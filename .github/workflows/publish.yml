@@ -41,7 +41,7 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           for csproj in \
-            BellaClient/BellaClient.csproj \
+            BellaBaxter.Client/BellaBaxter.Client.csproj \
             BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj \
             BellaBaxter.Aspire.Configuration/BellaBaxter.Aspire.Configuration.csproj \
             BellaBaxter.Aspire.Host/BellaBaxter.Aspire.Host.csproj \
