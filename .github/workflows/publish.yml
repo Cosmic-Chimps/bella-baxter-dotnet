@@ -37,7 +37,15 @@ jobs:
       - name: Generate Kiota client
         run: |
           dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.30.0
-          kiota update -o BellaBaxter.Client/src/generated
+          kiota generate \
+            --language CSharp \
+            --class-name BellaClient \
+            --namespace-name BellaBaxter.Client \
+            --openapi openapi.json \
+            --output BellaBaxter.Client/src/generated \
+            --exclude-backward-compatible \
+            --clean-output \
+            --log-level Warning
 
       - name: Restore & Build
         run: dotnet restore && dotnet build -c Release --no-restore
