@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Bella source generator — no live fetch needed for the sample -->
+    <BellaSkipFetch>true</BellaSkipFetch>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Bella configuration provider: IConfigurationSource + polling hot-reload -->
+    <ProjectReference Include="../../src/BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj" />
+    <!-- Bella source generator: reads bella-secrets.manifest.json → emits AppSecrets.g.cs -->
+    <PackageReference Include="BellaBaxter.SourceGenerator" Version="0.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildProjectDirectory)/bella-secrets.manifest.json" />
+    <CompilerVisibleProperty Include="BellaSecretsClassName" />
+    <CompilerVisibleProperty Include="BellaSecretsNamespace" />
+  </ItemGroup>
+</Project>

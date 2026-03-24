@@ -1,0 +1,6 @@
+<Project>
+  <ItemGroup>
+    <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\cs\BellaBaxter.SourceGenerator.dll"
+              Condition="Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\cs\BellaBaxter.SourceGenerator.dll')" />
+  </ItemGroup>
+</Project>

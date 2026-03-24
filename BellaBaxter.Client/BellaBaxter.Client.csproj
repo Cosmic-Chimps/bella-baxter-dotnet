@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- NuGet package metadata -->
+    <PackageId>BellaBaxter.Client</PackageId>
+    <Version>0.1.0</Version>
+    <IsPackable>true</IsPackable>
+    <Description>Generated .NET API client for the Bella Baxter secrets management API. Includes built-in E2EE decryption support via BellaBaxter.Crypto.</Description>
+    <PackageTags>bella-baxter;secrets;api-client</PackageTags>
+    <PackageProjectUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <!-- Dev (monorepo): direct project reference when crypto source is on disk -->
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\crypto\BellaBaxter.Crypto.csproj')">
+    <ProjectReference Include="..\..\crypto\BellaBaxter.Crypto.csproj" />
+  </ItemGroup>
+  <!-- Publish (public repo bella-baxter-dotnet): resolve from NuGet when project is absent -->
+  <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\..\crypto\BellaBaxter.Crypto.csproj')">
+    <PackageReference Include="BellaBaxter.Crypto" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+      Version="10.0.5"
+    />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.4.0" />
+    <PackageReference Include="Microsoft.Kiota.Http.HttpClientLibrary" Version="1.22.1" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Form" Version="1.22.1" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Json" Version="1.22.1" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Multipart" Version="1.22.1" />
+    <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="1.22.1" />
+  </ItemGroup>
+</Project>

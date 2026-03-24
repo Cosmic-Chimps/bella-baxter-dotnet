@@ -1,0 +1,58 @@
+<Project>
+
+  <!--
+    BellaBaxter.SourceGenerator MSBuild integration.
+    This file is included automatically when the NuGet package is referenced.
+
+    Required properties in the consuming project:
+      <BellaProject>my-project</BellaProject>
+      <BellaEnvironment>dev</BellaEnvironment>
+      <BellaApiUrl>https://bella.example.com</BellaApiUrl>
+      <BellaApiKey>$(BELLA_API_KEY)</BellaApiKey>
+
+    Optional:
+      <BellaSecretsClassName>AppSecrets</BellaSecretsClassName>
+      <BellaSecretsNamespace>MyApp.Config</BellaSecretsNamespace>
+      <BellaManifestPath>$(ProjectDir)bella-secrets.manifest.json</BellaManifestPath>
+      <BellaSkipFetch>false</BellaSkipFetch>       set to true to always use cached manifest
+  -->
+
+  <PropertyGroup>
+    <BellaSecretsClassName  Condition="'$(BellaSecretsClassName)'  == ''">AppSecrets</BellaSecretsClassName>
+    <BellaSecretsNamespace  Condition="'$(BellaSecretsNamespace)'  == ''">$(RootNamespace)</BellaSecretsNamespace>
+    <BellaManifestPath      Condition="'$(BellaManifestPath)'      == ''">$(ProjectDir)bella-secrets.manifest.json</BellaManifestPath>
+    <BellaSkipFetch         Condition="'$(BellaSkipFetch)'         == ''">false</BellaSkipFetch>
+  </PropertyGroup>
+
+  <!-- Make the manifest available as an AdditionalFile for the Roslyn generator -->
+  <ItemGroup Condition="Exists('$(BellaManifestPath)')">
+    <AdditionalFiles Include="$(BellaManifestPath)" />
+  </ItemGroup>
+
+  <!-- Expose class name + namespace to the Roslyn generator via analyzer config -->
+  <ItemGroup>
+    <CompilerVisibleProperty Include="BellaSecretsClassName" />
+    <CompilerVisibleProperty Include="BellaSecretsNamespace" />
+  </ItemGroup>
+
+  <!--
+    BeforeBuild target: fetch the manifest from Bella if BellaApiKey is set
+    and BellaSkipFetch is false.
+  -->
+  <UsingTask
+    TaskName="BellaBaxter.SourceGenerator.MSBuild.BellaSecretsManifestTask"
+    AssemblyFile="$(MSBuildThisFileDirectory)..\tools\net8.0\BellaBaxter.SourceGenerator.MSBuild.dll" />
+
+  <Target Name="FetchBellaSecretsManifest"
+          BeforeTargets="BeforeBuild"
+          Condition="'$(BellaSkipFetch)' != 'true' AND '$(BellaApiKey)' != '' AND '$(BellaProject)' != '' AND '$(BellaEnvironment)' != '' AND '$(BellaApiUrl)' != ''">
+    <Message Text="[BellaBaxter] Fetching secrets manifest for $(BellaProject)/$(BellaEnvironment)…" Importance="normal" />
+    <BellaSecretsManifestTask
+      BellaProject="$(BellaProject)"
+      BellaEnvironment="$(BellaEnvironment)"
+      BellaApiUrl="$(BellaApiUrl)"
+      BellaApiKey="$(BellaApiKey)"
+      BellaManifestPath="$(BellaManifestPath)" />
+  </Target>
+
+</Project>

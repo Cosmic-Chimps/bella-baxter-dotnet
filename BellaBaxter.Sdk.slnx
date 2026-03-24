@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="BellaBaxter.Aspire.Configuration/BellaBaxter.Aspire.Configuration.csproj" />
+  <Project Path="BellaBaxter.Aspire.Host/BellaBaxter.Aspire.Host.csproj" />
+  <Project Path="BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj" />
+  <Project Path="BellaBaxter.SourceGenerator.MSBuild/BellaBaxter.SourceGenerator.MSBuild.csproj" />
+  <Project Path="BellaBaxter.SourceGenerator.Tests/BellaBaxter.SourceGenerator.Tests.csproj" />
+  <Project Path="BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj" />
+  <Project Path="BellaBaxter.Client/BellaBaxter.Client.csproj" />
+</Solution>
