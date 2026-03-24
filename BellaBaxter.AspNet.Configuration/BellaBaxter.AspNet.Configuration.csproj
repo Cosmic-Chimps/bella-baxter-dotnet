@@ -8,7 +8,7 @@
 
     <!-- NuGet package metadata -->
     <PackageId>BellaBaxter.AspNet.Configuration</PackageId>
-    <Version>0.1.1-preview.2</Version>
+    <Version>0.1.1-preview.3</Version>
     <Authors>Cosmic Chimps</Authors>
     <Description>ASP.NET Core IConfiguration provider that polls Baxter API for secrets with automatic hot-reload.</Description>
     <PackageTags>secrets;configuration;aspnetcore;baxter;bella</PackageTags>
@@ -30,7 +30,7 @@
   </ItemGroup>
   <!-- Publish (public repo bella-baxter-dotnet): resolve from NuGet when project is absent -->
   <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.Client\BellaBaxter.Client.csproj')">
-    <PackageReference Include="BellaBaxter.Client" Version="0.1.1-preview.2" />
+    <PackageReference Include="BellaBaxter.Client" Version="0.1.1-preview.3" />
   </ItemGroup>
 
 </Project>
