@@ -8,7 +8,7 @@
 
     <!-- NuGet package metadata -->
     <PackageId>BellaBaxter.Aspire.Configuration</PackageId>
-    <Version>0.1.1.preview.6</Version>
+    <Version>0.1.1-preview.6</Version>
     <Authors>Cosmic Chimps</Authors>
     <Description>Aspire AppHost integration for Bella Baxter — inject Baxter API connection into Aspire-hosted apps.</Description>
     <PackageTags>aspire;secrets;configuration;baxter;bella</PackageTags>
