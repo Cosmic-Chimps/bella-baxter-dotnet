@@ -17,19 +17,21 @@ public static class BellaClientFactory
     /// the response. Decryption happens automatically.
     /// Suitable for service-to-service calls where an access token is obtained externally.
     /// </summary>
-    public static BellaClient CreateWithBearerToken(string baseUrl, string accessToken,
-        DelegatingHandler? outerHandler = null)
+    public static BellaClient CreateWithBearerToken(
+        string baseUrl,
+        string accessToken,
+        DelegatingHandler? outerHandler = null
+    )
     {
         var services = new ServiceCollection();
-        var builder = services
-            .AddHttpClient(
-                "BellaBearerClient",
-                client =>
-                {
-                    client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
-                    client.DefaultRequestHeaders.Add("Accept", "application/json");
-                }
-            );
+        var builder = services.AddHttpClient(
+            "BellaBearerClient",
+            client =>
+            {
+                client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            }
+        );
 
         if (outerHandler is not null)
             builder.AddHttpMessageHandler(() => outerHandler);
@@ -72,19 +74,19 @@ public static class BellaClientFactory
         string apiKey,
         DelegatingHandler? outerHandler = null,
         string bellaClient = "bella-dotnet-sdk",
-        string? appClient = null)
+        string? appClient = null
+    )
     {
         var services = new ServiceCollection();
-        var httpClientBuilder = services
-            .AddHttpClient(
-                "BellaHmacClient",
-                client =>
-                {
-                    client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
-                    client.DefaultRequestHeaders.Add("Accept", "application/json");
-                    client.DefaultRequestHeaders.UserAgent.ParseAdd($"{bellaClient}/1.0");
-                }
-            );
+        var httpClientBuilder = services.AddHttpClient(
+            "BellaHmacClient",
+            client =>
+            {
+                client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.DefaultRequestHeaders.UserAgent.ParseAdd($"{bellaClient}/1.0");
+            }
+        );
 
         if (outerHandler is not null)
             httpClientBuilder.AddHttpMessageHandler(() => outerHandler);
@@ -104,7 +106,10 @@ public static class BellaClientFactory
             .GetRequiredService<IHttpClientFactory>()
             .CreateClient("BellaHmacClient");
 
-        var adapter = new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(), httpClient: httpClient);
+        var adapter = new HttpClientRequestAdapter(
+            new AnonymousAuthenticationProvider(),
+            httpClient: httpClient
+        );
         adapter.BaseUrl = baseUrl.TrimEnd('/');
         return new BellaClient(adapter);
     }
