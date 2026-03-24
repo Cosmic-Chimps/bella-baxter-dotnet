@@ -1,6 +1,6 @@
 {
   "descriptionHash": "80DF2097980B3B65212F2D9CF0FC6CC2BB9F511350F622BE425A2C4A82A09A9034C68FBEA65FB429E78F936609B9D36EC2B39A555B0ED10C01B1E9FDAEE5CEE3",
-  "descriptionLocation": "../../../../api/baxter-dotnet/BellaBaxter.WebApp/openapi.json",
+  "descriptionLocation": "../../../../../api/baxter-dotnet/BellaBaxter.WebApp/openapi.json",
   "lockFileVersion": "1.0.0",
   "kiotaVersion": "1.30.0",
   "clientClassName": "BellaClient",

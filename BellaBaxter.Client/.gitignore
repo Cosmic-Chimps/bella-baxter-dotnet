@@ -1,5 +1,3 @@
-# Kiota-generated client IS committed so the public SDK repo builds without
-# needing to run Kiota. To regenerate after an API change, run:
-#   kiota update -o src/generated/
-# or from the monorepo root:
-#   apps/sdk/generate.sh
+# Kiota-generated client — regenerate with: kiota update -o src/generated/
+# or run apps/sdk/generate.sh from repo root
+src/generated/

@@ -34,6 +34,11 @@ jobs:
               | xargs sed -i "s|https://api.bella-baxter.io|${BELLA_BAXTER_API_URL}|g"
           fi
 
+      - name: Generate Kiota client
+        run: |
+          dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.30.0
+          kiota update -o BellaBaxter.Client/src/generated
+
       - name: Restore & Build
         run: dotnet restore && dotnet build -c Release --no-restore
 
