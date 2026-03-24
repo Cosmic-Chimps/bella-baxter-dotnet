@@ -65,10 +65,13 @@ jobs:
           done
 
       - name: Push to NuGet.org
-        run: dotnet nuget push ./nupkgs/*.nupkg \
-          --api-key ${{ secrets.NUGET_API_KEY }} \
-          --source https://api.nuget.org/v3/index.json \
-          --skip-duplicate
+        run: |
+          for nupkg in ./nupkgs/*.nupkg; do
+            dotnet nuget push "$nupkg" \
+              --api-key "${{ secrets.NUGET_API_KEY }}" \
+              --source https://api.nuget.org/v3/index.json \
+              --skip-duplicate
+          done
 
   notify:
     runs-on: ubuntu-latest
