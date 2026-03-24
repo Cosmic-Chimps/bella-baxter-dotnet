@@ -7,7 +7,12 @@
     <PackageId>BellaBaxter.Aspire.Host</PackageId>
     <Version>0.1.1-preview.6</Version>
     <Authors>Cosmic Chimps</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" Version="13.1.3" />

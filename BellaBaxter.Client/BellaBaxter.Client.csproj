@@ -13,7 +13,12 @@
     <PackageProjectUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <!-- Dev (monorepo): direct project reference when crypto source is on disk -->
   <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\crypto\BellaBaxter.Crypto.csproj')">

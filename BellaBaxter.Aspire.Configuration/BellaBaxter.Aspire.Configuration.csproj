@@ -13,7 +13,12 @@
     <Description>Aspire AppHost integration for Bella Baxter — inject Baxter API connection into Aspire-hosted apps.</Description>
     <PackageTags>aspire;secrets;configuration;baxter;bella</PackageTags>
     <RepositoryUrl>https://github.com/cosmic-chimps/bella-baxter</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" Version="13.1.3" />
