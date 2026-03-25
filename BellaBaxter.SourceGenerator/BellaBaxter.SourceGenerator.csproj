@@ -7,6 +7,7 @@
     <!-- NuGet packaging — source generators must live in analyzers/dotnet/cs/, NOT lib/ -->
     <PackageId>BellaBaxter.SourceGenerator</PackageId>
     <Version>0.1.1-preview.16</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Roslyn source generator that reads bella-secrets.manifest.json and emits a typed BellaAppSecrets class.</Description>
     <Authors>Cosmic Chimps</Authors>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -19,15 +20,34 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.Analyzers"
+      Version="3.3.4"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <!-- Place the generator DLL in the correct NuGet analyzer path -->
   <ItemGroup>
-    <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)$(AssemblyName).pdb" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"
-          Condition="Exists('$(OutputPath)$(AssemblyName).pdb')" />
+    <None
+      Include="$(OutputPath)$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false"
+    />
+    <None
+      Include="$(OutputPath)$(AssemblyName).pdb"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false"
+      Condition="Exists('$(OutputPath)$(AssemblyName).pdb')"
+    />
     <!-- build/*.targets auto-registers the analyzer when consumed as NuGet package -->
-    <None Include="build\BellaBaxter.SourceGenerator.targets" Pack="true" PackagePath="build" Visible="false" />
+    <None
+      Include="build\BellaBaxter.SourceGenerator.targets"
+      Pack="true"
+      PackagePath="build"
+      Visible="false"
+    />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -9,6 +8,7 @@
     <!-- NuGet package metadata -->
     <PackageId>BellaBaxter.AspNet.Configuration</PackageId>
     <Version>0.1.1-preview.16</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Cosmic Chimps</Authors>
     <Description>ASP.NET Core IConfiguration provider that polls Baxter API for secrets with automatic hot-reload.</Description>
     <PackageTags>secrets;configuration;aspnetcore;baxter;bella</PackageTags>
@@ -23,7 +23,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.5" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.5" />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+      Version="10.0.5"
+    />
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
@@ -37,5 +40,4 @@
   <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.Client\BellaBaxter.Client.csproj')">
     <PackageReference Include="BellaBaxter.Client" Version="0.1.1-preview.16" />
   </ItemGroup>
-
 </Project>

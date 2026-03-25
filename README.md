@@ -259,15 +259,3 @@ builder.AddProject<Projects.MyApi>("api")
 | `BellaBaxter.Aspire.Host` | You want Bella's full stack running **locally** (dev/testing without a deployed Bella instance) |
 | `BellaBaxter.Aspire.Configuration` | You have a **deployed** Bella instance and just need Aspire to wire the connection URL |
 
----
-
-## Origin
-
-Migrated from [BellaGotNet](../../BellaGotNet) — the original prototype built in November 2025.
-Key changes from prototype:
-- Auth: API key (`bax-...`) instead of X-API-Key/X-Secret-Key headers
-- Endpoints: new .NET API (GUIDs/slugs, not int IDs)
-- Removed WebSocket provider (planned for future — polling + Redis cache is sufficient for MVP)
-- Aspire: uses `BellaBarterStackResource` and `AddBellaBaxter()` / `WithBellaSecrets()`
-
-
