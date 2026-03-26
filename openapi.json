@@ -90,27 +90,26 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/WebhookId"
             }
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -131,27 +130,26 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/WebhookId"
             }
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -209,8 +207,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/WebhookId"
             }
           }
         ],
@@ -225,21 +222,21 @@
           "required": true
         },
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -472,27 +469,26 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/WebhookId"
             }
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -8876,27 +8872,26 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/NotificationChannelId"
             }
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -9109,27 +9104,26 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/NotificationChannelId"
             }
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -9201,8 +9195,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/GroupId"
             }
           }
         ],
@@ -9405,8 +9398,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/GroupId"
             }
           }
         ],
@@ -9483,8 +9475,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/GroupId"
             }
           }
         ],
@@ -9534,8 +9525,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/GroupId"
             }
           },
           {
@@ -10531,80 +10521,6 @@
                 "schema": { }
               }
             }
-          }
-        }
-      }
-    },
-    "/dead-letters": {
-      "post": {
-        "tags": [
-          "BellaBaxter.Api"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeadLetterEnvelopeGetRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeadLetterEnvelopeResults"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "BellaBaxter.Api"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeadLetterEnvelopeIdsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/dead-letters/replay": {
-      "post": {
-        "tags": [
-          "BellaBaxter.Api"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeadLetterEnvelopeIdsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -12220,162 +12136,6 @@
           }
         }
       },
-      "DeadLetterEnvelope": {
-        "required": [
-          "id",
-          "executionTime",
-          "envelope",
-          "messageType",
-          "receivedAt",
-          "source",
-          "exceptionType",
-          "exceptionMessage",
-          "sentAt",
-          "replayable"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "executionTime": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "envelope": {
-            "$ref": "#/components/schemas/Envelope"
-          },
-          "messageType": {
-            "type": "string"
-          },
-          "receivedAt": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "exceptionType": {
-            "type": "string"
-          },
-          "exceptionMessage": {
-            "type": "string"
-          },
-          "sentAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "replayable": {
-            "type": "boolean"
-          },
-          "message": { }
-        }
-      },
-      "DeadLetterEnvelopeGetRequest": {
-        "type": "object",
-        "properties": {
-          "limit": {
-            "type": "integer",
-            "format": "uint32"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "messageType": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "exceptionType": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "exceptionMessage": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "from": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "until": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "tenantId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "databaseUri": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uri"
-          }
-        }
-      },
-      "DeadLetterEnvelopeIdsRequest": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          "tenantId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
-        }
-      },
-      "DeadLetterEnvelopeResults": {
-        "type": "object",
-        "properties": {
-          "totalCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "envelopes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DeadLetterEnvelope"
-            }
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "databaseUri": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uri"
-          }
-        }
-      },
       "DriftItem": {
         "required": [
           "key",
@@ -12496,187 +12256,6 @@
           },
           "ciphertext": {
             "type": "string"
-          }
-        }
-      },
-      "Envelope": {
-        "type": "object",
-        "properties": {
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "deliverBy": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "ackRequested": {
-            "type": "boolean"
-          },
-          "scheduledTime": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "scheduleDelay": {
-            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "data": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "byte"
-          },
-          "message": { },
-          "attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sendAttempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sentAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "source": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "messageType": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "replyUri": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uri"
-          },
-          "contentType": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "correlationId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "sagaId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "conversationId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "destination": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uri"
-          },
-          "parentId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "tenantId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "userName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "acceptedContentTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "replyRequested": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "topicName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "endpointName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "wasPersistedInOutbox": {
-            "type": "boolean"
-          },
-          "groupId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "deduplicationId": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "partitionKey": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "offset": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "keepUntil": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
           }
         }
       },
@@ -13549,6 +13128,7 @@
           }
         }
       },
+      "GroupId": { },
       "GroupMemberResponse": {
         "required": [
           "userId",
@@ -14218,6 +13798,7 @@
           }
         }
       },
+      "NotificationChannelId": { },
       "NotificationChannelOperationResponse": {
         "required": [
           "success",
@@ -17087,6 +16668,7 @@
           }
         }
       },
+      "WebhookId": { },
       "WebhookOperationResponse": {
         "required": [
           "success",
@@ -17776,9 +17358,6 @@
     },
     {
       "name": "BellaBaxter.Features.AccessLog.ListAccessLogs"
-    },
-    {
-      "name": "BellaBaxter.Api"
     }
   ]
 }
