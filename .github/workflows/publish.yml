@@ -83,4 +83,4 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: webhook-trigger
           payload: |
-            text: "*SDK .NET publish ${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            text: "${{ needs.publish.result == 'success' && '✅' || needs.publish.result == 'failure' && '❌' || '⚠️' }} *SDK .NET publish ${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
