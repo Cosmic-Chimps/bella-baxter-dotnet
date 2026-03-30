@@ -6,7 +6,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <!-- NuGet packaging — source generators must live in analyzers/dotnet/cs/, NOT lib/ -->
     <PackageId>BellaBaxter.SourceGenerator</PackageId>
-    <Version>0.1.1-preview.35</Version>
+    <Version>0.1.1-preview.36</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Roslyn source generator that reads bella-secrets.manifest.json and emits a typed BellaAppSecrets class.</Description>
     <Authors>Cosmic Chimps</Authors>
