@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using BellaBaxter.Client;
 using BellaBaxter.Client.Models;
 using Microsoft.Extensions.Logging;
@@ -12,6 +14,10 @@ namespace BellaBaxter.AspNet.Configuration;
 /// Authentication: HMAC-SHA256 request signing via BellaClientFactory (bax- API key).
 /// End-to-end encryption: always enabled — the server requires X-E2E-Public-Key
 /// for all secret read endpoints.
+///
+/// ZKE mode: when <see cref="BellaOptions.PrivateKey"/> is set, a persistent P-256 key
+/// is used instead of an ephemeral per-poll keypair. The server wraps the DEK for that
+/// key and the wrapped DEK is cached in memory for future offline use.
 /// </summary>
 internal sealed class BellaPollingProvider : IDisposable
 {
@@ -25,6 +31,9 @@ internal sealed class BellaPollingProvider : IDisposable
     private long _currentVersion = -1;
     private bool _contextResolved;
 
+    // ZKE: in-memory DEK lease cache (null when ZKE mode is not enabled)
+    private (string WrappedDek, DateTimeOffset Expires)? _dekLease;
+
     /// <summary>Fired when at least one secret value has changed since last poll.</summary>
     public event EventHandler<SecretsChangedEventArgs>? SecretsChanged;
 
@@ -33,12 +42,36 @@ internal sealed class BellaPollingProvider : IDisposable
         _options = options;
         _logger = logger ?? NullLogger.Instance;
 
-        _client = BellaClientFactory.CreateWithHmacApiKey(
-            options.BaxterUrl,
-            options.ApiKey,
-            appClient: options.AppClient ?? Environment.GetEnvironmentVariable("BELLA_BAXTER_APP_CLIENT"));
+        var appClient = options.AppClient ?? Environment.GetEnvironmentVariable("BELLA_BAXTER_APP_CLIENT");
 
-        _logger.LogDebug("[BellaBaxter] E2EE enabled (P-256 key pair generated)");
+        if (!string.IsNullOrEmpty(options.PrivateKey))
+        {
+            // ZKE mode: persistent device key — server wraps DEK for this identity
+            var ecdhKey = LoadEcdhKeyFromPem(options.PrivateKey);
+            var zkeHandler = new ZkeDekHandler(ecdhKey, onWrappedDekReceived: (_, _, wrappedDek, expires) =>
+            {
+                _dekLease = (wrappedDek, expires ?? DateTimeOffset.UtcNow.AddHours(1));
+                _logger.LogDebug("[BellaBaxter] ZKE DEK lease cached, expires {Expires}", _dekLease.Value.Expires);
+            });
+
+            _client = BellaClientFactory.CreateWithHmacApiKeyAndZke(
+                options.BaxterUrl,
+                options.ApiKey,
+                zkeHandler,
+                appClient: appClient);
+
+            _logger.LogDebug("[BellaBaxter] ZKE mode enabled (persistent P-256 device key)");
+        }
+        else
+        {
+            // Default: ephemeral keypair per poll — E2EE transport, no persistent identity
+            _client = BellaClientFactory.CreateWithHmacApiKey(
+                options.BaxterUrl,
+                options.ApiKey,
+                appClient: appClient);
+
+            _logger.LogDebug("[BellaBaxter] E2EE enabled (ephemeral P-256 keypair per poll)");
+        }
 
         // Start polling: first tick immediately (TimeSpan.Zero), then every interval
         _timer = new Timer(_ => _ = PollAsync(), null, TimeSpan.Zero, options.PollingInterval);
@@ -143,11 +176,37 @@ internal sealed class BellaPollingProvider : IDisposable
             }
             finally { _lock.Release(); }
 
+            // Persist to the optional offline cache after every successful fetch.
+            if (_options.Cache is not null)
+            {
+                try { await _options.Cache.WriteAsync(newSecrets, ct); }
+                catch (Exception cacheEx) { _logger.LogWarning(cacheEx, "[BellaBaxter] Persistent cache write failed"); }
+            }
+
             return newSecrets;
         }
         catch (Exception ex)
         {
             _logger.LogWarning(ex, "[BellaBaxter] Failed to fetch secrets from Baxter");
+
+            // Try the persistent cache before falling back to the in-memory copy.
+            // This allows offline startup after the first successful connection.
+            if (_options.FallbackOnError && _cache is null && _options.Cache is not null)
+            {
+                try
+                {
+                    var persistedSecrets = await _options.Cache.ReadAsync(ct);
+                    if (persistedSecrets is not null)
+                    {
+                        _logger.LogWarning("[BellaBaxter] Using persisted cache ({Count} entries, offline mode)", persistedSecrets.Count);
+                        return persistedSecrets;
+                    }
+                }
+                catch (Exception cacheEx)
+                {
+                    _logger.LogWarning(cacheEx, "[BellaBaxter] Persistent cache read failed");
+                }
+            }
 
             if (_options.FallbackOnError && _cache is not null)
             {
@@ -238,6 +297,31 @@ internal sealed class BellaPollingProvider : IDisposable
     {
         _timer.Dispose();
         _lock.Dispose();
+    }
+
+    /// <summary>
+    /// Parses a PKCS#8 PEM private key string into an <see cref="ECDiffieHellman"/> instance.
+    /// Accepts PEM with or without the header/footer lines.
+    /// </summary>
+    private static ECDiffieHellman LoadEcdhKeyFromPem(string pem)
+    {
+        // Strip PEM envelope if present, keep only base64 body
+        var base64 = Regex.Replace(pem, @"-----[A-Z ]+-----|[\r\n\s]", string.Empty);
+        var der = Convert.FromBase64String(base64);
+
+        var ecdh = ECDiffieHellman.Create();
+        try
+        {
+            ecdh.ImportPkcs8PrivateKey(der, out _);
+            return ecdh;
+        }
+        catch
+        {
+            ecdh.Dispose();
+            throw new InvalidOperationException(
+                "[BellaBaxter] Could not parse PrivateKey as PKCS#8 PEM. " +
+                "Generate it with: bella auth setup");
+        }
     }
 }
 

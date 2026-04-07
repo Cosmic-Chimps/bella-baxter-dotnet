@@ -1397,6 +1397,52 @@
         }
       }
     },
+    "/api/v1/tenants/me/encryption-key/emergency-kit": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.DownloadEmergencyKit"
+        ],
+        "summary": "GET_api_v1_tenants_me_encryption_key_emergency_kit",
+        "description": "GET_api_v1_tenants_me_encryption_key_emergency_kit",
+        "operationId": "downloadEmergencyKit",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenant/billing/statements": {
       "get": {
         "tags": [
@@ -1608,6 +1654,106 @@
         }
       }
     },
+    "/api/v1/tenants/me/encryption-key": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetTenantEncryptionKey"
+        ],
+        "summary": "GET_api_v1_tenants_me_encryption_key",
+        "description": "GET_api_v1_tenants_me_encryption_key",
+        "operationId": "getTenantEncryptionKey",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantEncryptionKeyStatusResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RegisterTenantEncryptionKey"
+        ],
+        "summary": "POST_api_v1_tenants_me_encryption_key",
+        "description": "POST_api_v1_tenants_me_encryption_key",
+        "operationId": "registerTenantEncryptionKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterTenantEncryptionKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterTenantEncryptionKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/tenants/invites/{token}/preview": {
       "get": {
         "tags": [
@@ -1709,6 +1855,138 @@
                     "$ref": "#/components/schemas/TenantUserResponse"
                   }
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/encryption-key/migrate": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.MigrateTenantEncryption"
+        ],
+        "summary": "POST_api_v1_tenants_me_encryption_key_migrate",
+        "description": "POST_api_v1_tenants_me_encryption_key_migrate",
+        "operationId": "migrateTenantEncryption",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MigrateTenantEncryptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/encryption-key/recovery-challenge": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RecoverTenantEncryptionKey"
+        ],
+        "summary": "GET_api_v1_tenants_me_encryption_key_recovery_challenge",
+        "description": "GET_api_v1_tenants_me_encryption_key_recovery_challenge",
+        "operationId": "getTenantEncryptionKeyRecoveryChallenge",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoveryChallengeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/encryption-key/recover": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RecoverTenantEncryptionKey"
+        ],
+        "summary": "POST_api_v1_tenants_me_encryption_key_recover",
+        "description": "POST_api_v1_tenants_me_encryption_key_recover",
+        "operationId": "recoverTenantEncryptionKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecoverEncryptionKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecoverEncryptionKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           },
@@ -2082,6 +2360,54 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ToggleSsoEnforcementResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/zke/enforce": {
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.ToggleZkeEnforcement"
+        ],
+        "summary": "PUT_api_v1_tenants_me_zke_enforce",
+        "description": "PUT_api_v1_tenants_me_zke_enforce",
+        "operationId": "toggleZkeEnforcement",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleZkeEnforcementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToggleZkeEnforcementResponse"
                 }
               }
             }
@@ -3923,6 +4249,67 @@
                 "schema": {
                   "$ref": "#/components/schemas/OperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "manage"
+        }
+      }
+    },
+    "/api/v1/projects/{id}/encryption-key/rotate": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.RotateProjectDek"
+        ],
+        "summary": "POST_api_v1_projects_id_encryption_key_rotate",
+        "description": "POST_api_v1_projects_id_encryption_key_rotate",
+        "operationId": "rotateProjectDek",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotateProjectDekResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           },
@@ -9879,6 +10266,103 @@
         }
       }
     },
+    "/api/v1/me/api-keys": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ApiKeys.CreatePersonalApiKey"
+        ],
+        "summary": "POST_api_v1_me_api_keys",
+        "description": "POST_api_v1_me_api_keys",
+        "operationId": "createPersonalApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonalApiKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ApiKeys.GetPersonalApiKeys"
+        ],
+        "summary": "GET_api_v1_me_api_keys",
+        "description": "GET_api_v1_me_api_keys",
+        "operationId": "getPersonalApiKeys",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiKeyResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/api-keys": {
       "post": {
         "tags": [
@@ -10058,6 +10542,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiKeyOperationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/api-keys/{id}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.ApiKeys.DeletePersonalApiKey"
+        ],
+        "summary": "DELETE_api_v1_me_api_keys_id",
+        "description": "DELETE_api_v1_me_api_keys_id",
+        "operationId": "deletePersonalApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
                 }
               }
             }
@@ -11452,6 +11977,12 @@
               "null",
               "string"
             ]
+          },
+          "publicKey": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -11663,6 +12194,32 @@
           },
           "requiresTokenRefresh": {
             "type": "boolean"
+          }
+        }
+      },
+      "CreatePersonalApiKeyRequest": {
+        "required": [
+          "clientName",
+          "description",
+          "expiresInDays"
+        ],
+        "type": "object",
+        "properties": {
+          "clientName": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiresInDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
           }
         }
       },
@@ -13798,6 +14355,41 @@
           }
         }
       },
+      "MigrateTenantEncryptionResponse": {
+        "required": [
+          "success",
+          "message",
+          "projectsProcessed",
+          "environmentsProcessed",
+          "secretsEncrypted",
+          "secretsSkipped"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "projectsProcessed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "environmentsProcessed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "secretsEncrypted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "secretsSkipped": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "NotificationChannelId": { },
       "NotificationChannelOperationResponse": {
         "required": [
@@ -14655,6 +15247,56 @@
           }
         }
       },
+      "RecoverEncryptionKeyRequest": {
+        "required": [
+          "newMasterPublicKey",
+          "challengeSignature"
+        ],
+        "type": "object",
+        "properties": {
+          "newMasterPublicKey": {
+            "type": "string"
+          },
+          "challengeSignature": {
+            "type": "string"
+          }
+        }
+      },
+      "RecoverEncryptionKeyResponse": {
+        "required": [
+          "message",
+          "newMasterKeyFingerprint"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "newMasterKeyFingerprint": {
+            "type": "string"
+          }
+        }
+      },
+      "RecoveryChallengeResponse": {
+        "required": [
+          "challenge",
+          "expiresAt",
+          "instructions"
+        ],
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "instructions": {
+            "type": "string"
+          }
+        }
+      },
       "RegionInfo": {
         "required": [
           "id",
@@ -14670,6 +15312,44 @@
             "type": "string"
           },
           "description": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterTenantEncryptionKeyRequest": {
+        "required": [
+          "masterPublicKey",
+          "recoveryPublicKey",
+          "keyLossAcknowledged"
+        ],
+        "type": "object",
+        "properties": {
+          "masterPublicKey": {
+            "type": "string"
+          },
+          "recoveryPublicKey": {
+            "type": "string"
+          },
+          "keyLossAcknowledged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RegisterTenantEncryptionKeyResponse": {
+        "required": [
+          "message",
+          "masterKeyFingerprint",
+          "recoveryKeyFingerprint"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "masterKeyFingerprint": {
+            "type": "string"
+          },
+          "recoveryKeyFingerprint": {
             "type": "string"
           }
         }
@@ -14739,6 +15419,25 @@
           "version": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "RotateProjectDekResponse": {
+        "required": [
+          "message",
+          "projectId",
+          "migrationRequired"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "migrationRequired": {
+            "type": "string"
           }
         }
       },
@@ -15716,6 +16415,43 @@
           }
         }
       },
+      "TenantEncryptionKeyStatusResponse": {
+        "required": [
+          "encryptionEnabled",
+          "masterKeyFingerprint",
+          "recoveryKeyFingerprint",
+          "registeredAt",
+          "enforceZke"
+        ],
+        "type": "object",
+        "properties": {
+          "encryptionEnabled": {
+            "type": "boolean"
+          },
+          "masterKeyFingerprint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recoveryKeyFingerprint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "registeredAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "enforceZke": {
+            "type": "boolean"
+          }
+        }
+      },
       "TenantInviteRole": {
         "enum": [
           "Admin",
@@ -15897,6 +16633,32 @@
         }
       },
       "ToggleSsoEnforcementResponse": {
+        "required": [
+          "enforced",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "enforced": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ToggleZkeEnforcementRequest": {
+        "required": [
+          "enforced"
+        ],
+        "type": "object",
+        "properties": {
+          "enforced": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ToggleZkeEnforcementResponse": {
         "required": [
           "enforced",
           "message"
@@ -16880,6 +17642,9 @@
       "name": "BellaBaxter.Features.Tenants.ListTenantInvites"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.DownloadEmergencyKit"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.GetBillingStatements"
     },
     {
@@ -16895,6 +17660,12 @@
       "name": "BellaBaxter.Features.Tenants.GetTenant"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.GetTenantEncryptionKey"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RegisterTenantEncryptionKey"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.GetTenantInvite"
     },
     {
@@ -16902,6 +17673,12 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.ListTenantUsers"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.MigrateTenantEncryption"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RecoverTenantEncryptionKey"
     },
     {
       "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
@@ -16923,6 +17700,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.ToggleSsoEnforcement"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.ToggleZkeEnforcement"
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.DiagnosticsEndpoint"
@@ -17031,6 +17811,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.RemoveProjectUser"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.RotateProjectDek"
     },
     {
       "name": "BellaBaxter.Features.Projects.SetGlobalSecretProvider"
@@ -17324,6 +18107,12 @@
       "name": "BellaBaxter.Features.ApiKeys.GetEnvironmentApiKeys"
     },
     {
+      "name": "BellaBaxter.Features.ApiKeys.CreatePersonalApiKey"
+    },
+    {
+      "name": "BellaBaxter.Features.ApiKeys.GetPersonalApiKeys"
+    },
+    {
       "name": "BellaBaxter.Features.ApiKeys.CreateTenantAdminApiKey"
     },
     {
@@ -17334,6 +18123,9 @@
     },
     {
       "name": "BellaBaxter.Features.ApiKeys.UpdateApiKey"
+    },
+    {
+      "name": "BellaBaxter.Features.ApiKeys.DeletePersonalApiKey"
     },
     {
       "name": "BellaBaxter.Features.ApiKeys.GetKeyContext"

@@ -50,6 +50,9 @@ jobs:
       - name: Restore & Build
         run: dotnet restore && dotnet build -c Release --no-restore
 
+      - name: Install MAUI workload
+        run: dotnet workload install maui --skip-manifest-update
+
       - name: Pack all publishable packages
         run: |
           VERSION="${{ steps.version.outputs.version }}"
@@ -58,7 +61,8 @@ jobs:
             BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj \
             BellaBaxter.Aspire.Configuration/BellaBaxter.Aspire.Configuration.csproj \
             BellaBaxter.Aspire.Host/BellaBaxter.Aspire.Host.csproj \
-            BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj; do
+            BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj \
+            BellaBaxter.Maui/BellaBaxter.Maui.csproj; do
             dotnet pack "$csproj" -c Release --no-build \
               -p:Version="$VERSION" \
               -o ./nupkgs

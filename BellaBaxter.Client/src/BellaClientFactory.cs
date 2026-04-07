@@ -110,9 +110,108 @@ public static class BellaClientFactory
     }
 
     /// <summary>
-    /// Creates a BellaClient with API key / secret key headers.
-    /// Suitable for CI/CD pipelines using Bella API keys.
+    /// Creates a <see cref="BellaClient"/> with Bearer token auth and zero-knowledge encryption (ZKE).
+    /// Uses a persistent <paramref name="zkeHandler"/> instead of the ephemeral-key
+    /// <see cref="E2EEncryptionHandler"/>, so the server can wrap the project DEK for this identity.
     /// </summary>
+    /// <param name="zkeHandler">
+    ///   A <see cref="ZkeDekHandler"/> holding the caller's persistent P-256 private key.
+    ///   Set <see cref="ZkeDekHandler.OnWrappedDekReceived"/> before passing to cache DEK leases.
+    /// </param>
+    public static BellaClient CreateWithBearerTokenAndZke(
+        string baseUrl,
+        string accessToken,
+        ZkeDekHandler zkeHandler,
+        DelegatingHandler? outerHandler = null)
+    {
+        var services = new ServiceCollection();
+        var builder = services
+            .AddHttpClient(
+                "BellaBearerZkeClient",
+                client =>
+                {
+                    client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                }
+            );
+
+        if (outerHandler is not null)
+            builder.AddHttpMessageHandler(() => outerHandler);
+
+        builder
+            .AddHttpMessageHandler(() => zkeHandler)
+            .AddStandardResilienceHandler(options =>
+            {
+                options.Retry.MaxRetryAttempts = 3;
+                options.Retry.UseJitter = true;
+            });
+
+        var httpClient = services
+            .BuildServiceProvider()
+            .GetRequiredService<IHttpClientFactory>()
+            .CreateClient("BellaBearerZkeClient");
+
+        var authProvider = new BaseBearerTokenAuthenticationProvider(
+            new StaticAccessTokenProvider(accessToken)
+        );
+        var adapter = new HttpClientRequestAdapter(authProvider, httpClient: httpClient);
+        adapter.BaseUrl = baseUrl.TrimEnd('/');
+        return new BellaClient(adapter);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="BellaClient"/> with HMAC API key auth and zero-knowledge encryption (ZKE).
+    /// Uses a persistent <paramref name="zkeHandler"/> instead of the ephemeral-key
+    /// <see cref="E2EEncryptionHandler"/>, so the server can wrap the project DEK for this identity.
+    /// </summary>
+    /// <param name="zkeHandler">
+    ///   A <see cref="ZkeDekHandler"/> holding the caller's persistent P-256 private key.
+    ///   Set <see cref="ZkeDekHandler.OnWrappedDekReceived"/> before passing to cache DEK leases.
+    /// </param>
+    public static BellaClient CreateWithHmacApiKeyAndZke(
+        string baseUrl,
+        string apiKey,
+        ZkeDekHandler zkeHandler,
+        DelegatingHandler? outerHandler = null,
+        string bellaClient = "bella-dotnet-sdk",
+        string? appClient = null)
+    {
+        var services = new ServiceCollection();
+        var httpClientBuilder = services
+            .AddHttpClient(
+                "BellaHmacZkeClient",
+                client =>
+                {
+                    client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd($"{bellaClient}/1.0");
+                }
+            );
+
+        if (outerHandler is not null)
+            httpClientBuilder.AddHttpMessageHandler(() => outerHandler);
+
+        httpClientBuilder
+            .AddHttpMessageHandler(() => new HmacSigningHandler(apiKey, bellaClient, appClient))
+            .AddHttpMessageHandler(() => zkeHandler);
+
+        httpClientBuilder.AddStandardResilienceHandler(options =>
+        {
+            options.Retry.MaxRetryAttempts = 3;
+            options.Retry.UseJitter = true;
+        });
+
+        var httpClient = services
+            .BuildServiceProvider()
+            .GetRequiredService<IHttpClientFactory>()
+            .CreateClient("BellaHmacZkeClient");
+
+        var adapter = new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(), httpClient: httpClient);
+        adapter.BaseUrl = baseUrl.TrimEnd('/');
+        return new BellaClient(adapter);
+    }
+
+
     public static BellaClient CreateWithApiKey(string baseUrl, string apiKey, string secretKey)
     {
         var httpClient = BuildHttpClient(baseUrl);

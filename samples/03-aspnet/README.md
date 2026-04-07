@@ -59,6 +59,30 @@ export BellaBaxter__EnvironmentSlug=production
 dotnet run
 ```
 
+**CI/CD / production with ZKE (Zero-Knowledge Encryption):**
+
+ZKE uses a persistent device key so the server can wrap the encryption key (DEK) for your process
+identity. The server never sees your DEK in plaintext; transport is bound to your specific key.
+
+```bash
+# 1. Generate a device keypair once (stores private key in ~/.bella/device-key.pem)
+bella auth setup
+
+# 2. Supply the private key to the SDK via env var
+export BELLA_BAXTER_API_KEY=bax-...
+export BELLA_BAXTER_PRIVATE_KEY="$(cat ~/.bella/device-key.pem)"
+dotnet run
+```
+
+Or bind in appsettings (use environment variables / secrets manager in production — never commit):
+```json
+{
+  "BellaBaxter": {
+    "PrivateKey": "-----BEGIN PRIVATE KEY-----\n..."
+  }
+}
+```
+
 ---
 
 ## Program.cs at a glance

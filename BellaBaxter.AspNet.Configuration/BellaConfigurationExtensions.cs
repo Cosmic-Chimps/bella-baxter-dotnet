@@ -59,6 +59,12 @@ public static class BellaConfigurationExtensions
         if (!string.IsNullOrEmpty(envUrl))
             options.BaxterUrl = envUrl;
 
+        // BELLA_BAXTER_PRIVATE_KEY enables ZKE mode — persistent device key for transport
+        // and DEK lease caching. Generate with: bella auth setup
+        var envPrivateKey = Environment.GetEnvironmentVariable("BELLA_BAXTER_PRIVATE_KEY");
+        if (!string.IsNullOrEmpty(envPrivateKey))
+            options.PrivateKey = envPrivateKey;
+
         // 2. Allow override via configure callback (highest priority)
         configure?.Invoke(options);
 

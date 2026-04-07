@@ -68,4 +68,39 @@ public class BellaOptions
     /// Example values: "my-web-api", "github-ci-deploy", "data-pipeline"
     /// </summary>
     public string? AppClient { get; set; }
+
+	/// <summary>
+    /// Optional persistent cache for secrets. When set, secrets are written to the cache
+    /// after every successful fetch and read from it when the Baxter API is unavailable.
+    /// This enables offline startup — the app can launch and run without network access
+    /// after the first successful connection.
+    ///
+    /// For .NET MAUI apps, use <c>BellaBaxter.Maui.MauiSecureSecretCache</c>:
+    /// <code>
+    /// o.Cache = new MauiSecureSecretCache(); // iOS Keychain / Android EncryptedSharedPreferences / Windows DPAPI
+    /// </code>
+    /// </summary>
+    public ISecretCache? Cache { get; set; }
+
+    /// <summary>
+    /// Optional PKCS#8 PEM private key for ZKE (Zero-Knowledge Encryption) transport.
+    ///
+    /// When set, the SDK sends a persistent device public key as <c>X-E2E-Public-Key</c>
+    /// instead of an ephemeral per-poll keypair. This enables:
+    /// <list type="bullet">
+    ///   <item>Persistent key identity (the server can correlate requests to this M2M identity)</item>
+    ///   <item>DEK lease caching — the server wraps the encryption key for this device so future
+    ///         requests can reuse the cached key without a round-trip</item>
+    ///   <item>Future: true zero-knowledge reads where the server returns ciphertext and the SDK
+    ///         decrypts locally</item>
+    /// </list>
+    ///
+    /// Obtain via: <c>bella auth setup</c> (exports <c>~/.bella/device-key.pem</c>).
+    /// Supply via the <c>BELLA_BAXTER_PRIVATE_KEY</c> environment variable or appsettings.
+    /// Never commit a private key to source control.
+    ///
+    /// When null (default), the SDK generates a fresh ephemeral P-256 keypair on each poll —
+    /// this provides E2EE transport security but no persistent identity or DEK caching.
+    /// </summary>
+    public string? PrivateKey { get; set; }
 }
