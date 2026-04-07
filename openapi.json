@@ -1411,7 +1411,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IResult"
+                  "$ref": "#/components/schemas/EmergencyKit"
                 }
               }
             }
@@ -12818,6 +12818,60 @@
             "type": "string"
           },
           "ciphertext": {
+            "type": "string"
+          }
+        }
+      },
+      "EmergencyKit": {
+        "required": [
+          "tenantId",
+          "tenantSlug",
+          "generatedAt",
+          "masterKeyFingerprint",
+          "recoveryKeyFingerprint",
+          "instructions"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string"
+          },
+          "tenantSlug": {
+            "type": "string"
+          },
+          "generatedAt": {
+            "type": "string"
+          },
+          "masterKeyFingerprint": {
+            "type": "string"
+          },
+          "recoveryKeyFingerprint": {
+            "type": "string"
+          },
+          "instructions": {
+            "$ref": "#/components/schemas/EmergencyKitInstructions"
+          }
+        }
+      },
+      "EmergencyKitInstructions": {
+        "required": [
+          "step1",
+          "step2",
+          "step3",
+          "warning"
+        ],
+        "type": "object",
+        "properties": {
+          "step1": {
+            "type": "string"
+          },
+          "step2": {
+            "type": "string"
+          },
+          "step3": {
+            "type": "string"
+          },
+          "warning": {
             "type": "string"
           }
         }

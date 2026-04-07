@@ -65,9 +65,8 @@ jobs:
             BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj; do
             dotnet build "$csproj" -c Release --no-restore
           done
-          # Build MAUI with macOS-compatible targets only (net10.0-windows requires a Windows runner)
-          dotnet build BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-restore \
-            /p:TargetFrameworks="net10.0-ios;net10.0-android;net10.0-maccatalyst"
+          # MAUI: net10.0-windows is auto-excluded on non-Windows (see csproj condition)
+          dotnet build BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-restore
 
       - name: Pack all publishable packages
         run: |
@@ -82,9 +81,8 @@ jobs:
               -p:Version="$VERSION" \
               -o ./nupkgs
           done
-          # MAUI: pack macOS-compatible targets only
+          # MAUI: net10.0-windows is auto-excluded on non-Windows (see csproj condition)
           dotnet pack BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-build \
-            /p:TargetFrameworks="net10.0-ios;net10.0-android;net10.0-maccatalyst" \
             -p:Version="$VERSION" \
             -o ./nupkgs
 

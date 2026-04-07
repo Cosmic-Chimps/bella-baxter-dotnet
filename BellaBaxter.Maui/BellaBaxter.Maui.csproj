@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net10.0-ios;net10.0-android;net10.0-maccatalyst;net10.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- net10.0-windows requires a Windows runner; excluded automatically on non-Windows CI -->
+    <TargetFrameworks>net10.0-ios;net10.0-android;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
