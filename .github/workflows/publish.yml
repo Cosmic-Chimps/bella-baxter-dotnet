@@ -66,6 +66,8 @@ jobs:
             dotnet build "$csproj" -c Release --no-restore
           done
           # MAUI: net10.0-windows is auto-excluded on non-Windows (see csproj condition)
+          # Explicit restore needed because BellaBaxter.Maui is not in the solution file
+          dotnet restore BellaBaxter.Maui/BellaBaxter.Maui.csproj
           dotnet build BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-restore
 
       - name: Pack all publishable packages
