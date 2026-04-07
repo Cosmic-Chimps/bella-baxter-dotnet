@@ -12477,6 +12477,12 @@
             "type": "integer",
             "format": "int32",
             "default": 15
+          },
+          "grantedRole": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -13334,9 +13340,7 @@
       },
       "ExchangeOidcTokenBySlugCommand": {
         "required": [
-          "oidcToken",
-          "projectSlug",
-          "environmentSlug"
+          "oidcToken"
         ],
         "type": "object",
         "properties": {
@@ -13344,10 +13348,16 @@
             "type": "string"
           },
           "projectSlug": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "environmentSlug": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -16806,6 +16816,7 @@
           "oidcJwksUri",
           "claimRules",
           "issuedTokenTtlMinutes",
+          "grantedRole",
           "isEnabled",
           "createdAt",
           "updatedAt"
@@ -16844,6 +16855,9 @@
           "issuedTokenTtlMinutes": {
             "type": "integer",
             "format": "int32"
+          },
+          "grantedRole": {
+            "type": "string"
           },
           "isEnabled": {
             "type": "boolean"
@@ -17280,6 +17294,12 @@
             "type": [
               "null",
               "boolean"
+            ]
+          },
+          "grantedRole": {
+            "type": [
+              "null",
+              "string"
             ]
           }
         }

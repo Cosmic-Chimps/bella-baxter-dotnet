@@ -10,7 +10,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,7 +31,8 @@ jobs:
           if [ "$BELLA_BAXTER_API_URL" != "https://api.bella-baxter.io" ]; then
             grep -rl 'https://api.bella-baxter.io' . \
               --include='*.cs' \
-              | xargs sed -i "s|https://api.bella-baxter.io|${BELLA_BAXTER_API_URL}|g"
+              | xargs sed -i.bak "s|https://api.bella-baxter.io|${BELLA_BAXTER_API_URL}|g"
+            find . -name "*.bak" -delete
           fi
 
       - name: Generate Kiota client
@@ -47,11 +48,26 @@ jobs:
             --clean-output \
             --log-level Warning
 
-      - name: Restore & Build
-        run: dotnet restore && dotnet build -c Release --no-restore
-
       - name: Install MAUI workload
         run: dotnet workload install maui --skip-manifest-update
+        # macOS supports all MAUI targets except net10.0-windows (requires a Windows runner).
+        # The BellaBaxter.Maui package is built with iOS/Android/macCatalyst targets only.
+
+      - name: Restore & Build
+        run: |
+          dotnet restore
+          # Build non-MAUI projects
+          for csproj in \
+            BellaBaxter.Client/BellaBaxter.Client.csproj \
+            BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj \
+            BellaBaxter.Aspire.Configuration/BellaBaxter.Aspire.Configuration.csproj \
+            BellaBaxter.Aspire.Host/BellaBaxter.Aspire.Host.csproj \
+            BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj; do
+            dotnet build "$csproj" -c Release --no-restore
+          done
+          # Build MAUI with macOS-compatible targets only (net10.0-windows requires a Windows runner)
+          dotnet build BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-restore \
+            /p:TargetFrameworks="net10.0-ios;net10.0-android;net10.0-maccatalyst"
 
       - name: Pack all publishable packages
         run: |
@@ -61,12 +77,16 @@ jobs:
             BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj \
             BellaBaxter.Aspire.Configuration/BellaBaxter.Aspire.Configuration.csproj \
             BellaBaxter.Aspire.Host/BellaBaxter.Aspire.Host.csproj \
-            BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj \
-            BellaBaxter.Maui/BellaBaxter.Maui.csproj; do
+            BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj; do
             dotnet pack "$csproj" -c Release --no-build \
               -p:Version="$VERSION" \
               -o ./nupkgs
           done
+          # MAUI: pack macOS-compatible targets only
+          dotnet pack BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-build \
+            /p:TargetFrameworks="net10.0-ios;net10.0-android;net10.0-maccatalyst" \
+            -p:Version="$VERSION" \
+            -o ./nupkgs
 
       - name: Push to NuGet.org
         run: |
