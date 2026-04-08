@@ -3,7 +3,6 @@
     <!-- net10.0-windows requires a Windows runner; excluded automatically on non-Windows CI -->
     <TargetFrameworks>net10.0-ios;net10.0-android;net10.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
-    <UseMaui>true</UseMaui>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
@@ -27,10 +26,6 @@
     <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Storage" />
-  </ItemGroup>
-
   <!-- Dev (monorepo): use project reference when AspNet.Configuration source is on disk -->
   <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.AspNet.Configuration\BellaBaxter.AspNet.Configuration.csproj')">
     <ProjectReference Include="..\BellaBaxter.AspNet.Configuration\BellaBaxter.AspNet.Configuration.csproj" />
@@ -38,5 +33,8 @@
   <!-- Publish (public repo bella-baxter-dotnet): resolve from NuGet when project is absent -->
   <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.AspNet.Configuration\BellaBaxter.AspNet.Configuration.csproj')">
     <PackageReference Include="BellaBaxter.AspNet.Configuration" Version="0.1.1-preview.41" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.51" />
   </ItemGroup>
 </Project>

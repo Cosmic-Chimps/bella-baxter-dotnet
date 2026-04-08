@@ -68,6 +68,7 @@ jobs:
           # MAUI: net10.0-windows is auto-excluded on non-Windows (see csproj condition)
           # Explicit restore needed because BellaBaxter.Maui is not in the solution file
           dotnet restore BellaBaxter.Maui/BellaBaxter.Maui.csproj
+          dotnet build -t:InstallAndroidDependencies -f net10.0-android "-p:AndroidSdkDirectory=/Users/jjchiw/Library/Developer/Xamarin/android-sdk-macosx" "-p:AcceptAndroidSDKLicenses=true"
           dotnet build BellaBaxter.Maui/BellaBaxter.Maui.csproj -c Release --no-restore
 
       - name: Pack all publishable packages

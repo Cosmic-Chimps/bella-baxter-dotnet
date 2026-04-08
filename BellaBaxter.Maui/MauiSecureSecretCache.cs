@@ -1,5 +1,5 @@
-using Microsoft.Maui.Storage;
 using BellaBaxter.AspNet.Configuration;
+using Microsoft.Maui.Storage;
 
 namespace BellaBaxter.Maui;
 
@@ -92,7 +92,8 @@ public sealed class MauiSecureSecretCache : ISecretCache
     /// <inheritdoc />
     public async Task WriteAsync(Dictionary<string, string> secrets, CancellationToken ct = default)
     {
-        if (secrets is null) throw new ArgumentNullException(nameof(secrets));
+        if (secrets is null)
+            throw new ArgumentNullException(nameof(secrets));
 
         // Remove stale keys from a previous write that are no longer present.
         await RemoveStaleKeysAsync(secrets.Keys);
@@ -108,7 +109,8 @@ public sealed class MauiSecureSecretCache : ISecretCache
         // Store the index so ReadAsync can enumerate all keys.
         await SecureStorage.Default.SetAsync(
             $"{_namespace}.{KeysSuffix}",
-            string.Join(KeySeparator, keyList));
+            string.Join(KeySeparator, keyList)
+        );
     }
 
     /// <inheritdoc />
@@ -129,11 +131,15 @@ public sealed class MauiSecureSecretCache : ISecretCache
             var indexRaw = await SecureStorage.Default.GetAsync(indexKey);
             if (!string.IsNullOrEmpty(indexRaw))
             {
-                foreach (var key in indexRaw.Split(KeySeparator, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    var key in indexRaw.Split(KeySeparator, StringSplitOptions.RemoveEmptyEntries)
+                )
                     SecureStorage.Default.Remove($"{_namespace}.{key}");
             }
         }
-        catch { /* ignore — might already be gone */ }
+        catch
+        { /* ignore — might already be gone */
+        }
 
         SecureStorage.Default.Remove(indexKey);
     }
@@ -144,15 +150,20 @@ public sealed class MauiSecureSecretCache : ISecretCache
         try
         {
             var indexRaw = await SecureStorage.Default.GetAsync(indexKey);
-            if (string.IsNullOrEmpty(indexRaw)) return;
+            if (string.IsNullOrEmpty(indexRaw))
+                return;
 
             var currentSet = new HashSet<string>(currentKeys, StringComparer.OrdinalIgnoreCase);
-            foreach (var oldKey in indexRaw.Split(KeySeparator, StringSplitOptions.RemoveEmptyEntries))
+            foreach (
+                var oldKey in indexRaw.Split(KeySeparator, StringSplitOptions.RemoveEmptyEntries)
+            )
             {
                 if (!currentSet.Contains(oldKey))
                     SecureStorage.Default.Remove($"{_namespace}.{oldKey}");
             }
         }
-        catch { /* ignore */ }
+        catch
+        { /* ignore */
+        }
     }
 }
