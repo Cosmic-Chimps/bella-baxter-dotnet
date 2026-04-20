@@ -13,7 +13,7 @@
 
     <!-- NuGet package metadata -->
     <PackageId>BellaBaxter.Maui</PackageId>
-    <Version>0.1.1-preview.50</Version>
+    <Version>0.1.1-preview.51</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Cosmic Chimps</Authors>
     <Description>.NET MAUI secure secret cache for Bella Baxter. Uses SecureStorage (iOS Keychain, Android EncryptedSharedPreferences, Windows DPAPI) to cache secrets offline.</Description>
@@ -32,7 +32,7 @@
   </ItemGroup>
   <!-- Publish (public repo bella-baxter-dotnet): resolve from NuGet when project is absent -->
   <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.AspNet.Configuration\BellaBaxter.AspNet.Configuration.csproj')">
-    <PackageReference Include="BellaBaxter.AspNet.Configuration" Version="0.1.1-preview.50" />
+    <PackageReference Include="BellaBaxter.AspNet.Configuration" Version="0.1.1-preview.51" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.51" />
