@@ -2067,6 +2067,60 @@
         }
       }
     },
+    "/api/v1/tenants/me/encryption-key/reprovision": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.ReprovisionTenantDek"
+        ],
+        "summary": "POST_api_v1_tenants_me_encryption_key_reprovision",
+        "description": "POST_api_v1_tenants_me_encryption_key_reprovision",
+        "operationId": "reprovisionTenantDek",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReprovisionTenantDekResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/sso/request": {
       "post": {
         "tags": [
@@ -3207,21 +3261,22 @@
         }
       }
     },
-    "/api/v1/providers/{providerSlug}": {
+    "/api/v1/providers/{id}": {
       "delete": {
         "tags": [
           "BellaBaxter.Features.Providers.DeleteProvider"
         ],
-        "summary": "DELETE_api_v1_providers_providerSlug",
-        "description": "DELETE_api_v1_providers_providerSlug",
+        "summary": "DELETE_api_v1_providers_id",
+        "description": "DELETE_api_v1_providers_id",
         "operationId": "deleteProvider",
         "parameters": [
           {
-            "name": "providerSlug",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3258,16 +3313,17 @@
         "tags": [
           "BellaBaxter.Features.Providers.GetProvider"
         ],
-        "summary": "GET_api_v1_providers_providerSlug",
-        "description": "GET_api_v1_providers_providerSlug",
-        "operationId": "getProviderBySlug",
+        "summary": "GET_api_v1_providers_id",
+        "description": "GET_api_v1_providers_id",
+        "operationId": "getProviderById",
         "parameters": [
           {
-            "name": "providerSlug",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3296,16 +3352,17 @@
         "tags": [
           "BellaBaxter.Features.Providers.UpdateProvider"
         ],
-        "summary": "PUT_api_v1_providers_providerSlug",
-        "description": "PUT_api_v1_providers_providerSlug",
+        "summary": "PUT_api_v1_providers_id",
+        "description": "PUT_api_v1_providers_id",
         "operationId": "updateProvider",
         "parameters": [
           {
-            "name": "providerSlug",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3881,6 +3938,51 @@
         }
       }
     },
+    "/api/v1/projects/{id}/encryption-key": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.GetProjectEncryptionKey"
+        ],
+        "summary": "GET_api_v1_projects_id_encryption_key",
+        "description": "GET_api_v1_projects_id_encryption_key",
+        "operationId": "getProjectEncryptionKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectEncryptionKeyStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "read"
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/secret-drift": {
       "get": {
         "tags": [
@@ -4211,6 +4313,67 @@
               }
             }
           }
+        }
+      }
+    },
+    "/api/v1/projects/{id}/encryption-key/provision": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.ProvisionProjectDek"
+        ],
+        "summary": "POST_api_v1_projects_id_encryption_key_provision",
+        "description": "POST_api_v1_projects_id_encryption_key_provision",
+        "operationId": "provisionProjectDek",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvisionProjectDekResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "manage"
         }
       }
     },
@@ -10007,6 +10170,140 @@
         }
       }
     },
+    "/api/v1/billing/portal": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Billing.CreateBillingPortalSession"
+        ],
+        "summary": "POST_api_v1_billing_portal",
+        "description": "POST_api_v1_billing_portal",
+        "operationId": "createBillingPortalSession",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillingPortalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingPortalResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/checkout": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Billing.CreateCheckoutSession"
+        ],
+        "summary": "POST_api_v1_billing_checkout",
+        "description": "POST_api_v1_billing_checkout",
+        "operationId": "createCheckoutSession",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCheckoutSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCheckoutSessionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/stripe/webhook": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Billing.StripeWebhookHandler"
+        ],
+        "summary": "POST_api_v1_stripe_webhook",
+        "description": "POST_api_v1_stripe_webhook",
+        "operationId": "stripeWebhook",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/token": {
       "post": {
         "tags": [
@@ -11673,6 +11970,28 @@
         },
         "description": "The JSON payload delivered to your webhook endpoint by Bella Baxter. Validate with X-Bella-Signature header using HMAC-SHA256."
       },
+      "BillingPortalRequest": {
+        "required": [
+          "returnUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "returnUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "BillingPortalResponse": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
       "BillingStatementResponse": {
         "required": [
           "id",
@@ -11983,6 +12302,32 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "CreateCheckoutSessionRequest": {
+        "required": [
+          "successUrl",
+          "cancelUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "successUrl": {
+            "type": "string"
+          },
+          "cancelUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCheckoutSessionResponse": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
           }
         }
       },
@@ -14426,7 +14771,10 @@
           "projectsProcessed",
           "environmentsProcessed",
           "secretsEncrypted",
-          "secretsSkipped"
+          "secretsSkipped",
+          "providersEncrypted",
+          "webhooksEncrypted",
+          "notificationsEncrypted"
         ],
         "type": "object",
         "properties": {
@@ -14449,6 +14797,18 @@
             "format": "int32"
           },
           "secretsSkipped": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "providersEncrypted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webhooksEncrypted": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationsEncrypted": {
             "type": "integer",
             "format": "int32"
           }
@@ -14764,6 +15124,37 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "ProjectEncryptionKeyStatusResponse": {
+        "required": [
+          "tenantEncryptionEnabled",
+          "hasProjectDek",
+          "hasTenantDek",
+          "usingFallback",
+          "lastKeyEventAt"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantEncryptionEnabled": {
+            "type": "boolean"
+          },
+          "hasProjectDek": {
+            "type": "boolean"
+          },
+          "hasTenantDek": {
+            "type": "boolean"
+          },
+          "usingFallback": {
+            "type": "boolean"
+          },
+          "lastKeyEventAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -15311,6 +15702,25 @@
           }
         }
       },
+      "ProvisionProjectDekResponse": {
+        "required": [
+          "message",
+          "projectId",
+          "nextStep"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "nextStep": {
+            "type": "string"
+          }
+        }
+      },
       "RecoverEncryptionKeyRequest": {
         "required": [
           "newMasterPublicKey",
@@ -15414,6 +15824,21 @@
             "type": "string"
           },
           "recoveryKeyFingerprint": {
+            "type": "string"
+          }
+        }
+      },
+      "ReprovisionTenantDekResponse": {
+        "required": [
+          "message",
+          "nextStep"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "nextStep": {
             "type": "string"
           }
         }
@@ -16482,6 +16907,7 @@
       "TenantEncryptionKeyStatusResponse": {
         "required": [
           "encryptionEnabled",
+          "hasDek",
           "masterKeyFingerprint",
           "recoveryKeyFingerprint",
           "registeredAt",
@@ -16490,6 +16916,9 @@
         "type": "object",
         "properties": {
           "encryptionEnabled": {
+            "type": "boolean"
+          },
+          "hasDek": {
             "type": "boolean"
           },
           "masterKeyFingerprint": {
@@ -16611,7 +17040,9 @@
           "requestsUsed",
           "requestsRemaining",
           "estimatedOverageCost",
-          "isUnlimited"
+          "isUnlimited",
+          "hasActiveSubscription",
+          "isOperatorManaged"
         ],
         "type": "object",
         "properties": {
@@ -16642,6 +17073,12 @@
             "format": "double"
           },
           "isUnlimited": {
+            "type": "boolean"
+          },
+          "hasActiveSubscription": {
+            "type": "boolean"
+          },
+          "isOperatorManaged": {
             "type": "boolean"
           }
         }
@@ -17758,6 +18195,9 @@
       "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.ReprovisionTenantDek"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.RequestSsoAccess"
     },
     {
@@ -17872,6 +18312,9 @@
       "name": "BellaBaxter.Features.Projects.ExportProject"
     },
     {
+      "name": "BellaBaxter.Features.Projects.GetProjectEncryptionKey"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.GetSecretDrift"
     },
     {
@@ -17882,6 +18325,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.CreateProject.CreateProject"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.ProvisionProjectDek"
     },
     {
       "name": "BellaBaxter.Features.Projects.RemoveProjectUser"
@@ -18164,6 +18610,15 @@
     },
     {
       "name": "BellaBaxter.Features.Dashboard.GetDashboard"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.CreateBillingPortalSession"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.CreateCheckoutSession"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.StripeWebhookHandler"
     },
     {
       "name": "BellaBaxter.Features.Auth.ExchangeToken"
