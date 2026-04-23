@@ -8912,6 +8912,532 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/ca": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.ConfigurePkiCa"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_ca",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_ca",
+        "operationId": "configurePkiCa",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PkiCaSetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiCaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.GetPkiCa"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_pki_ca",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_pki_ca",
+        "operationId": "getPkiCa",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiCaPublicKeyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/roles": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.CreatePkiRole"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_roles",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_roles",
+        "operationId": "createPkiRole",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PkiCreateRoleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiRoleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.ListPkiRoles"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_pki_roles",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_pki_roles",
+        "operationId": "listPkiRoles",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiRolesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/roles/{roleName}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.DeletePkiRole"
+        ],
+        "summary": "DELETE_api_v1_projects_projectRef_environments_envSlug_pki_roles_roleName",
+        "description": "DELETE_api_v1_projects_projectRef_environments_envSlug_pki_roles_roleName",
+        "operationId": "deletePkiRole",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/issue": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.IssuePkiCertificate"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_issue",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_issue",
+        "operationId": "issuePkiCertificate",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PkiIssueCertificateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiIssuedCertificateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/certificates": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.ListPkiCertificates"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_pki_certificates",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_pki_certificates",
+        "operationId": "listPkiCertificates",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiCertificatesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/revoke": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.RevokePkiCertificate"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_revoke",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_revoke",
+        "operationId": "revokePkiCertificate",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PkiRevokeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiRevokeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/tidy": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.TidyPkiCerts"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_tidy",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_tidy",
+        "operationId": "tidyPkiCerts",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiTidyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/leases": {
       "get": {
         "tags": [
@@ -15107,6 +15633,357 @@
           }
         }
       },
+      "PkiCaPublicKeyResponse": {
+        "required": [
+          "certificate",
+          "caChain",
+          "instructions"
+        ],
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "type": "string"
+          },
+          "caChain": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "acmeDirectoryUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PkiCaResponse": {
+        "required": [
+          "success",
+          "message",
+          "certificate",
+          "serialNumber",
+          "expiration"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "certificate": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "expiration": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PkiCaSetupRequest": {
+        "required": [
+          "commonName"
+        ],
+        "type": "object",
+        "properties": {
+          "commonName": {
+            "type": "string"
+          },
+          "ttl": {
+            "type": "string",
+            "default": "87600h"
+          },
+          "keyType": {
+            "type": "string",
+            "default": "rsa"
+          },
+          "keyBits": {
+            "type": "integer",
+            "format": "int32",
+            "default": 4096
+          },
+          "organization": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "country": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PkiCertificatesResponse": {
+        "required": [
+          "certificates"
+        ],
+        "type": "object",
+        "properties": {
+          "certificates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PkiCertSummaryResponse"
+            }
+          }
+        }
+      },
+      "PkiCertSummaryResponse": {
+        "required": [
+          "serialNumber",
+          "commonName",
+          "expiration",
+          "revoked"
+        ],
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string"
+          },
+          "commonName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiration": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int64"
+          },
+          "revoked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PkiCreateRoleRequest": {
+        "required": [
+          "name",
+          "allowedDomains"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "allowedDomains": {
+            "type": "string"
+          },
+          "allowSubdomains": {
+            "type": "boolean",
+            "default": true
+          },
+          "allowLocalhost": {
+            "type": "boolean",
+            "default": false
+          },
+          "allowAnyName": {
+            "type": "boolean",
+            "default": false
+          },
+          "maxTtl": {
+            "type": "string",
+            "default": "8760h"
+          },
+          "defaultTtl": {
+            "type": "string",
+            "default": "720h"
+          },
+          "keyType": {
+            "type": "string",
+            "default": "rsa"
+          },
+          "keyBits": {
+            "type": "integer",
+            "format": "int32",
+            "default": 2048
+          }
+        }
+      },
+      "PkiIssueCertificateRequest": {
+        "required": [
+          "commonName",
+          "roleName"
+        ],
+        "type": "object",
+        "properties": {
+          "commonName": {
+            "type": "string"
+          },
+          "roleName": {
+            "type": "string"
+          },
+          "altNames": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ipSans": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ttl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PkiIssuedCertificateResponse": {
+        "required": [
+          "success",
+          "certificate",
+          "privateKey",
+          "privateKeyType",
+          "issuingCa",
+          "caChain",
+          "serialNumber",
+          "expiration",
+          "instructions"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "certificate": {
+            "type": "string"
+          },
+          "privateKey": {
+            "type": "string"
+          },
+          "privateKeyType": {
+            "type": "string"
+          },
+          "issuingCa": {
+            "type": "string"
+          },
+          "caChain": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "expiration": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "instructions": {
+            "type": "string"
+          }
+        }
+      },
+      "PkiRevokeRequest": {
+        "required": [
+          "serialNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "PkiRevokeResponse": {
+        "required": [
+          "success",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PkiRoleResponse": {
+        "required": [
+          "name",
+          "allowedDomains",
+          "allowSubdomains",
+          "allowLocalhost",
+          "allowAnyName",
+          "maxTtl",
+          "defaultTtl",
+          "keyType"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "allowedDomains": {
+            "type": "string"
+          },
+          "allowSubdomains": {
+            "type": "boolean"
+          },
+          "allowLocalhost": {
+            "type": "boolean"
+          },
+          "allowAnyName": {
+            "type": "boolean"
+          },
+          "maxTtl": {
+            "type": "string"
+          },
+          "defaultTtl": {
+            "type": "string"
+          },
+          "keyType": {
+            "type": "string"
+          }
+        }
+      },
+      "PkiRolesResponse": {
+        "required": [
+          "roles"
+        ],
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PkiRoleResponse"
+            }
+          }
+        }
+      },
+      "PkiTidyResponse": {
+        "required": [
+          "success",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -18548,6 +19425,33 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.Versions.UndeleteSecretVersion"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.ConfigurePkiCa"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.GetPkiCa"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.CreatePkiRole"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.ListPkiRoles"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.DeletePkiRole"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.IssuePkiCertificate"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.ListPkiCertificates"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.RevokePkiCertificate"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.TidyPkiCerts"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Leases.ListLeases"
