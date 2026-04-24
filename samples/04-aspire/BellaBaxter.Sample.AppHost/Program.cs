@@ -17,10 +17,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 //
 // The Api project calls builder.Configuration.AddBellaSecrets() at startup —
 // IConfiguration picks up the injected env vars automatically.
-var baxter = builder.AddBaxter(
-    name: "baxter",
-    baxterUrl: "https://baxter.example.com"
-);
+var baxter = builder.AddBaxter(name: "baxter", baxterUrl: "https://baxter.example.com");
 
 // ──────────────────────────────────────────────────────────────────────────
 
