@@ -3172,6 +3172,39 @@
         }
       }
     },
+    "/api/v1/rotator-definitions": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.RotatorDefinitions.ListRotatorDefinitions"
+        ],
+        "summary": "GET_api_v1_rotator_definitions",
+        "description": "GET_api_v1_rotator_definitions",
+        "operationId": "listRotatorDefinitions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RotatorDefinitionPublicResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/providers": {
       "post": {
         "tags": [
@@ -8176,6 +8209,96 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/rotate": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.TriggerSecretRotation"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotate",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotate",
+        "operationId": "triggerSecretRotation",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IResult"
                 }
               }
             }
@@ -16823,6 +16946,86 @@
           }
         }
       },
+      "RotatorDefinitionPublicResponse": {
+        "required": [
+          "id",
+          "displayName",
+          "description",
+          "deliveryType",
+          "credentialSchema",
+          "paramSchema"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "deliveryType": {
+            "$ref": "#/components/schemas/RotatorDeliveryType"
+          },
+          "credentialSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RotatorFieldDefDto"
+            }
+          },
+          "paramSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RotatorFieldDefDto"
+            }
+          }
+        }
+      },
+      "RotatorDeliveryType": {
+        "enum": [
+          "Internal",
+          "HttpWebhook"
+        ]
+      },
+      "RotatorFieldDefDto": {
+        "required": [
+          "key",
+          "label",
+          "type",
+          "required",
+          "helpText",
+          "placeholder"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "helpText": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "placeholder": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "SecretDriftSummaryResponse": {
         "required": [
           "hasDrift",
@@ -17160,6 +17363,31 @@
           },
           "intervalDays": {
             "type": "integer",
+            "format": "int32"
+          },
+          "rotatorDefinitionId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "rotationCredentials": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "staticParams": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "revokePreviousAfterDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
             "format": "int32"
           }
         }
@@ -19154,6 +19382,9 @@
       "name": "BellaBaxter.Features.SecurityIntelligence.TriggerEnvironmentScan"
     },
     {
+      "name": "BellaBaxter.Features.RotatorDefinitions.ListRotatorDefinitions"
+    },
+    {
       "name": "BellaBaxter.Features.Providers.CreateProvider"
     },
     {
@@ -19401,6 +19632,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.TriggerSecretRotation"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
