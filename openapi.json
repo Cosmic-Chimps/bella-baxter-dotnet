@@ -2515,6 +2515,36 @@
         }
       }
     },
+    "/api/v1/system/integration-info": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.SystemEndpoints.GetIntegrationInfo"
+        ],
+        "summary": "GET_api_v1_system_integration_info",
+        "description": "GET_api_v1_system_integration_info",
+        "operationId": "getIntegrationInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationInfoResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/version": {
       "get": {
         "tags": [
@@ -15020,6 +15050,27 @@
           }
         }
       },
+      "IntegrationInfoResponse": {
+        "required": [
+          "azureKeyVaultFunctionPrincipalId",
+          "awsLambdaAccountId"
+        ],
+        "type": "object",
+        "properties": {
+          "azureKeyVaultFunctionPrincipalId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "awsLambdaAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "InviteListResponse": {
         "required": [
           "token",
@@ -19341,6 +19392,9 @@
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.DiagnosticsEndpoint"
+    },
+    {
+      "name": "BellaBaxter.Features.SystemEndpoints.GetIntegrationInfo"
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.GetVersion"
