@@ -265,6 +265,19 @@ public static class BellaClientFactory
         return services;
     }
 
+    /// <summary>
+    /// Creates a <see cref="BellaClient"/> with no authentication.
+    /// Use for pre-auth calls such as OIDC token exchange, where you don't yet have
+    /// a Bella API key or bearer token.
+    /// </summary>
+    public static BellaClient CreateAnonymous(string baseUrl)
+    {
+        var httpClient = BuildHttpClient(baseUrl);
+        var adapter = new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(), httpClient: httpClient);
+        adapter.BaseUrl = baseUrl.TrimEnd('/');
+        return new BellaClient(adapter);
+    }
+
     private static HttpClient BuildHttpClient(string baseUrl)
     {
         var services = new ServiceCollection();
