@@ -2635,6 +2635,50 @@
         }
       }
     },
+    "/api/superadmin/users/{userId}/tenants": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.SuperAdmin.GetUserTenants"
+        ],
+        "summary": "GET_api_superadmin_users_userId_tenants",
+        "description": "GET_api_superadmin_users_userId_tenants",
+        "operationId": "GetUserTenants",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserTenantItem"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/ssh/logs": {
       "get": {
         "tags": [
@@ -14441,6 +14485,12 @@
           "oidcToken": {
             "type": "string"
           },
+          "tenantSlug": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "projectSlug": {
             "type": [
               "null",
@@ -19113,6 +19163,26 @@
           }
         }
       },
+      "UserTenantItem": {
+        "required": [
+          "tenantId",
+          "tenantName",
+          "tenantSlug"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantName": {
+            "type": "string"
+          },
+          "tenantSlug": {
+            "type": "string"
+          }
+        }
+      },
       "WebhookId": { },
       "WebhookOperationResponse": {
         "required": [
@@ -19401,6 +19471,9 @@
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.SystemEndpoints"
+    },
+    {
+      "name": "BellaBaxter.Features.SuperAdmin.GetUserTenants"
     },
     {
       "name": "BellaBaxter.Features.Ssh.ListSshLogs"

@@ -270,18 +270,18 @@ public static class BellaClientFactory
     /// Use for pre-auth calls such as OIDC token exchange, where you don't yet have
     /// a Bella API key or bearer token.
     /// </summary>
-    public static BellaClient CreateAnonymous(string baseUrl)
+    public static BellaClient CreateAnonymous(string baseUrl, DelegatingHandler? outerHandler = null)
     {
-        var httpClient = BuildHttpClient(baseUrl);
+        var httpClient = BuildHttpClient(baseUrl, outerHandler);
         var adapter = new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(), httpClient: httpClient);
         adapter.BaseUrl = baseUrl.TrimEnd('/');
         return new BellaClient(adapter);
     }
 
-    private static HttpClient BuildHttpClient(string baseUrl)
+    private static HttpClient BuildHttpClient(string baseUrl, DelegatingHandler? outerHandler = null)
     {
         var services = new ServiceCollection();
-        services
+        var builder = services
             .AddHttpClient(
                 "BellaClient",
                 client =>
@@ -289,7 +289,12 @@ public static class BellaClientFactory
                     client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
                     client.DefaultRequestHeaders.Add("Accept", "application/json");
                 }
-            )
+            );
+
+        if (outerHandler is not null)
+            builder.AddHttpMessageHandler(() => outerHandler);
+
+        builder
             .AddStandardResilienceHandler(options =>
             {
                 options.Retry.MaxRetryAttempts = 3;
