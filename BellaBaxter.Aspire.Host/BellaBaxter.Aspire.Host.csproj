@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>Aspire hosting integration for Bella Baxter — spins up the full Baxter stack (Postgres, Redis, Keycloak, OpenBao, Bella API) in a local Aspire AppHost.</Description>
     <PackageId>BellaBaxter.Aspire.Host</PackageId>
-    <Version>0.1.1-preview.75</Version>
+    <Version>0.1.1-preview.76</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Cosmic Chimps</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
