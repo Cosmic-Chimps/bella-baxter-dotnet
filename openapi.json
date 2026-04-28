@@ -2635,13 +2635,13 @@
         }
       }
     },
-    "/api/superadmin/users/{userId}/tenants": {
+    "/api/v1/superadmin/users/{userId}/tenants": {
       "get": {
         "tags": [
           "BellaBaxter.Features.SuperAdmin.GetUserTenants"
         ],
-        "summary": "GET_api_superadmin_users_userId_tenants",
-        "description": "GET_api_superadmin_users_userId_tenants",
+        "summary": "GET_api_v1_superadmin_users_userId_tenants",
+        "description": "GET_api_v1_superadmin_users_userId_tenants",
         "operationId": "GetUserTenants",
         "parameters": [
           {
@@ -10089,6 +10089,127 @@
         }
       }
     },
+    "/api/v1/pki/logs": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Pki.ListPkiLogs"
+        ],
+        "summary": "GET_api_v1_pki_logs",
+        "description": "GET_api_v1_pki_logs",
+        "operationId": "listPkiLogs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "projectSlug",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actorType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "apiKeyId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiLogPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/notifications": {
       "post": {
         "tags": [
@@ -16114,6 +16235,175 @@
           }
         }
       },
+      "PkiLogEntry": {
+        "required": [
+          "id",
+          "projectId",
+          "projectSlug",
+          "environmentId",
+          "environmentSlug",
+          "action",
+          "roleName",
+          "commonName",
+          "serialNumber",
+          "ttl",
+          "altNames",
+          "actorType",
+          "userId",
+          "userName",
+          "apiKeyId",
+          "apiKeyName",
+          "appClient",
+          "ipAddress",
+          "userAgent",
+          "country",
+          "city",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectSlug": {
+            "type": "string"
+          },
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "roleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "commonName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serialNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ttl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "altNames": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "actorType": {
+            "type": "string"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "userName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "apiKeyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "apiKeyName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "appClient": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ipAddress": {
+            "type": "string"
+          },
+          "userAgent": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "country": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "city": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PkiLogPage": {
+        "required": [
+          "items",
+          "totalCount",
+          "page",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PkiLogEntry"
+            }
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "PkiRevokeRequest": {
         "required": [
           "serialNumber"
@@ -19834,6 +20124,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.DynamicCredentials.ListCredentialRoles"
+    },
+    {
+      "name": "BellaBaxter.Features.Pki.ListPkiLogs"
     },
     {
       "name": "BellaBaxter.Features.Notifications.CreateNotificationChannel"
