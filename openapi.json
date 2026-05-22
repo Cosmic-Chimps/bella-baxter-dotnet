@@ -5575,6 +5575,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "includeArchived",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -6035,6 +6042,66 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/restore": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.RestoreEnvironment"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_restore",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_restore",
+        "operationId": "restoreEnvironment",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentOperationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": { }
@@ -8171,6 +8238,86 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/rotation-policy/rotate-signing-secret": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.RotateRotationSigningSecret"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy_rotate_signing_secret",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy_rotate_signing_secret",
+        "operationId": "rotateRotationSigningSecret",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotateRotationSigningSecretResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/rotation-policy": {
       "put": {
         "tags": [
@@ -8229,7 +8376,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationResponse"
+                  "$ref": "#/components/schemas/SetRotationPolicyResponse"
                 }
               }
             }
@@ -14343,6 +14490,10 @@
               "null",
               "string"
             ]
+          },
+          "status": {
+            "type": "string",
+            "default": "Active"
           }
         }
       },
@@ -17310,6 +17461,29 @@
           }
         }
       },
+      "RotateRotationSigningSecretResponse": {
+        "required": [
+          "success",
+          "message",
+          "newSigningSecret",
+          "newSigningSecretKeyPrefix"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "newSigningSecret": {
+            "type": "string"
+          },
+          "newSigningSecretKeyPrefix": {
+            "type": "string"
+          }
+        }
+      },
       "SecretDriftSummaryResponse": {
         "required": [
           "hasDrift",
@@ -17671,12 +17845,6 @@
               "string"
             ]
           },
-          "signingSecret": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
           "randomFormat": {
             "type": [
               "null",
@@ -17689,6 +17857,33 @@
               "integer"
             ],
             "format": "int32"
+          }
+        }
+      },
+      "SetRotationPolicyResponse": {
+        "required": [
+          "success",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "signingSecret": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "signingSecretKeyPrefix": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -19878,6 +20073,9 @@
       "name": "BellaBaxter.Features.Projects.Environments.UpdateEnvironmentUserRole"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.RestoreEnvironment"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.UpdateLeasePolicy"
     },
     {
@@ -19972,6 +20170,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.PreviewImportSecrets"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.RotateRotationSigningSecret"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
