@@ -3246,39 +3246,6 @@
         }
       }
     },
-    "/api/v1/rotator-definitions": {
-      "get": {
-        "tags": [
-          "BellaBaxter.Features.RotatorDefinitions.ListRotatorDefinitions"
-        ],
-        "summary": "GET_api_v1_rotator_definitions",
-        "description": "GET_api_v1_rotator_definitions",
-        "operationId": "listRotatorDefinitions",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RotatorDefinitionPublicResponse"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/providers": {
       "post": {
         "tags": [
@@ -13513,6 +13480,12 @@
           "ignoreInScan": {
             "type": "boolean",
             "default": false
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },
@@ -17337,86 +17310,6 @@
           }
         }
       },
-      "RotatorDefinitionPublicResponse": {
-        "required": [
-          "id",
-          "displayName",
-          "description",
-          "deliveryType",
-          "credentialSchema",
-          "paramSchema"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "displayName": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "deliveryType": {
-            "$ref": "#/components/schemas/RotatorDeliveryType"
-          },
-          "credentialSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RotatorFieldDefDto"
-            }
-          },
-          "paramSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RotatorFieldDefDto"
-            }
-          }
-        }
-      },
-      "RotatorDeliveryType": {
-        "enum": [
-          "Internal",
-          "HttpWebhook"
-        ]
-      },
-      "RotatorFieldDefDto": {
-        "required": [
-          "key",
-          "label",
-          "type",
-          "required",
-          "helpText",
-          "placeholder"
-        ],
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "required": {
-            "type": "boolean"
-          },
-          "helpText": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "placeholder": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
-        }
-      },
       "SecretDriftSummaryResponse": {
         "required": [
           "hasDrift",
@@ -17756,23 +17649,39 @@
             "type": "integer",
             "format": "int32"
           },
-          "rotatorDefinitionId": {
+          "strategy": {
+            "type": "string",
+            "default": "HttpWebhook"
+          },
+          "endpoint": {
             "type": [
               "null",
               "string"
             ]
           },
-          "rotationCredentials": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+          "apiKeyHeader": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
-          "staticParams": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+          "apiKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "signingSecret": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "randomFormat": {
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "revokePreviousAfterDays": {
             "type": [
@@ -19144,6 +19053,20 @@
               "null",
               "boolean"
             ]
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "expiryWarningDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
           }
         }
       },
@@ -19178,6 +19101,12 @@
               "null",
               "boolean"
             ]
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },
@@ -19797,9 +19726,6 @@
     },
     {
       "name": "BellaBaxter.Features.SecurityIntelligence.TriggerEnvironmentScan"
-    },
-    {
-      "name": "BellaBaxter.Features.RotatorDefinitions.ListRotatorDefinitions"
     },
     {
       "name": "BellaBaxter.Features.Providers.CreateProvider"
