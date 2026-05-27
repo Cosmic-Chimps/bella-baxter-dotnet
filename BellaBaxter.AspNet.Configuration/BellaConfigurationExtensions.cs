@@ -39,7 +39,8 @@ public static class BellaConfigurationExtensions
     public static IConfigurationBuilder AddBellaSecrets(
         this IConfigurationBuilder builder,
         Action<BellaOptions>? configure = null,
-        ILogger? logger = null)
+        ILogger? logger = null
+    )
     {
         var options = new BellaOptions();
 
@@ -65,6 +66,25 @@ public static class BellaConfigurationExtensions
         if (!string.IsNullOrEmpty(envPrivateKey))
             options.PrivateKey = envPrivateKey;
 
+        // bella sdk run in JWT mode injects BELLA_BAXTER_ACCESS_TOKEN, BELLA_BAXTER_PROJECT,
+        // and BELLA_BAXTER_ENV so the SDK can authenticate with the user's OAuth2 token
+        // instead of an API key. These override appsettings values but lose to the callback.
+        var envAccessToken = Environment.GetEnvironmentVariable("BELLA_BAXTER_ACCESS_TOKEN");
+        if (!string.IsNullOrEmpty(envAccessToken))
+            options.AccessToken = envAccessToken;
+
+        var envProject =
+            Environment.GetEnvironmentVariable("BELLA_BAXTER_PROJECT")
+            ?? Environment.GetEnvironmentVariable("BELLA_PROJECT");
+        if (!string.IsNullOrEmpty(envProject))
+            options.ProjectSlug = envProject;
+
+        var envEnvironment =
+            Environment.GetEnvironmentVariable("BELLA_BAXTER_ENV")
+            ?? Environment.GetEnvironmentVariable("BELLA_ENV");
+        if (!string.IsNullOrEmpty(envEnvironment))
+            options.EnvironmentSlug = envEnvironment;
+
         // 2. Allow override via configure callback (highest priority)
         configure?.Invoke(options);
 
@@ -77,14 +97,33 @@ public static class BellaConfigurationExtensions
     {
         if (string.IsNullOrWhiteSpace(options.BaxterUrl))
             throw new InvalidOperationException(
-                "[BellaBaxter] BaxterUrl is required. Set it in appsettings.json under 'BellaBaxter:BaxterUrl' " +
-                "or via the configure callback.");
+                "[BellaBaxter] BaxterUrl is required. Set it in appsettings.json under 'BellaBaxter:BaxterUrl' "
+                    + "or via the configure callback."
+            );
 
-        if (string.IsNullOrWhiteSpace(options.ApiKey))
+        var hasApiKey = !string.IsNullOrWhiteSpace(options.ApiKey);
+        var hasAccessToken = !string.IsNullOrWhiteSpace(options.AccessToken);
+
+        if (!hasApiKey && !hasAccessToken)
             throw new InvalidOperationException(
-                "[BellaBaxter] ApiKey is required. Generate an API key with 'bella api-keys create' " +
-                "and set 'BellaBaxter:ApiKey' (e.g. in environment variables or user secrets).");
-        // Note: ProjectSlug and EnvironmentSlug are optional — if not set they are
+                "[BellaBaxter] Authentication is required. Either:\n"
+                    + "  • Set 'BellaBaxter:ApiKey' (obtain one and store it with: bella login --api-key bax-...), or\n"
+                    + "  • Run via 'bella sdk run' with interactive login (bella login) — the CLI injects BELLA_BAXTER_ACCESS_TOKEN automatically."
+            );
+
+        if (
+            hasAccessToken
+            && (
+                string.IsNullOrWhiteSpace(options.ProjectSlug)
+                || string.IsNullOrWhiteSpace(options.EnvironmentSlug)
+            )
+        )
+            throw new InvalidOperationException(
+                "[BellaBaxter] ProjectSlug and EnvironmentSlug are required when using AccessToken (JWT) auth. "
+                    + "Run: bella sdk run -p <project> -e <env> -- <command>, or set 'BellaBaxter:ProjectSlug' and 'BellaBaxter:EnvironmentSlug'."
+            );
+
+        // Note: when using ApiKey, ProjectSlug and EnvironmentSlug are optional — they are
         // auto-resolved from the API key via GET /api/v1/keys/me at first fetch.
     }
 }

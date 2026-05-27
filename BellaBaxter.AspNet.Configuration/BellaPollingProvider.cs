@@ -42,25 +42,54 @@ internal sealed class BellaPollingProvider : IDisposable
         _options = options;
         _logger = logger ?? NullLogger.Instance;
 
-        var appClient = options.AppClient ?? Environment.GetEnvironmentVariable("BELLA_BAXTER_APP_CLIENT");
+        var appClient =
+            options.AppClient ?? Environment.GetEnvironmentVariable("BELLA_BAXTER_APP_CLIENT");
 
         if (!string.IsNullOrEmpty(options.PrivateKey))
         {
             // ZKE mode: persistent device key — server wraps DEK for this identity
             var ecdhKey = LoadEcdhKeyFromPem(options.PrivateKey);
-            var zkeHandler = new ZkeDekHandler(ecdhKey, onWrappedDekReceived: (_, _, wrappedDek, expires) =>
+            var zkeHandler = new ZkeDekHandler(
+                ecdhKey,
+                onWrappedDekReceived: (_, _, wrappedDek, expires) =>
+                {
+                    _dekLease = (wrappedDek, expires ?? DateTimeOffset.UtcNow.AddHours(1));
+                    _logger.LogDebug(
+                        "[BellaBaxter] ZKE DEK lease cached, expires {Expires}",
+                        _dekLease.Value.Expires
+                    );
+                }
+            );
+
+            if (!string.IsNullOrEmpty(options.AccessToken))
             {
-                _dekLease = (wrappedDek, expires ?? DateTimeOffset.UtcNow.AddHours(1));
-                _logger.LogDebug("[BellaBaxter] ZKE DEK lease cached, expires {Expires}", _dekLease.Value.Expires);
-            });
-
-            _client = BellaClientFactory.CreateWithHmacApiKeyAndZke(
+                _client = BellaClientFactory.CreateWithBearerTokenAndZke(
+                    options.BaxterUrl,
+                    options.AccessToken,
+                    zkeHandler
+                );
+                _logger.LogDebug("[BellaBaxter] JWT + ZKE mode (persistent P-256 device key)");
+            }
+            else
+            {
+                _client = BellaClientFactory.CreateWithHmacApiKeyAndZke(
+                    options.BaxterUrl,
+                    options.ApiKey,
+                    zkeHandler,
+                    appClient: appClient
+                );
+                _logger.LogDebug("[BellaBaxter] ZKE mode enabled (persistent P-256 device key)");
+            }
+        }
+        else if (!string.IsNullOrEmpty(options.AccessToken))
+        {
+            // JWT / bearer token mode — no ZKE, ephemeral E2EE per poll
+            _client = BellaClientFactory.CreateWithBearerToken(
                 options.BaxterUrl,
-                options.ApiKey,
-                zkeHandler,
-                appClient: appClient);
-
-            _logger.LogDebug("[BellaBaxter] ZKE mode enabled (persistent P-256 device key)");
+                options.AccessToken
+            );
+            _contextResolved = true; // project/env already supplied via env vars; skip /keys/me
+            _logger.LogDebug("[BellaBaxter] JWT bearer mode (ephemeral P-256 keypair per poll)");
         }
         else
         {
@@ -68,7 +97,8 @@ internal sealed class BellaPollingProvider : IDisposable
             _client = BellaClientFactory.CreateWithHmacApiKey(
                 options.BaxterUrl,
                 options.ApiKey,
-                appClient: appClient);
+                appClient: appClient
+            );
 
             _logger.LogDebug("[BellaBaxter] E2EE enabled (ephemeral P-256 keypair per poll)");
         }
@@ -91,9 +121,13 @@ internal sealed class BellaPollingProvider : IDisposable
     /// </summary>
     private async Task EnsureContextResolvedAsync(CancellationToken ct)
     {
-        if (_contextResolved) return;
+        if (_contextResolved)
+            return;
 
-        if (!string.IsNullOrEmpty(_options.ProjectSlug) && !string.IsNullOrEmpty(_options.EnvironmentSlug))
+        if (
+            !string.IsNullOrEmpty(_options.ProjectSlug)
+            && !string.IsNullOrEmpty(_options.EnvironmentSlug)
+        )
         {
             _contextResolved = true;
             return;
@@ -101,7 +135,9 @@ internal sealed class BellaPollingProvider : IDisposable
 
         var ctx = await _client.Api.V1.Keys.Me.GetAsync(cancellationToken: ct);
         if (ctx is null)
-            throw new InvalidOperationException("[BellaBaxter] Could not resolve project/environment context from API key.");
+            throw new InvalidOperationException(
+                "[BellaBaxter] Could not resolve project/environment context from API key."
+            );
 
         if (string.IsNullOrEmpty(_options.ProjectSlug))
             _options.ProjectSlug = ctx.ProjectSlug ?? string.Empty;
@@ -109,8 +145,11 @@ internal sealed class BellaPollingProvider : IDisposable
         if (string.IsNullOrEmpty(_options.EnvironmentSlug))
             _options.EnvironmentSlug = ctx.EnvironmentSlug ?? string.Empty;
 
-        _logger.LogInformation("[BellaBaxter] Context resolved from API key: project='{Project}' environment='{Env}'",
-            _options.ProjectSlug, _options.EnvironmentSlug);
+        _logger.LogInformation(
+            "[BellaBaxter] Context resolved from API key: project='{Project}' environment='{Env}'",
+            _options.ProjectSlug,
+            _options.EnvironmentSlug
+        );
 
         _contextResolved = true;
     }
@@ -127,13 +166,17 @@ internal sealed class BellaPollingProvider : IDisposable
             {
                 try
                 {
-                    var versionResp = await _client.Api.V1.Projects[_options.ProjectSlug]
+                    var versionResp = await _client
+                        .Api.V1.Projects[_options.ProjectSlug]
                         .Environments[_options.EnvironmentSlug]
                         .Secrets.Version.GetAsync(cancellationToken: ct);
 
                     if (versionResp?.Version == _currentVersion)
                     {
-                        _logger.LogDebug("[BellaBaxter] Version unchanged ({Version}), skipping full fetch", _currentVersion);
+                        _logger.LogDebug(
+                            "[BellaBaxter] Version unchanged ({Version}), skipping full fetch",
+                            _currentVersion
+                        );
                         return _cache!;
                     }
                 }
@@ -144,7 +187,8 @@ internal sealed class BellaPollingProvider : IDisposable
             }
 
             // 2. Full fetch via Kiota client
-            var secretsResp = await _client.Api.V1.Projects[_options.ProjectSlug]
+            var secretsResp = await _client
+                .Api.V1.Projects[_options.ProjectSlug]
                 .Environments[_options.EnvironmentSlug]
                 .Secrets.GetAsync(cancellationToken: ct);
 
@@ -165,22 +209,37 @@ internal sealed class BellaPollingProvider : IDisposable
 
                 if (changes.Count > 0)
                 {
-                    _logger.LogInformation("[BellaBaxter] {Count} secret(s) changed, reloading configuration", changes.Count);
+                    _logger.LogInformation(
+                        "[BellaBaxter] {Count} secret(s) changed, reloading configuration",
+                        changes.Count
+                    );
                     SecretsChanged?.Invoke(this, new SecretsChangedEventArgs(changes));
                 }
                 else if (_cache is null)
                 {
-                    _logger.LogInformation("[BellaBaxter] Loaded {Count} secret(s) from environment '{Env}'",
-                        newSecrets.Count, _options.EnvironmentSlug);
+                    _logger.LogInformation(
+                        "[BellaBaxter] Loaded {Count} secret(s) from environment '{Env}'",
+                        newSecrets.Count,
+                        _options.EnvironmentSlug
+                    );
                 }
             }
-            finally { _lock.Release(); }
+            finally
+            {
+                _lock.Release();
+            }
 
             // Persist to the optional offline cache after every successful fetch.
             if (_options.Cache is not null)
             {
-                try { await _options.Cache.WriteAsync(newSecrets, ct); }
-                catch (Exception cacheEx) { _logger.LogWarning(cacheEx, "[BellaBaxter] Persistent cache write failed"); }
+                try
+                {
+                    await _options.Cache.WriteAsync(newSecrets, ct);
+                }
+                catch (Exception cacheEx)
+                {
+                    _logger.LogWarning(cacheEx, "[BellaBaxter] Persistent cache write failed");
+                }
             }
 
             return newSecrets;
@@ -198,7 +257,10 @@ internal sealed class BellaPollingProvider : IDisposable
                     var persistedSecrets = await _options.Cache.ReadAsync(ct);
                     if (persistedSecrets is not null)
                     {
-                        _logger.LogWarning("[BellaBaxter] Using persisted cache ({Count} entries, offline mode)", persistedSecrets.Count);
+                        _logger.LogWarning(
+                            "[BellaBaxter] Using persisted cache ({Count} entries, offline mode)",
+                            persistedSecrets.Count
+                        );
                         return persistedSecrets;
                     }
                 }
@@ -210,7 +272,10 @@ internal sealed class BellaPollingProvider : IDisposable
 
             if (_options.FallbackOnError && _cache is not null)
             {
-                _logger.LogWarning("[BellaBaxter] Using cached secrets ({Count} entries)", _cache.Count);
+                _logger.LogWarning(
+                    "[BellaBaxter] Using cached secrets ({Count} entries)",
+                    _cache.Count
+                );
                 return _cache;
             }
 
@@ -220,8 +285,14 @@ internal sealed class BellaPollingProvider : IDisposable
 
     private async Task PollAsync()
     {
-        try { await LoadSecretsAsync(); }
-        catch (Exception ex) { _logger.LogWarning(ex, "[BellaBaxter] Poll failed"); }
+        try
+        {
+            await LoadSecretsAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "[BellaBaxter] Poll failed");
+        }
     }
 
     /// <summary>
@@ -236,21 +307,22 @@ internal sealed class BellaPollingProvider : IDisposable
         var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         foreach (var kvp in resp.Secrets.AdditionalData)
         {
-            if (kvp.Value is null) continue;
+            if (kvp.Value is null)
+                continue;
 
             // Kiota 1.x parses JSON values into typed CLR objects:
             // regular strings → string, UUID-shaped strings → Guid, numbers → int/long/double, booleans → bool.
             // Convert every non-null scalar to string so nothing is silently dropped.
             var str = kvp.Value switch
             {
-                string s  => s,
-                Guid g    => g.ToString(),           // UUIDs come back as Guid, not string
-                bool b    => b.ToString().ToLower(),  // "true"/"false" not "True"/"False"
-                int i     => i.ToString(),
-                long l    => l.ToString(),
-                double d  => d.ToString(),
-                float f   => f.ToString(),
-                _         => kvp.Value.ToString()
+                string s => s,
+                Guid g => g.ToString(), // UUIDs come back as Guid, not string
+                bool b => b.ToString().ToLower(), // "true"/"false" not "True"/"False"
+                int i => i.ToString(),
+                long l => l.ToString(),
+                double d => d.ToString(),
+                float f => f.ToString(),
+                _ => kvp.Value.ToString(),
             };
 
             if (str is not null)
@@ -269,16 +341,19 @@ internal sealed class BellaPollingProvider : IDisposable
                 kvp.Key.StartsWith(_options.KeyPrefix, StringComparison.OrdinalIgnoreCase)
                     ? kvp.Key[_options.KeyPrefix.Length..]
                     : kvp.Key,
-                kvp.Value))
+                kvp.Value
+            ))
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
     private static List<SecretChange> DetectChanges(
         IDictionary<string, string>? oldSecrets,
-        IDictionary<string, string> newSecrets)
+        IDictionary<string, string> newSecrets
+    )
     {
         var changes = new List<SecretChange>();
-        if (oldSecrets is null) return changes;
+        if (oldSecrets is null)
+            return changes;
 
         foreach (var kv in newSecrets)
         {
@@ -319,8 +394,9 @@ internal sealed class BellaPollingProvider : IDisposable
         {
             ecdh.Dispose();
             throw new InvalidOperationException(
-                "[BellaBaxter] Could not parse PrivateKey as PKCS#8 PEM. " +
-                "Generate it with: bella auth setup");
+                "[BellaBaxter] Could not parse PrivateKey as PKCS#8 PEM. "
+                    + "Generate it with: bella auth setup"
+            );
         }
     }
 }
@@ -331,4 +407,3 @@ public sealed class SecretsChangedEventArgs(IReadOnlyList<SecretChange> changes)
 {
     public IReadOnlyList<SecretChange> Changes { get; } = changes;
 }
-

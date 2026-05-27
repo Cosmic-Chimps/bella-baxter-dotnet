@@ -37,6 +37,16 @@ public class BellaOptions
     public string ApiKey { get; set; } = string.Empty;
 
     /// <summary>
+    /// Short-lived JWT access token obtained from OAuth2 / <c>bella login</c>.
+    /// Used instead of <see cref="ApiKey"/> when running under <c>bella sdk run</c>
+    /// with interactive (JWT) auth. Injected automatically as the
+    /// <c>BELLA_BAXTER_ACCESS_TOKEN</c> environment variable by the CLI.
+    /// When set, <see cref="ProjectSlug"/> and <see cref="EnvironmentSlug"/> must also
+    /// be provided (they cannot be auto-resolved from a JWT the way an API key can).
+    /// </summary>
+    public string AccessToken { get; set; } = string.Empty;
+
+    /// <summary>
     /// How often to poll Baxter for secret changes (default: 60 seconds).
     ///
     /// Cost note: Baxter serves secrets from its Redis HybridCache, so polling
@@ -69,7 +79,7 @@ public class BellaOptions
     /// </summary>
     public string? AppClient { get; set; }
 
-	/// <summary>
+    /// <summary>
     /// Optional persistent cache for secrets. When set, secrets are written to the cache
     /// after every successful fetch and read from it when the Baxter API is unavailable.
     /// This enables offline startup — the app can launch and run without network access
