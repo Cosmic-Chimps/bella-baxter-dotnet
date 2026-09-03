@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <PackageId>BellaBaxter.Spiffe.Client</PackageId>
+    <Version>0.1.0-preview.1</Version>
+    <IsPackable>true</IsPackable>
+    <Description>SPIFFE/SVID-based authentication for the BellaBaxter.Client SDK. Exchanges a JWT-SVID obtained from the bella agent sidecar for a scoped bax- lease, enabling zero-static-secret workload secret fetching.</Description>
+    <PackageTags>bella-baxter;secrets;spiffe;svid;workload-identity</PackageTags>
+    <PackageProjectUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cosmic-chimps/bella-baxter-dotnet</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Dev (monorepo): direct project reference when client source is on disk -->
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.Client\BellaBaxter.Client.csproj')">
+    <ProjectReference Include="..\BellaBaxter.Client\BellaBaxter.Client.csproj" />
+  </ItemGroup>
+  <!-- Publish (public repo): resolve from NuGet when project is absent -->
+  <ItemGroup Condition="!Exists('$(MSBuildThisFileDirectory)..\BellaBaxter.Client\BellaBaxter.Client.csproj')">
+    <PackageReference Include="BellaBaxter.Client" Version="0.1.1-preview.55" />
+  </ItemGroup>
+
+  <!-- Spec 001 T044: the real agent serves the SPIFFE Workload API (gRPC over a Unix socket), so the
+       SDK needs a client for it. Version matches the CLI's server pin. -->
+  <ItemGroup>
+    <Protobuf Include="Protos/workload.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.71.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Google.Protobuf" Version="3.31.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.5.0" />
+  </ItemGroup>
+</Project>

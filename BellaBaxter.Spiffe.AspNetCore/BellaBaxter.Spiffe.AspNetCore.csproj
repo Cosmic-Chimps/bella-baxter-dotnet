@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <PackageId>BellaBaxter.Spiffe.AspNetCore</PackageId>
+    <Version>0.1.0-preview.1</Version>
+    <IsPackable>true</IsPackable>
+    <Description>ASP.NET Core middleware that validates incoming X.509 client certificates as SPIFFE SVIDs issued by Bella Baxter's OpenBao PKI. Extracts the SPIFFE ID from the cert SAN URI and adds it as an HttpContext claim.</Description>
+    <PackageTags>spiffe;mtls;x509;aspnetcore;bella-baxter;zero-trust</PackageTags>
+    <Authors>Cosmic Chimps</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/cosmic-chimps/bella-baxter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cosmic-chimps/bella-baxter</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

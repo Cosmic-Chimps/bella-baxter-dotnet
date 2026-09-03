@@ -11,4 +11,8 @@
   <Project Path="BellaBaxter.SourceGenerator.Tests/BellaBaxter.SourceGenerator.Tests.csproj" />
   <Project Path="BellaBaxter.SourceGenerator/BellaBaxter.SourceGenerator.csproj" />
   <Project Path="BellaBaxter.Client/BellaBaxter.Client.csproj" />
+  <Project Path="BellaBaxter.Spiffe.AspNetCore/BellaBaxter.Spiffe.AspNetCore.csproj" />
+  <Project Path="BellaBaxter.Spiffe.AspNetCore.Tests/BellaBaxter.Spiffe.AspNetCore.Tests.csproj" />
+  <Project Path="BellaBaxter.Spiffe.Client/BellaBaxter.Spiffe.Client.csproj" />
+  <Project Path="BellaBaxter.Spiffe.Client.Tests/BellaBaxter.Spiffe.Client.Tests.csproj" />
 </Solution>
