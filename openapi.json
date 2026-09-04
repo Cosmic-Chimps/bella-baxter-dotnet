@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5522/"
+      "url": "http://localhost/"
     }
   ],
   "paths": {
@@ -53,7 +53,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -61,7 +61,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -69,7 +69,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -95,14 +95,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -110,6 +102,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -135,14 +135,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -150,6 +142,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -188,7 +188,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -222,14 +222,6 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -237,6 +229,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -287,7 +287,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -295,7 +295,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -339,7 +339,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -383,7 +383,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -416,7 +416,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -460,7 +460,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -486,14 +486,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -501,6 +493,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -541,7 +541,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -582,7 +582,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -622,7 +622,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -630,7 +630,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -678,7 +678,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -717,7 +717,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -747,7 +747,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -785,7 +785,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -826,7 +826,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -856,7 +856,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -897,7 +897,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -905,7 +905,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -956,7 +956,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -964,7 +964,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1024,7 +1024,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1064,7 +1064,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1072,15 +1072,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1088,7 +1080,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -1128,7 +1128,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1136,15 +1136,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1152,7 +1144,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -1202,7 +1202,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1210,7 +1210,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1250,7 +1250,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1299,7 +1299,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1360,7 +1360,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1402,7 +1402,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1432,7 +1432,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1440,7 +1440,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1448,7 +1448,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1499,7 +1499,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1529,7 +1529,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1547,7 +1547,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1555,7 +1555,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1563,7 +1563,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1601,7 +1601,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1609,7 +1609,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1649,7 +1649,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1679,7 +1679,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1687,7 +1687,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1725,7 +1725,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1733,15 +1733,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1749,7 +1741,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -1779,7 +1779,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1820,7 +1820,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1850,7 +1850,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1894,7 +1894,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1924,7 +1924,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1932,7 +1932,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -1940,7 +1940,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -1970,7 +1970,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2010,7 +2010,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2018,7 +2018,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2026,7 +2026,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2066,7 +2066,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2074,7 +2074,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2082,7 +2082,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2112,7 +2112,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2120,7 +2120,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2128,7 +2128,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2136,7 +2136,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2166,7 +2166,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2174,15 +2174,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2190,7 +2182,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -2230,7 +2230,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2238,7 +2238,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2279,7 +2279,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2312,7 +2312,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2353,7 +2353,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2394,7 +2394,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2434,7 +2434,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2442,7 +2442,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2482,7 +2482,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2490,7 +2490,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2520,7 +2520,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2550,7 +2550,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2580,7 +2580,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2596,6 +2596,14 @@
         "description": "GET_api_v1_system_rate_limit_status",
         "operationId": "getRateLimitStatus",
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -2603,14 +2611,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -2626,6 +2626,14 @@
         "description": "GET_api_v1_system_health_rate_limit",
         "operationId": "getRateLimitHealth",
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -2633,14 +2641,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -2684,7 +2684,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2805,7 +2805,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2835,7 +2835,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2885,7 +2885,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2916,7 +2916,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2957,7 +2957,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -2986,7 +2986,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -2994,7 +2994,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3041,19 +3041,19 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "403": {
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -3094,7 +3094,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3134,7 +3134,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3178,7 +3178,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3212,7 +3212,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3253,7 +3253,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3303,7 +3303,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3311,7 +3311,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3342,7 +3342,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3373,7 +3373,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3381,7 +3381,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3389,7 +3389,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3397,7 +3397,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3436,7 +3436,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3485,7 +3485,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3515,7 +3515,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3545,7 +3545,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3588,7 +3588,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3626,7 +3626,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3634,7 +3634,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3664,11 +3664,19 @@
               }
             }
           },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
           "409": {
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3676,15 +3684,7 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3726,7 +3726,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3766,7 +3766,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3816,7 +3816,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -3824,7 +3824,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3869,7 +3869,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3913,7 +3913,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -3965,7 +3965,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4007,7 +4007,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4051,7 +4051,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4096,7 +4096,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4140,7 +4140,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4194,7 +4194,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4202,7 +4202,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4210,7 +4210,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4279,7 +4279,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4327,7 +4327,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4335,7 +4335,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4343,7 +4343,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4351,7 +4351,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4376,6 +4376,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -4383,14 +4391,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
               }
             }
           }
@@ -4423,7 +4423,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4464,7 +4464,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4472,7 +4472,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4480,7 +4480,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4533,7 +4533,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4578,7 +4578,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4586,7 +4586,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4594,7 +4594,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4648,7 +4648,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4656,7 +4656,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4699,7 +4699,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4707,7 +4707,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4770,7 +4770,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4778,7 +4778,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4832,7 +4832,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -4840,7 +4840,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4881,7 +4881,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -4930,7 +4930,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5254,7 +5254,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -5262,7 +5262,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5315,7 +5315,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5377,7 +5377,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5430,7 +5430,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5502,7 +5502,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5586,7 +5586,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5634,7 +5634,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5686,7 +5686,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5736,7 +5736,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5796,7 +5796,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5841,7 +5841,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5886,7 +5886,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5938,7 +5938,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -5998,7 +5998,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6006,7 +6006,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6076,7 +6076,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6137,7 +6137,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6206,7 +6206,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6254,19 +6254,19 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "400": {
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -6328,7 +6328,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6336,7 +6336,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6391,7 +6391,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6399,7 +6399,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6407,7 +6407,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6475,7 +6475,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6525,7 +6525,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6576,7 +6576,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6584,7 +6584,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6643,7 +6643,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6722,7 +6722,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6777,7 +6777,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6785,7 +6785,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6826,7 +6826,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6834,7 +6834,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6875,7 +6875,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6926,7 +6926,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6934,7 +6934,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -6942,7 +6942,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -6999,7 +6999,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7060,7 +7060,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7125,15 +7125,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7141,7 +7133,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -7187,7 +7187,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7231,7 +7231,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7239,7 +7239,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7291,7 +7291,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7353,7 +7353,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7408,7 +7408,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7416,7 +7416,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7424,7 +7424,7 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7432,7 +7432,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7472,7 +7472,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7480,7 +7480,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7488,7 +7488,7 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7496,7 +7496,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7552,7 +7552,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7624,7 +7624,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7632,7 +7632,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7692,7 +7692,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7764,7 +7764,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7772,7 +7772,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7827,7 +7827,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7894,7 +7894,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7902,7 +7902,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -7970,7 +7970,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -7978,7 +7978,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8024,7 +8024,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8070,7 +8070,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -8078,7 +8078,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8126,7 +8126,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8181,7 +8181,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -8189,7 +8189,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -8197,7 +8197,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -8205,7 +8205,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8267,7 +8267,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -8275,7 +8275,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -8979,7 +8979,7 @@
             "description": "Not Modified",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -9732,40 +9732,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "file"
-                ],
-                "type": "object",
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "overwriteExisting": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "typeOverrides": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "file": {
-                        "$ref": "#/components/schemas/IFormFile"
-                      }
-                    }
-                  }
-                ]
-              }
-            },
             "multipart/form-data": {
               "schema": {
                 "required": [
@@ -10426,7 +10392,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10434,7 +10400,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10480,7 +10446,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10538,7 +10504,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10546,7 +10512,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10592,7 +10558,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10638,7 +10604,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10646,7 +10612,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10704,7 +10670,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10712,7 +10678,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10760,7 +10726,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10818,7 +10784,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10826,7 +10792,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10874,7 +10840,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10932,7 +10898,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -10983,7 +10949,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10991,7 +10957,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -10999,7 +10965,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11061,7 +11027,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11069,7 +11035,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11118,7 +11084,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11175,7 +11141,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11251,7 +11217,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11314,7 +11280,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11439,7 +11405,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11489,7 +11455,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11497,7 +11463,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11523,14 +11489,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -11538,6 +11496,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -11576,7 +11542,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11620,7 +11586,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11664,7 +11630,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11697,7 +11663,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11738,7 +11704,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11764,14 +11730,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -11779,6 +11737,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {}
               }
             }
           }
@@ -11829,7 +11795,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11859,7 +11825,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11867,7 +11833,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11875,7 +11841,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11923,7 +11889,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11931,7 +11897,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11939,7 +11905,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -11980,7 +11946,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11988,7 +11954,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -11996,7 +11962,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12026,7 +11992,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12034,7 +12000,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12042,7 +12008,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12093,7 +12059,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12101,7 +12067,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12109,7 +12075,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12117,7 +12083,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12125,7 +12091,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12175,7 +12141,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12217,7 +12183,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12267,7 +12233,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -12275,7 +12241,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12328,7 +12294,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12368,7 +12334,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12407,7 +12373,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12455,7 +12421,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12504,7 +12470,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12534,7 +12500,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12564,7 +12530,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -12607,19 +12573,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12662,19 +12628,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12717,19 +12683,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12772,19 +12738,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12818,19 +12784,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12862,19 +12828,19 @@
           }
         ],
         "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -12981,7 +12947,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13021,7 +12987,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13029,7 +12995,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13069,7 +13035,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13077,7 +13043,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13100,7 +13066,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13108,7 +13074,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13148,15 +13114,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13164,7 +13122,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -13194,7 +13160,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13233,7 +13199,484 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/destination/replays": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.RequestAuditStreamReplay"
+        ],
+        "summary": "POST_api_v1_audit_stream_destination_replays",
+        "description": "POST_api_v1_audit_stream_destination_replays",
+        "operationId": "requestAuditStreamReplay",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAuditStreamReplayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamReplayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/destination/replays/{replayId}": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.GetAuditStreamReplay"
+        ],
+        "summary": "GET_api_v1_audit_stream_destination_replays_replayId",
+        "description": "GET_api_v1_audit_stream_destination_replays_replayId",
+        "operationId": "getAuditStreamReplay",
+        "parameters": [
+          {
+            "name": "replayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamReplayResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.CancelAuditStreamReplay"
+        ],
+        "summary": "DELETE_api_v1_audit_stream_destination_replays_replayId",
+        "description": "DELETE_api_v1_audit_stream_destination_replays_replayId",
+        "operationId": "cancelAuditStreamReplay",
+        "parameters": [
+          {
+            "name": "replayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/destination": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.CreateAuditStreamDestination"
+        ],
+        "summary": "POST_api_v1_audit_stream_destination",
+        "description": "POST_api_v1_audit_stream_destination",
+        "operationId": "createAuditStreamDestination",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuditStreamDestinationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedAuditStreamDestinationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.DeleteAuditStreamDestination"
+        ],
+        "summary": "DELETE_api_v1_audit_stream_destination",
+        "description": "DELETE_api_v1_audit_stream_destination",
+        "operationId": "deleteAuditStreamDestination",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.GetAuditStreamDestination"
+        ],
+        "summary": "GET_api_v1_audit_stream_destination",
+        "description": "GET_api_v1_audit_stream_destination",
+        "operationId": "getAuditStreamDestination",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamDestinationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.UpdateAuditStreamDestination"
+        ],
+        "summary": "PUT_api_v1_audit_stream_destination",
+        "description": "PUT_api_v1_audit_stream_destination",
+        "operationId": "updateAuditStreamDestination",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuditStreamDestinationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamDestinationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/availability": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.GetAuditStreamAvailability"
+        ],
+        "summary": "GET_api_v1_audit_stream_availability",
+        "description": "GET_api_v1_audit_stream_availability",
+        "operationId": "getAuditStreamAvailability",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamAvailabilityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/destination/deliveries": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.ListAuditStreamDeliveries"
+        ],
+        "summary": "GET_api_v1_audit_stream_destination_deliveries",
+        "description": "GET_api_v1_audit_stream_destination_deliveries",
+        "operationId": "listAuditStreamDeliveries",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "outcome",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamDeliveryPage"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/audit-stream/destination/test": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.AuditStream.TestAuditStreamDestination"
+        ],
+        "summary": "POST_api_v1_audit_stream_destination_test",
+        "description": "POST_api_v1_audit_stream_destination_test",
+        "operationId": "testAuditStreamDestination",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditStreamTestResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -13294,15 +13737,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13310,7 +13745,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -13363,7 +13806,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13407,15 +13850,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13423,7 +13858,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -13454,7 +13897,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13504,15 +13947,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13520,7 +13955,15 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -13561,7 +14004,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13600,7 +14043,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13648,7 +14091,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13689,7 +14132,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13719,7 +14162,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13727,7 +14170,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13788,7 +14231,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13796,7 +14239,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13850,7 +14293,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13890,7 +14333,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13898,7 +14341,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13948,7 +14391,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           },
@@ -13956,7 +14399,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -13997,7 +14440,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -14027,7 +14470,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -14141,7 +14584,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {}
               }
             }
           }
@@ -14391,7 +14834,7 @@
           }
         }
       },
-      "ApiKeyId": { },
+      "ApiKeyId": {},
       "ApiKeyOperationResponse": {
         "required": [
           "success",
@@ -14725,6 +15168,391 @@
           "expiresAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "AuditStreamAvailabilityResponse": {
+        "required": [
+          "available",
+          "flagEnabled",
+          "planSatisfied",
+          "requiresEnterprisePlan"
+        ],
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "boolean"
+          },
+          "flagEnabled": {
+            "type": "boolean"
+          },
+          "planSatisfied": {
+            "type": "boolean"
+          },
+          "requiresEnterprisePlan": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AuditStreamDeliveryPage": {
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditStreamDeliveryResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "AuditStreamDeliveryResponse": {
+        "required": [
+          "id",
+          "attemptedAt",
+          "durationMs",
+          "count",
+          "firstItemId",
+          "lastItemId",
+          "outcome",
+          "statusCode",
+          "error",
+          "includedGapMarker",
+          "includedTest"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attemptedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "durationMs": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstItemId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "lastItemId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "includedGapMarker": {
+            "type": "boolean"
+          },
+          "includedTest": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AuditStreamDestinationResponse": {
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "endpoint",
+          "tlsTrustMode",
+          "caBundlePem",
+          "settings",
+          "credential",
+          "enabled",
+          "mirrorWebhookEvents",
+          "health",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": "string"
+          },
+          "tlsTrustMode": {
+            "type": "string"
+          },
+          "caBundlePem": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "credential": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "mirrorWebhookEvents": {
+            "type": "boolean"
+          },
+          "health": {
+            "$ref": "#/components/schemas/AuditStreamHealthResponse"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "AuditStreamGapResponse": {
+        "required": [
+          "count",
+          "from",
+          "to",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "AuditStreamHealthResponse": {
+        "required": [
+          "state",
+          "lastDeliveredAt",
+          "pendingCount",
+          "consecutiveFailures",
+          "failingSince",
+          "lastError",
+          "lastErrorAt",
+          "nextFlushAt",
+          "pendingGap"
+        ],
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "lastDeliveredAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "pendingCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consecutiveFailures": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failingSince": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lastError": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastErrorAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "nextFlushAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "pendingGap": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AuditStreamGapResponse"
+              }
+            ]
+          }
+        }
+      },
+      "AuditStreamReplayResponse": {
+        "required": [
+          "id",
+          "state",
+          "from",
+          "to",
+          "total",
+          "sent",
+          "requestedAt",
+          "requestedBy",
+          "finishedAt",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sent": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "finishedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AuditStreamTestResponse": {
+        "required": [
+          "delivered",
+          "statusCode",
+          "durationMs",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "delivered": {
+            "type": "boolean"
+          },
+          "statusCode": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "durationMs": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -15584,6 +16412,63 @@
           }
         }
       },
+      "CreateAuditStreamDestinationRequest": {
+        "required": [
+          "kind",
+          "name",
+          "endpoint",
+          "tlsTrustMode",
+          "caBundlePem",
+          "settings",
+          "credential",
+          "mirrorWebhookEvents"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tlsTrustMode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "caBundlePem": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "credential": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "mirrorWebhookEvents": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
       "CreateCheckoutSessionRequest": {
         "required": [
           "successUrl",
@@ -15639,6 +16524,24 @@
           "expiresAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "CreatedAuditStreamDestinationResponse": {
+        "required": [
+          "destination",
+          "signingSecretOnce"
+        ],
+        "type": "object",
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/AuditStreamDestinationResponse"
+          },
+          "signingSecretOnce": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -17540,7 +18443,7 @@
           }
         }
       },
-      "GroupId": { },
+      "GroupId": {},
       "GroupMemberResponse": {
         "required": [
           "userId",
@@ -18371,6 +19274,17 @@
               "null",
               "string"
             ]
+          },
+          "kind": {
+            "type": "string",
+            "default": "secret"
+          },
+          "workloadIdentityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
@@ -18527,7 +19441,7 @@
           }
         }
       },
-      "NotificationChannelId": { },
+      "NotificationChannelId": {},
       "NotificationChannelOperationResponse": {
         "required": [
           "success",
@@ -18657,7 +19571,7 @@
           "message": {
             "type": "string"
           },
-          "data": { }
+          "data": {}
         }
       },
       "PageableObject": {
@@ -20213,6 +21127,26 @@
           }
         }
       },
+      "RequestAuditStreamReplayRequest": {
+        "required": [
+          "from",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "RequestSsoAccessResponse": {
         "required": [
           "status",
@@ -21478,6 +22412,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "k8sOidcIssuerProblem": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -22176,6 +23116,69 @@
           }
         }
       },
+      "UpdateAuditStreamDestinationRequest": {
+        "required": [
+          "name",
+          "endpoint",
+          "tlsTrustMode",
+          "caBundlePem",
+          "settings",
+          "credential",
+          "enabled",
+          "mirrorWebhookEvents"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "endpoint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tlsTrustMode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "caBundlePem": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "credential": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "mirrorWebhookEvents": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
       "UpdateCurrentUserRequest": {
         "required": [
           "nombre",
@@ -22860,7 +23863,7 @@
           }
         }
       },
-      "WebhookId": { },
+      "WebhookId": {},
       "WebhookOperationResponse": {
         "required": [
           "success",
@@ -23824,6 +24827,36 @@
     },
     {
       "name": "BellaBaxter.Features.Auth.GetSsoHint"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.RequestAuditStreamReplay"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.GetAuditStreamReplay"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.CancelAuditStreamReplay"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.CreateAuditStreamDestination"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.DeleteAuditStreamDestination"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.GetAuditStreamDestination"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.UpdateAuditStreamDestination"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.GetAuditStreamAvailability"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.ListAuditStreamDeliveries"
+    },
+    {
+      "name": "BellaBaxter.Features.AuditStream.TestAuditStreamDestination"
     },
     {
       "name": "BellaBaxter.Features.ApiKeys.CreateApiKey"
