@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
 using Microsoft.Kiota.Abstractions.Authentication;
@@ -10,6 +11,42 @@ namespace BellaBaxter.Client;
 /// </summary>
 public static class BellaClientFactory
 {
+    /// <summary>Default <c>X-Bella-Client</c> for callers that do not name themselves.</summary>
+    public const string DefaultBellaClient = "bella-dotnet-sdk";
+
+    /// <summary>
+    /// This client library's version, for the <c>User-Agent</c>. The <c>+{commit}</c> build
+    /// metadata SourceLink appends is trimmed: it is not part of the semantic version and it
+    /// changes every commit, which would churn the User-Agent of every request.
+    /// </summary>
+    private static readonly string SdkVersion = (
+        typeof(BellaClientFactory).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion
+        ?? typeof(BellaClientFactory).Assembly.GetName().Version?.ToString()
+        ?? "unknown"
+    ).Split('+')[0];
+
+    /// <summary>
+    /// Sets the attribution headers Bella records on every audit row, plus a <c>User-Agent</c>.
+    /// These are caller-asserted labels and are never used for authorization — the HMAC path has
+    /// sent them since day one, and this only stops the bearer paths being silent.
+    /// </summary>
+    private static void ApplyClientHeaders(HttpClient client, string bellaClient, string? appClient)
+    {
+        if (!string.IsNullOrWhiteSpace(bellaClient))
+        {
+            client.DefaultRequestHeaders.Add("X-Bella-Client", bellaClient.Trim());
+            client.DefaultRequestHeaders.Add(
+                "User-Agent",
+                $"{bellaClient.Trim()}/{SdkVersion}"
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(appClient))
+            client.DefaultRequestHeaders.Add("X-App-Client", appClient.Trim());
+    }
+
     /// <summary>
     /// Creates a BellaClient with a static Bearer token and Polly resilience pipeline.
     /// E2E encryption is always enabled — a P-256 keypair is generated per instance and
@@ -17,8 +54,19 @@ public static class BellaClientFactory
     /// the response. Decryption happens automatically.
     /// Suitable for service-to-service calls where an access token is obtained externally.
     /// </summary>
+    /// <param name="bellaClient">
+    ///   Value for <c>X-Bella-Client</c> — which SDK or tool is calling. Bella records it on every
+    ///   audit row, so the console's "App" column can say where a secret read came from. Only the
+    ///   HMAC path used to send it, which is why every bearer caller (the CLI after an OAuth login,
+    ///   the WebApp) was unattributed. Caller-asserted; never used for authorization.
+    /// </param>
+    /// <param name="appClient">
+    ///   Value for <c>X-App-Client</c> — which application the operator labelled this call with.
+    /// </param>
     public static BellaClient CreateWithBearerToken(string baseUrl, string accessToken,
-        DelegatingHandler? outerHandler = null)
+        DelegatingHandler? outerHandler = null,
+        string bellaClient = DefaultBellaClient,
+        string? appClient = null)
     {
         var services = new ServiceCollection();
         var builder = services
@@ -28,6 +76,7 @@ public static class BellaClientFactory
                 {
                     client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
                     client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    ApplyClientHeaders(client, bellaClient, appClient);
                 }
             );
 
@@ -118,11 +167,15 @@ public static class BellaClientFactory
     ///   A <see cref="ZkeDekHandler"/> holding the caller's persistent P-256 private key.
     ///   Set <see cref="ZkeDekHandler.OnWrappedDekReceived"/> before passing to cache DEK leases.
     /// </param>
+    /// <param name="bellaClient">See <see cref="CreateWithBearerToken"/>.</param>
+    /// <param name="appClient">See <see cref="CreateWithBearerToken"/>.</param>
     public static BellaClient CreateWithBearerTokenAndZke(
         string baseUrl,
         string accessToken,
         ZkeDekHandler zkeHandler,
-        DelegatingHandler? outerHandler = null)
+        DelegatingHandler? outerHandler = null,
+        string bellaClient = DefaultBellaClient,
+        string? appClient = null)
     {
         var services = new ServiceCollection();
         var builder = services
@@ -132,6 +185,7 @@ public static class BellaClientFactory
                 {
                     client.BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/");
                     client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    ApplyClientHeaders(client, bellaClient, appClient);
                 }
             );
 

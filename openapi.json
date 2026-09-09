@@ -53,7 +53,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -61,7 +61,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -69,7 +69,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -95,6 +95,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -102,14 +110,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -135,6 +135,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -142,14 +150,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -188,7 +188,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -222,6 +222,14 @@
           "required": true
         },
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -229,14 +237,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -287,7 +287,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -295,7 +295,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -339,7 +339,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -383,7 +383,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -416,7 +416,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -460,7 +460,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -486,6 +486,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -493,14 +501,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -541,7 +541,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -582,7 +582,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -622,7 +622,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -630,7 +630,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -678,7 +678,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -717,7 +717,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -747,7 +747,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -785,7 +785,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -826,7 +826,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -856,7 +856,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -897,7 +897,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -905,7 +905,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -956,7 +956,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -964,7 +964,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1024,7 +1024,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1064,7 +1064,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1072,15 +1072,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1088,7 +1080,15 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -1128,7 +1128,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1136,15 +1136,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1152,7 +1144,15 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -1202,7 +1202,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1210,7 +1210,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1250,7 +1250,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1299,7 +1299,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1360,7 +1360,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1402,7 +1402,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1432,7 +1432,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1440,7 +1440,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1448,7 +1448,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1499,7 +1499,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1529,7 +1529,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1547,7 +1547,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1555,7 +1555,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1563,7 +1563,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1601,7 +1601,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1609,7 +1609,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1649,7 +1649,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1679,7 +1679,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1687,7 +1687,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1725,7 +1725,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1733,15 +1733,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1749,7 +1741,15 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -1779,7 +1779,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1820,7 +1820,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1850,7 +1850,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1894,7 +1894,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1924,7 +1924,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1932,7 +1932,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -1940,7 +1940,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -1970,7 +1970,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2010,7 +2010,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2018,7 +2018,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2026,7 +2026,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2066,7 +2066,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2074,7 +2074,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2082,7 +2082,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2112,7 +2112,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2120,7 +2120,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2128,7 +2128,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2136,7 +2136,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2166,7 +2166,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2174,15 +2174,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2190,7 +2182,15 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -2230,7 +2230,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2238,7 +2238,73 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenant/features/{feature}": {
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.SetTenantSelfServiceFeature"
+        ],
+        "summary": "PUT_api_v1_tenant_features_feature",
+        "description": "PUT_api_v1_tenant_features_feature",
+        "operationId": "setTenantSelfServiceFeature",
+        "parameters": [
+          {
+            "name": "feature",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetTenantSelfServiceFeatureRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantFeaturesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -2279,7 +2345,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2312,7 +2378,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2353,7 +2419,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2394,7 +2460,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2434,7 +2500,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2442,7 +2508,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2482,7 +2548,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2490,7 +2556,260 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/zke/readiness": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.GetZkeReadiness"
+        ],
+        "summary": "GET_api_v1_tenants_me_zke_readiness",
+        "description": "GET_api_v1_tenants_me_zke_readiness",
+        "operationId": "getZkeReadiness",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZkeReadinessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/zke": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.GetZkeStatus"
+        ],
+        "summary": "GET_api_v1_tenants_me_zke",
+        "description": "GET_api_v1_tenants_me_zke",
+        "operationId": "getZkeStatus",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZkeStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/devices": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.ListZkeDevices"
+        ],
+        "summary": "GET_api_v1_tenants_me_devices",
+        "description": "GET_api_v1_tenants_me_devices",
+        "operationId": "listZkeDevices",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZkeDeviceResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.RegisterZkeDevice"
+        ],
+        "summary": "POST_api_v1_tenants_me_devices",
+        "description": "POST_api_v1_tenants_me_devices",
+        "operationId": "registerZkeDevice",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterZkeDeviceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZkeDeviceResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ZkeDeviceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/devices/{id}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.RevokeZkeDevice"
+        ],
+        "summary": "DELETE_api_v1_tenants_me_devices_id",
+        "description": "DELETE_api_v1_tenants_me_devices_id",
+        "operationId": "revokeZkeDevice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -2520,7 +2839,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2550,7 +2869,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2580,7 +2899,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2596,14 +2915,6 @@
         "description": "GET_api_v1_system_rate_limit_status",
         "operationId": "getRateLimitStatus",
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -2611,6 +2922,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -2626,14 +2945,6 @@
         "description": "GET_api_v1_system_health_rate_limit",
         "operationId": "getRateLimitHealth",
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -2641,6 +2952,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -2684,7 +3003,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2805,7 +3124,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2835,7 +3154,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2885,7 +3204,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2916,7 +3235,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2957,7 +3276,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -2986,7 +3305,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -2994,7 +3313,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3041,19 +3360,19 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -3094,7 +3413,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3134,7 +3453,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3178,7 +3497,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3212,7 +3531,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3253,7 +3572,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3303,7 +3622,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3311,7 +3630,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3342,7 +3661,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3373,7 +3692,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3381,7 +3700,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3389,7 +3708,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3397,7 +3716,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3436,7 +3755,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3485,7 +3804,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3515,7 +3834,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3545,7 +3864,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3588,7 +3907,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3626,7 +3945,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3634,7 +3953,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3664,19 +3983,11 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "409": {
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3684,7 +3995,15 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -3726,7 +4045,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3766,7 +4085,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3816,7 +4135,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -3824,7 +4143,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3869,7 +4188,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3913,7 +4232,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -3965,7 +4284,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4007,7 +4326,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4051,7 +4370,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4096,7 +4415,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4140,7 +4459,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4194,7 +4513,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4202,7 +4521,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4210,7 +4529,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4279,7 +4598,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4327,7 +4646,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4335,7 +4654,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4343,7 +4662,7 @@
             "description": "Payment Required",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4351,7 +4670,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4376,14 +4695,6 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "501": {
             "description": "Not Implemented",
             "content": {
@@ -4391,6 +4702,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -4423,7 +4742,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4464,7 +4783,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4472,7 +4791,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4480,7 +4799,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4533,7 +4852,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4578,7 +4897,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4586,7 +4905,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4594,7 +4913,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4648,7 +4967,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4656,7 +4975,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4699,7 +5018,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4707,7 +5026,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4770,7 +5089,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4778,7 +5097,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4832,7 +5151,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -4840,7 +5159,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4881,7 +5200,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -4930,7 +5249,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5254,7 +5573,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -5262,7 +5581,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5315,7 +5634,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5377,7 +5696,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5430,7 +5749,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5502,7 +5821,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5586,7 +5905,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5634,7 +5953,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5686,7 +6005,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5736,7 +6055,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5796,7 +6115,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5841,7 +6160,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5886,7 +6205,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5938,7 +6257,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -5998,7 +6317,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6006,7 +6325,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6076,7 +6395,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6137,7 +6456,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6206,7 +6525,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6254,19 +6573,19 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -6328,7 +6647,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6336,7 +6655,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6391,7 +6710,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6399,7 +6718,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6407,7 +6726,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6475,7 +6794,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6525,7 +6844,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6576,7 +6895,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6584,7 +6903,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6643,7 +6962,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6722,7 +7041,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6777,7 +7096,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6785,7 +7104,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6826,7 +7145,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6834,7 +7153,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6875,7 +7194,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6926,7 +7245,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6934,7 +7253,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -6942,7 +7261,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -6999,7 +7318,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7060,7 +7379,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7125,15 +7444,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7141,7 +7452,15 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -7187,7 +7506,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7231,7 +7550,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7239,7 +7558,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7291,7 +7610,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7353,7 +7672,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7408,7 +7727,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7416,7 +7735,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7424,7 +7743,7 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7432,7 +7751,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7472,7 +7791,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7480,7 +7799,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7488,7 +7807,7 @@
             "description": "Unprocessable Entity",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7496,7 +7815,7 @@
             "description": "Too Many Requests",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7552,7 +7871,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7624,7 +7943,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7632,7 +7951,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7692,7 +8011,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7764,7 +8083,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7772,7 +8091,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7827,7 +8146,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7894,7 +8213,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7902,7 +8221,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -7970,7 +8289,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -7978,7 +8297,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8024,7 +8343,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8070,7 +8389,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -8078,7 +8397,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8126,7 +8445,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8181,7 +8500,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -8189,7 +8508,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -8197,7 +8516,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -8205,7 +8524,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8267,7 +8586,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -8275,7 +8594,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -8930,6 +9249,164 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/metadata": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretMetadata"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
+        "operationId": "getSecretMetadata",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SecretMetadataResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "read"
+        }
+      },
+      "patch": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
+        ],
+        "summary": "PATCH_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
+        "description": "PATCH_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
+        "operationId": "updateSecretMetadata",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSecretMetadataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/hash": {
       "get": {
         "tags": [
@@ -8979,7 +9456,7 @@
             "description": "Not Modified",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -9571,96 +10048,6 @@
         "responses": {
           "202": {
             "description": "Accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/metadata": {
-      "patch": {
-        "tags": [
-          "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
-        ],
-        "summary": "PATCH_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
-        "description": "PATCH_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_metadata",
-        "operationId": "updateSecretMetadata",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "providerSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSecretMetadataRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -10392,7 +10779,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10400,7 +10787,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10446,7 +10833,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10504,7 +10891,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10512,7 +10899,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10558,7 +10945,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10604,7 +10991,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10612,7 +10999,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10670,7 +11057,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10678,7 +11065,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10726,7 +11113,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10784,7 +11171,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10792,7 +11179,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10840,7 +11227,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10898,7 +11285,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -10949,7 +11336,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10957,7 +11344,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -10965,7 +11352,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11027,7 +11414,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11035,7 +11422,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11084,7 +11471,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11141,7 +11528,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11217,7 +11604,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11280,7 +11667,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11405,7 +11792,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11455,7 +11842,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11463,7 +11850,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11489,6 +11876,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -11496,14 +11891,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -11542,7 +11929,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11586,7 +11973,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11630,7 +12017,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11663,7 +12050,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11704,7 +12091,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11730,6 +12117,14 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": { }
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -11737,14 +12132,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {}
               }
             }
           }
@@ -11795,7 +12182,95 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/mcp-connections": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Mcp.ListMcpConnections"
+        ],
+        "summary": "GET_api_v1_me_mcp_connections",
+        "description": "GET_api_v1_me_mcp_connections",
+        "operationId": "listMcpConnections",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/McpConnectionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/mcp-connections/{id}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Mcp.RevokeMcpConnection"
+        ],
+        "summary": "DELETE_api_v1_me_mcp_connections_id",
+        "description": "DELETE_api_v1_me_mcp_connections_id",
+        "operationId": "revokeMcpConnection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -11825,7 +12300,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11833,7 +12308,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11841,7 +12316,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11889,7 +12364,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11897,7 +12372,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11905,7 +12380,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11946,7 +12421,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11954,7 +12429,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -11962,7 +12437,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -11992,7 +12467,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12000,7 +12475,27 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -12008,7 +12503,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12059,7 +12554,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12067,7 +12562,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12075,7 +12570,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12083,7 +12578,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12091,7 +12586,7 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12141,7 +12636,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12183,7 +12678,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12233,7 +12728,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12241,7 +12736,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12294,7 +12789,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12334,7 +12829,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12373,7 +12868,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12421,7 +12916,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12470,7 +12965,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12500,7 +12995,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12530,7 +13025,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12573,19 +13068,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12628,19 +13123,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12683,19 +13178,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12738,19 +13233,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12784,19 +13279,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12828,19 +13323,19 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
           "410": {
             "description": "Gone",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12947,7 +13442,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -12987,7 +13482,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -12995,7 +13490,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13035,7 +13530,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13043,7 +13538,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13066,7 +13561,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13074,7 +13569,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13114,15 +13609,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13130,7 +13617,15 @@
             "description": "Service Unavailable",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -13160,7 +13655,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13199,7 +13694,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13239,7 +13734,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13247,7 +13742,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13255,7 +13750,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13263,7 +13758,7 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13304,7 +13799,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13312,7 +13807,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13341,7 +13836,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13349,7 +13844,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13357,7 +13852,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13397,7 +13892,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13405,15 +13900,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13421,7 +13908,15 @@
             "description": "Conflict",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -13439,7 +13934,7 @@
             "description": "No Content",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13447,7 +13942,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13455,7 +13950,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13483,7 +13978,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13491,7 +13986,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13529,7 +14024,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13537,7 +14032,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13545,7 +14040,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13575,7 +14070,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13630,7 +14125,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13638,7 +14133,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13668,7 +14163,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13676,7 +14171,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13737,15 +14232,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13753,7 +14240,15 @@
             "description": "Internal Server Error",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -13806,7 +14301,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13850,15 +14345,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13866,7 +14353,15 @@
             "description": "Internal Server Error",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -13897,7 +14392,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -13947,15 +14442,7 @@
             "description": "Forbidden",
             "content": {
               "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -13963,7 +14450,15 @@
             "description": "Internal Server Error",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -14004,7 +14499,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14043,7 +14538,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14091,7 +14586,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14132,7 +14627,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14162,7 +14657,7 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -14170,7 +14665,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14231,7 +14726,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -14239,7 +14734,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14293,7 +14788,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14333,7 +14828,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -14341,7 +14836,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14391,7 +14886,7 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           },
@@ -14399,7 +14894,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14440,7 +14935,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14470,7 +14965,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14567,6 +15062,13 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "deviceFingerprint",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -14584,7 +15086,7 @@
             "description": "Not Found",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": { }
               }
             }
           }
@@ -14742,6 +15244,18 @@
               "null",
               "string"
             ]
+          },
+          "bellaClient": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "deviceFingerprint": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -14834,7 +15348,7 @@
           }
         }
       },
-      "ApiKeyId": {},
+      "ApiKeyId": { },
       "ApiKeyOperationResponse": {
         "required": [
           "success",
@@ -14956,6 +15470,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "hasRegisteredPublicKey": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -15562,7 +16080,9 @@
           "realm",
           "cliClientId",
           "webAppClientId",
-          "issuer"
+          "issuer",
+          "mcpConnectorClientId",
+          "mcpConnectorAddress"
         ],
         "type": "object",
         "properties": {
@@ -15579,6 +16099,12 @@
             "type": "string"
           },
           "issuer": {
+            "type": "string"
+          },
+          "mcpConnectorClientId": {
+            "type": "string"
+          },
+          "mcpConnectorAddress": {
             "type": "string"
           }
         }
@@ -18443,7 +18969,7 @@
           }
         }
       },
-      "GroupId": {},
+      "GroupId": { },
       "GroupMemberResponse": {
         "required": [
           "userId",
@@ -19376,6 +19902,97 @@
           }
         }
       },
+      "McpConnectionResponse": {
+        "required": [
+          "id",
+          "clientId",
+          "clientDisplayName",
+          "tenantId",
+          "tenantSlug",
+          "establishedAt",
+          "lastUsedAt",
+          "usageCount",
+          "state",
+          "revokedAt",
+          "revocationReason",
+          "refusalCount",
+          "lastRefusedAt",
+          "lastRefusalReason",
+          "accessTokenLifetimeSeconds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "clientDisplayName": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantSlug": {
+            "type": "string"
+          },
+          "establishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUsedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "usageCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "state": {
+            "type": "string"
+          },
+          "revokedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "revocationReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "refusalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastRefusedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lastRefusalReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accessTokenLifetimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "MigrateTenantEncryptionResponse": {
         "required": [
           "success",
@@ -19441,7 +20058,7 @@
           }
         }
       },
-      "NotificationChannelId": {},
+      "NotificationChannelId": { },
       "NotificationChannelOperationResponse": {
         "required": [
           "success",
@@ -19571,7 +20188,7 @@
           "message": {
             "type": "string"
           },
-          "data": {}
+          "data": { }
         }
       },
       "PageableObject": {
@@ -21002,6 +21619,10 @@
               "null",
               "string"
             ]
+          },
+          "auditRecordId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -21109,6 +21730,24 @@
           },
           "recoveryKeyFingerprint": {
             "type": "string"
+          }
+        }
+      },
+      "RegisterZkeDeviceRequest": {
+        "required": [
+          "publicKey",
+          "label"
+        ],
+        "type": "object",
+        "properties": {
+          "publicKey": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -21347,6 +21986,71 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "SecretMetadataResponse": {
+        "required": [
+          "key",
+          "description",
+          "type",
+          "ignoreInScan",
+          "tags",
+          "expiresAt",
+          "expiryWarningDays",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ignoreInScan": {
+            "type": "boolean"
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "expiryWarningDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -21718,6 +22422,17 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "SetTenantSelfServiceFeatureRequest": {
+        "required": [
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
           }
         }
       },
@@ -23863,7 +24578,7 @@
           }
         }
       },
-      "WebhookId": {},
+      "WebhookId": { },
       "WebhookOperationResponse": {
         "required": [
           "success",
@@ -24146,6 +24861,152 @@
             "format": "int32"
           }
         }
+      },
+      "ZkeDeviceOwner": {
+        "required": [
+          "userId",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ZkeDeviceResponse": {
+        "required": [
+          "id",
+          "fingerprint",
+          "label",
+          "registeredAt",
+          "registeredBy",
+          "state",
+          "revokedAt",
+          "revokedBy",
+          "revocationReason",
+          "lastUsedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "registeredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "registeredBy": {
+            "$ref": "#/components/schemas/ZkeDeviceOwner"
+          },
+          "state": {
+            "type": "string"
+          },
+          "revokedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "revokedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "revocationReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastUsedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "ZkeReadinessResponse": {
+        "required": [
+          "activeMembers",
+          "membersWithoutDevice",
+          "apiKeys",
+          "apiKeysWithoutKnownPublicKey"
+        ],
+        "type": "object",
+        "properties": {
+          "activeMembers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "membersWithoutDevice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiKeys": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiKeysWithoutKnownPublicKey": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ZkeStatusResponse": {
+        "required": [
+          "enforced",
+          "keyPresented",
+          "presentedKeyFingerprint",
+          "presentedKeyRegistered",
+          "presentedKeyLabel"
+        ],
+        "type": "object",
+        "properties": {
+          "enforced": {
+            "type": "boolean"
+          },
+          "keyPresented": {
+            "type": "boolean"
+          },
+          "presentedKeyFingerprint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "presentedKeyRegistered": {
+            "type": "boolean"
+          },
+          "presentedKeyLabel": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
       }
     }
   },
@@ -24295,6 +25156,9 @@
       "name": "BellaBaxter.Features.Tenants.RevokeTenantInvite"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.SetTenantSelfServiceFeature"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.SwitchTenant"
     },
     {
@@ -24308,6 +25172,21 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.ToggleZkeEnforcement"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.GetZkeReadiness"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.GetZkeStatus"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.ListZkeDevices"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.RegisterZkeDevice"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.RevokeZkeDevice"
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.DiagnosticsEndpoint"
@@ -24643,6 +25522,12 @@
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.GetEnvironmentSecretsVersion"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretMetadata"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretsHash"
     },
     {
@@ -24668,9 +25553,6 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.TriggerSecretRotation"
-    },
-    {
-      "name": "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.UploadSecretsFile"
@@ -24770,6 +25652,12 @@
     },
     {
       "name": "BellaBaxter.Features.Notifications.UpdateNotificationChannel"
+    },
+    {
+      "name": "BellaBaxter.Features.Mcp.ListMcpConnections"
+    },
+    {
+      "name": "BellaBaxter.Features.Mcp.RevokeMcpConnection"
     },
     {
       "name": "Internal"

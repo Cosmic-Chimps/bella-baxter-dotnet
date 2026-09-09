@@ -20,8 +20,8 @@ namespace BellaBaxter.Client;
 ///         and fires <see cref="OnWrappedDekReceived"/> so callers can cache the wrapped DEK
 ///         for future offline decryption.</item>
 ///   <item>Decrypts any <c>bellabaxter:v1:</c> prefixed values in the response body using
-///         the unwrapped DEK (no-op today — server already decrypts server-side — but
-///         transparent when server-side decryption is skipped for true ZKE callers).</item>
+///         the unwrapped DEK. A no-op while the server also decrypts server-side; kept because it is
+///         what makes a true zero-knowledge read possible without a client change.</item>
 /// </list>
 ///
 /// <para>Use this handler instead of <see cref="E2EEncryptionHandler"/> when:</para>
@@ -32,6 +32,12 @@ namespace BellaBaxter.Client;
 /// </list>
 ///
 /// <para>For non-ZKE callers, continue using <see cref="E2EEncryptionHandler"/> (ephemeral key).</para>
+///
+/// <para><b>spec 037 — the wrapped-DEK headers may be absent, and this handler must tolerate that.</b>
+/// The two handlers send byte-identical <c>X-E2E-Public-Key</c> values, so the server cannot tell them
+/// apart by shape and does not try: it looks the presented key UP. Only a key registered as a device
+/// (<c>bella auth setup</c>) or recorded against an API key at creation receives the environment key.
+/// An unregistered key still gets the values; <see cref="OnWrappedDekReceived"/> simply never fires.</para>
 /// </summary>
 public sealed class ZkeDekHandler : DelegatingHandler
 {
