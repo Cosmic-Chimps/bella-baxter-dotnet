@@ -94,11 +94,14 @@ public sealed class ZkeDekHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        var isSecrets = request.RequestUri?.AbsolutePath
-            .Contains("/secrets", StringComparison.OrdinalIgnoreCase) == true;
+        // #635 — the key is presented on every API call, not only on `/secrets`. The status call the
+        // CLI makes before a read (`GET /api/v1/tenants/me/zke`) went out bare, so the server answered
+        // `presentedKeyRegistered: false` and the CLI refused itself before reaching any secret.
+        if (ZkePresentedKey.ShouldPresent(request))
+            request.Headers.TryAddWithoutValidation(ZkePresentedKey.HeaderName, PublicKeyBase64);
 
-        if (isSecrets)
-            request.Headers.TryAddWithoutValidation("X-E2E-Public-Key", PublicKeyBase64);
+        // Decryption stays on the narrow test: only secrets responses come back encrypted.
+        var isSecrets = ZkePresentedKey.CarriesEncryptedPayload(request);
 
         var response = await base.SendAsync(request, cancellationToken);
 

@@ -35,12 +35,17 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        if (request.RequestUri?.AbsolutePath.Contains("/secrets", StringComparison.OrdinalIgnoreCase) == true)
-            request.Headers.TryAddWithoutValidation("X-E2E-Public-Key", PublicKeyBase64);
+        // #635 — presented on every API call, not only on `/secrets`. Must stay byte-identical to what
+        // ZkeDekHandler sends, and on the same set of requests: the server cannot tell the two apart,
+        // and a client that presented the key on different paths depending on which handler was wired
+        // would fail in only one of its two configurations.
+        if (ZkePresentedKey.ShouldPresent(request))
+            request.Headers.TryAddWithoutValidation(ZkePresentedKey.HeaderName, PublicKeyBase64);
 
         var response = await base.SendAsync(request, cancellationToken);
 
-        if (request.RequestUri?.AbsolutePath.Contains("/secrets", StringComparison.OrdinalIgnoreCase) == true
+        // Decryption stays on the narrow test: only secrets responses come back encrypted.
+        if (ZkePresentedKey.CarriesEncryptedPayload(request)
             && response.IsSuccessStatusCode)
         {
             var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
