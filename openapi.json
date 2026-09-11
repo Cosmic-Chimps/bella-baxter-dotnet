@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost/"
+      "url": "http://localhost:5522/"
     }
   ],
   "paths": {
@@ -5163,6 +5163,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "manage"
         }
       },
       "get": {
@@ -5204,6 +5208,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "read"
         }
       }
     },
@@ -5253,6 +5261,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "project",
+          "level": "manage"
         }
       }
     },
@@ -11426,6 +11438,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
         }
       },
       "get": {
@@ -11475,6 +11491,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "read"
         }
       }
     },
@@ -11532,6 +11552,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
         }
       }
     },
@@ -19540,6 +19564,12 @@
             "format": "int32"
           },
           "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "publicKey": {
             "type": [
               "null",
               "string"
