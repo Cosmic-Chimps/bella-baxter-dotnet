@@ -15336,6 +15336,12 @@
               "null",
               "string"
             ]
+          },
+          "countryCode": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
