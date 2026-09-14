@@ -22348,6 +22348,24 @@
               "null",
               "string"
             ]
+          },
+          "detailCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recommendationCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },
@@ -22385,6 +22403,24 @@
               "null",
               "string"
             ]
+          },
+          "detailCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recommendationCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },

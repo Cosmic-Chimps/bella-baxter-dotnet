@@ -65,6 +65,7 @@ public static class BellaClientFactory
     /// </param>
     public static BellaClient CreateWithBearerToken(string baseUrl, string accessToken,
         DelegatingHandler? outerHandler = null,
+        DelegatingHandler? additionalHandler = null,
         string bellaClient = DefaultBellaClient,
         string? appClient = null)
     {
@@ -82,6 +83,13 @@ public static class BellaClientFactory
 
         if (outerHandler is not null)
             builder.AddHttpMessageHandler(() => outerHandler);
+
+        // A SECOND optional slot, because the bearer paths need two: a token refresher AND — when the
+        // operator asks for it — request logging. With one slot the refresher always won, so
+        // `BELLA_BAXTER_DEBUG=1` printed nothing on any OAuth path. That is why #725, a wrong header on
+        // one request, could not be diagnosed from the CLI's own debug output.
+        if (additionalHandler is not null)
+            builder.AddHttpMessageHandler(() => additionalHandler);
 
         builder
             .AddHttpMessageHandler(() => new E2EEncryptionHandler())
@@ -174,6 +182,7 @@ public static class BellaClientFactory
         string accessToken,
         ZkeDekHandler zkeHandler,
         DelegatingHandler? outerHandler = null,
+        DelegatingHandler? additionalHandler = null,
         string bellaClient = DefaultBellaClient,
         string? appClient = null)
     {
@@ -191,6 +200,13 @@ public static class BellaClientFactory
 
         if (outerHandler is not null)
             builder.AddHttpMessageHandler(() => outerHandler);
+
+        // A SECOND optional slot, because the bearer paths need two: a token refresher AND — when the
+        // operator asks for it — request logging. With one slot the refresher always won, so
+        // `BELLA_BAXTER_DEBUG=1` printed nothing on any OAuth path. That is why #725, a wrong header on
+        // one request, could not be diagnosed from the CLI's own debug output.
+        if (additionalHandler is not null)
+            builder.AddHttpMessageHandler(() => additionalHandler);
 
         builder
             .AddHttpMessageHandler(() => zkeHandler)
