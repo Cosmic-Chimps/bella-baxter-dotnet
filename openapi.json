@@ -222,14 +222,6 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": { }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -237,6 +229,22 @@
                 "schema": {
                   "$ref": "#/components/schemas/WebhookOperationResponse"
                 }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           }
@@ -12243,6 +12251,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/NotificationChannelOperationResponse"
                 }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           },
