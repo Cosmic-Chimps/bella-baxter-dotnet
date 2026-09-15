@@ -12578,6 +12578,82 @@
         }
       }
     },
+    "/internal/v1/cert-rotation/outcome": {
+      "post": {
+        "tags": [
+          "Internal"
+        ],
+        "summary": "POST_internal_v1_cert_rotation_outcome",
+        "description": "POST_internal_v1_cert_rotation_outcome",
+        "operationId": "recordRotationOutcome",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordRotationOutcomeCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/internal/v1/environments/{id}/ssh/sign-deploy-cert": {
       "post": {
         "tags": [
@@ -21758,6 +21834,153 @@
             ]
           },
           "auditRecordId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "RecordRotationOutcomeCommand": {
+        "required": [
+          "tenantId",
+          "projectId",
+          "projectRef",
+          "environmentId",
+          "environmentSlug",
+          "targetId",
+          "rotationId",
+          "outcome",
+          "primaryDomain",
+          "sanList",
+          "occurredAt"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectRef": {
+            "type": "string"
+          },
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "targetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rotationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "primaryDomain": {
+            "type": "string"
+          },
+          "sanList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trigger": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hostsSucceeded": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "hostsFailed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "certificatesEvaluated": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "certificatesDeployed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "certificatesUnchanged": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "certificatesFailed": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "failureCategory": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "failureDetail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "missedReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "occurrenceDueAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "notAfter": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "announcementId": {
             "type": "string",
             "format": "uuid"
           }
