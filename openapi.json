@@ -11522,6 +11522,70 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/jwt-signing-key/rotate": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.RotateJwtSigningKey"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_jwt_signing_key_rotate",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_jwt_signing_key_rotate",
+        "operationId": "rotateJwtSigningKey",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwtSigningKeyRotationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/tidy": {
       "post": {
         "tags": [
@@ -20167,6 +20231,26 @@
           }
         }
       },
+      "JwtSigningKeyRotationResponse": {
+        "required": [
+          "keyId",
+          "previousKeyId",
+          "supersededKeyPublishedUntil"
+        ],
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "type": "string"
+          },
+          "previousKeyId": {
+            "type": "string"
+          },
+          "supersededKeyPublishedUntil": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "KeyContextResponse": {
         "required": [
           "keyId",
@@ -20898,6 +20982,21 @@
               "null",
               "string"
             ]
+          },
+          "tokenSigningStatus": {
+            "type": "string",
+            "default": "tenant"
+          },
+          "tokenSigningSupersededKeyPublished": {
+            "type": "boolean",
+            "default": false
+          },
+          "tokenSigningSupersededKeyPublishedUntil": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -26412,6 +26511,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Pki.RevokePkiCertificate"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.RotateJwtSigningKey"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Pki.TidyPkiCerts"
