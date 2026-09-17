@@ -8221,6 +8221,70 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/ssh/authority/adoption": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Ssh.AdoptSshAuthority"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_ssh_authority_adoption",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_ssh_authority_adoption",
+        "operationId": "adoptSshAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdoptSshAuthorityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/ssh/configure": {
       "post": {
         "tags": [
@@ -8468,6 +8532,54 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/ssh/authority": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Ssh.GetSshAuthority"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_ssh_authority",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_ssh_authority",
+        "operationId": "getSshAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SshAuthorityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/ssh/ca-public-key": {
       "get": {
         "tags": [
@@ -8501,6 +8613,54 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SshCaPublicKeyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/ssh/deploy-authority": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Ssh.GetSshDeployAuthority"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_ssh_deploy_authority",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_ssh_deploy_authority",
+        "operationId": "getSshDeployAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SshDeployAuthorityResponse"
                 }
               }
             }
@@ -10792,6 +10952,70 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/authority/adoption": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.AdoptPkiAuthority"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_pki_authority_adoption",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_pki_authority_adoption",
+        "operationId": "adoptPkiAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdoptPkiAuthorityResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/ca": {
       "post": {
         "tags": [
@@ -11056,6 +11280,54 @@
             "content": {
               "application/json": {
                 "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/pki/authority": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Pki.GetPkiAuthority"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_pki_authority",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_pki_authority",
+        "operationId": "getPkiAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PkiAuthorityResponse"
+                }
               }
             }
           },
@@ -15058,7 +15330,9 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
               }
             }
           },
@@ -15490,6 +15764,44 @@
         "type": "object",
         "properties": {
           "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "AdoptPkiAuthorityResponse": {
+        "required": [
+          "status",
+          "mountPath",
+          "notice"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "notice": {
+            "type": "string"
+          }
+        }
+      },
+      "AdoptSshAuthorityResponse": {
+        "required": [
+          "status",
+          "mountPath",
+          "notice"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "notice": {
             "type": "string"
           }
         }
@@ -20564,6 +20876,31 @@
           }
         }
       },
+      "PkiAuthorityResponse": {
+        "required": [
+          "status",
+          "mountPath",
+          "adopted"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "adopted": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "PkiCaPublicKeyResponse": {
         "required": [
           "certificate",
@@ -23046,6 +23383,31 @@
           }
         }
       },
+      "SshAuthorityResponse": {
+        "required": [
+          "status",
+          "mountPath",
+          "adopted"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "adopted": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "SshCaPublicKeyResponse": {
         "required": [
           "caPublicKey",
@@ -23161,6 +23523,31 @@
           "maxTtl": {
             "type": "string",
             "default": "24h"
+          }
+        }
+      },
+      "SshDeployAuthorityResponse": {
+        "required": [
+          "status",
+          "roleName",
+          "environmentPrincipal"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "roleName": {
+            "type": "string"
+          },
+          "environmentPrincipal": {
+            "type": "string"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -25886,6 +26273,9 @@
       "name": "BellaBaxter.Features.Projects.Environments.Totp.ListTotpKeys"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Ssh.AdoptSshAuthority"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Ssh.ConfigureSsh"
     },
     {
@@ -25898,7 +26288,13 @@
       "name": "BellaBaxter.Features.Projects.Environments.Ssh.DeleteSshRole"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Ssh.GetSshAuthority"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Ssh.GetSshCaPublicKey"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Ssh.GetSshDeployAuthority"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Ssh.RotateSshCa"
@@ -25988,6 +26384,9 @@
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.Versions.UndeleteSecretVersion"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.AdoptPkiAuthority"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Pki.ConfigurePkiCa"
     },
     {
@@ -26001,6 +26400,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Pki.DeletePkiRole"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Pki.GetPkiAuthority"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Pki.IssuePkiCertificate"
