@@ -9631,6 +9631,164 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/rotation-policy": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretRotationPolicy"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
+        "operationId": "getSecretRotationPolicy",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotationPolicyInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "read"
+        }
+      },
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
+        ],
+        "summary": "PUT_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
+        "description": "PUT_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
+        "operationId": "setSecretRotationPolicy",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetRotationPolicyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetRotationPolicyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/hash": {
       "get": {
         "tags": [
@@ -10106,96 +10264,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RotateRotationSigningSecretResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/rotation-policy": {
-      "put": {
-        "tags": [
-          "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
-        ],
-        "summary": "PUT_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
-        "description": "PUT_api_v1_projects_projectRef_environments_envSlug_providers_providerSlug_secrets_key_rotation_policy",
-        "operationId": "setSecretRotationPolicy",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "providerSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "key",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SetRotationPolicyRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SetRotationPolicyResponse"
                 }
               }
             }
@@ -22747,6 +22815,83 @@
           }
         }
       },
+      "RotationPolicyInfo": {
+        "required": [
+          "enabled",
+          "intervalDays",
+          "lastRotatedAt",
+          "nextRotationAt",
+          "isOverdue"
+        ],
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "intervalDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastRotatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "nextRotationAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "isOverdue": {
+            "type": "boolean"
+          },
+          "strategy": {
+            "type": "string",
+            "default": "HttpWebhook"
+          },
+          "rotationStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "randomFormat": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "endpoint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "apiKeyHeader": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revokePreviousAfterDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "signingSecretKeyPrefix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ScanQueuedResponse": {
         "required": [
           "message"
@@ -26435,6 +26580,12 @@
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.UpdateSecretMetadata"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretRotationPolicy"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.GetSecretsHash"
     },
     {
@@ -26454,9 +26605,6 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.RotateRotationSigningSecret"
-    },
-    {
-      "name": "BellaBaxter.Features.Projects.Environments.Secrets.SetSecretRotationPolicy"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.TriggerSecretRotation"
