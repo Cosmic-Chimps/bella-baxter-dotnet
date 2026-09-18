@@ -800,6 +800,47 @@
         }
       }
     },
+    "/api/v1/users/{userId}/deactivation-impact": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Users.PreviewUserDeactivation"
+        ],
+        "summary": "GET_api_v1_users_userId_deactivation_impact",
+        "description": "GET_api_v1_users_userId_deactivation_impact",
+        "operationId": "previewUserDeactivation",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeactivationImpactResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/users/{userId}/reactivate": {
       "post": {
         "tags": [
@@ -3740,6 +3781,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "provider",
+          "level": "manage"
         }
       },
       "get": {
@@ -3838,6 +3883,10 @@
               }
             }
           }
+        },
+        "x-bella-permission": {
+          "resource": "provider",
+          "level": "manage"
         }
       }
     },
@@ -18500,6 +18549,29 @@
           }
         }
       },
+      "DeactivationImpactKey": {
+        "required": [
+          "apiKeyId",
+          "clientName",
+          "role",
+          "tenantId"
+        ],
+        "type": "object",
+        "properties": {
+          "apiKeyId": {
+            "type": "string"
+          },
+          "clientName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          }
+        }
+      },
       "DriftItem": {
         "required": [
           "key",
@@ -25576,6 +25648,25 @@
           }
         }
       },
+      "UserDeactivationImpactResponse": {
+        "required": [
+          "apiKeyCount",
+          "apiKeys"
+        ],
+        "type": "object",
+        "properties": {
+          "apiKeyCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeactivationImpactKey"
+            }
+          }
+        }
+      },
       "UserResponse": {
         "required": [
           "id",
@@ -26192,6 +26283,9 @@
     },
     {
       "name": "BellaBaxter.Features.Users.UpdateCurrentUser"
+    },
+    {
+      "name": "BellaBaxter.Features.Users.PreviewUserDeactivation"
     },
     {
       "name": "BellaBaxter.Features.Users.ReactivateUserAccount"
