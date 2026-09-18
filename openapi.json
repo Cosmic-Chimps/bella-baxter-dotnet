@@ -5627,7 +5627,9 @@
             "description": "Bad Request",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
               }
             }
           },
@@ -14754,6 +14756,72 @@
         }
       }
     },
+    "/api/v1/api-keys/{id}/device": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ApiKeys.AttachApiKeyDevice"
+        ],
+        "summary": "POST_api_v1_api_keys_id_device",
+        "description": "POST_api_v1_api_keys_id_device",
+        "operationId": "attachApiKeyDevice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ApiKeyId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachApiKeyDeviceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKeyOperationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/environments/{environmentId}/api-keys": {
       "post": {
         "tags": [
@@ -16190,6 +16258,17 @@
             "items": {
               "$ref": "#/components/schemas/UserRoleAssignment"
             }
+          }
+        }
+      },
+      "AttachApiKeyDeviceRequest": {
+        "required": [
+          "publicKey"
+        ],
+        "type": "object",
+        "properties": {
+          "publicKey": {
+            "type": "string"
           }
         }
       },
@@ -17895,6 +17974,12 @@
               "integer"
             ],
             "format": "int32"
+          },
+          "publicKey": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -26809,6 +26894,9 @@
     },
     {
       "name": "BellaBaxter.Features.AuditStream.TestAuditStreamDestination"
+    },
+    {
+      "name": "BellaBaxter.Features.ApiKeys.AttachApiKeyDevice"
     },
     {
       "name": "BellaBaxter.Features.ApiKeys.CreateApiKey"
