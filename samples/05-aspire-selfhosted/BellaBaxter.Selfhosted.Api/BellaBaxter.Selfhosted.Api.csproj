@@ -7,9 +7,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Bella secrets provider — IConfiguration integration -->
-    <ProjectReference Include="../../../src/BellaBaxter.AspNet.Configuration/BellaBaxter.AspNet.Configuration.csproj" />
+    <PackageReference Include="BellaBaxter.AspNet.Configuration" Version="0.1.1-preview.111" />
     <!-- Bella source generator: reads bella-secrets.manifest.json → emits AppSecrets.g.cs -->
-    <PackageReference Include="BellaBaxter.SourceGenerator" Version="0.1.0" />
+    <PackageReference Include="BellaBaxter.SourceGenerator" Version="0.1.1-preview.111" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildProjectDirectory)/bella-secrets.manifest.json" />

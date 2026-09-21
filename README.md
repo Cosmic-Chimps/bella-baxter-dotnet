@@ -54,8 +54,8 @@ Requires a `.bella` file with `project` and `environment` to identify the target
 
 ### API key (for machines, CI/CD, production)
 ```bash
-bella login --api-key bax-<keyId>-<secret>
-# or: bella exec -- dotnet run  (injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL)
+bella login
+# or: bella sdk run -- dotnet run  (injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL)
 ```
 API keys encode the project and environment — no `.bella` file required.
 **Billed** on pay-as-you-go plans. Generate via `bella api-keys create` or the WebApp.
@@ -85,7 +85,7 @@ dotnet add package BellaBaxter.AspNet.Configuration
 
 | Method | How to set |
 |--------|-----------|
-| `bella exec -- dotnet run` (recommended) | Injects `BELLA_BAXTER_API_KEY` + `BELLA_BAXTER_URL` automatically |
+| `bella sdk run -- dotnet run` (recommended) | Injects `BELLA_BAXTER_API_KEY` + `BELLA_BAXTER_URL` automatically |
 | .NET User Secrets | `dotnet user-secrets set "BellaBaxter:ApiKey" "bax-..."` |
 | Environment variable | `BellaBaxter__ApiKey=bax-...` |
 
@@ -169,7 +169,7 @@ bella api-keys create --env production --name "MyApi Production"
 # Returns: bax-<keyId>-<secret>
 ```
 
-The key encodes the project slug and environment slug. Store it in user secrets, a secrets manager, or inject it via `bella exec`.
+The key encodes the project slug and environment slug. Store it in user secrets, a secrets manager, or inject it via `bella sdk run`.
 
 ---
 

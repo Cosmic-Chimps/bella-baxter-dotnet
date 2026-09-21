@@ -10,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 //   1. configure callback (highest)
 //   2. "BellaBaxter" section in appsettings.json / appsettings.{env}.json
 //      → BellaBaxter:BaxterUrl, BellaBaxter:EnvironmentSlug, BellaBaxter:ApiKey
-//   3. Standard bella exec env vars (fallback):
+//   3. Standard bella sdk run env vars (fallback):
 //      → BELLA_BAXTER_URL, BELLA_BAXTER_API_KEY
 //
-// Recommended for local dev: bella exec -- dotnet run
+// Recommended for local dev: bella sdk run -- dotnet run
 // BaxterUrl + EnvironmentSlug are in appsettings.Development.json.
 builder.Configuration.AddBellaSecrets();
 
@@ -61,7 +61,7 @@ app.MapGet(
                 GleapApiKey = s.GleapApiKey,
                 EnableFeatures = s.EnableFeatures,
                 AppId = s.AppId,
-                ConnectionstringsPostgres = s.ConnectionStrings.Postgres,
+                ConnectionStringsPostgres = s.ConnectionStrings.Postgres,
                 AppConfig = s.AppConfig,
             }
         )

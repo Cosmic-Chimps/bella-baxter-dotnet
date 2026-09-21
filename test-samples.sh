@@ -7,7 +7,7 @@
 # Samples tested:
 #   01-dotenv-file    — bella secrets get -o .env → dotnet run
 #   02-process-inject — bella run -- dotnet run
-#   03-aspnet         — bella exec -- dotnet run (ASP.NET server, curl validation)
+#   03-aspnet         — bella sdk run -- dotnet run (ASP.NET server, curl validation)
 #
 # Sample 04-aspire is skipped (requires manual Aspire infrastructure review).
 
@@ -158,7 +158,7 @@ cleanup_port "$SERVER_PORT"
 SERVER_PID=""
 pushd "$SAMPLE_03" > /dev/null
   ASPNETCORE_URLS="http://localhost:$SERVER_PORT" \
-    bella exec --app dotnet-03-aspnet -- dotnet run > /tmp/bella-dotnet-03.log 2>&1 &
+    bella sdk run --app dotnet-03-aspnet -- dotnet run > /tmp/bella-dotnet-03.log 2>&1 &
   SERVER_PID=$!
 
   if wait_for_server "http://localhost:$SERVER_PORT/health" "$SERVER_STARTUP_TIMEOUT"; then

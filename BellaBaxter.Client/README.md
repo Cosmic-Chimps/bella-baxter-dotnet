@@ -63,7 +63,7 @@ Billed on pay-as-you-go plans. Generate via `bella api-keys create` or the Bella
 
 ```bash
 bella login           # opens browser, stores token in .bella file
-bella exec -- dotnet run   # injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL automatically
+bella sdk run -- dotnet run   # injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL automatically
 ```
 
 ## End-to-end encryption

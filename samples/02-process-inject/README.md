@@ -28,9 +28,9 @@ bella run -- dotnet run
 **With API key (CI/CD, production):**
 ```bash
 # API key encodes project + environment — no .bella file or -p/-e flags needed
-bella run --api-key bax-... -- dotnet run
+BELLA_BAXTER_API_KEY=bax-... bella run -- dotnet run
 
-# Or after bella login --api-key:
+# Or after `bella login` has stored a key:
 bella run -- dotnet run
 ```
 

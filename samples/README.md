@@ -13,8 +13,8 @@ The `.bella` file (project + environment) is required for OAuth — the token do
 **API key (CI/CD, production, billed):**
 ```bash
 # API key encodes project + environment — no .bella file or -p/-e flags needed
-bella exec -- dotnet run                 # injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL
-bella login --api-key bax-...            # persist key in .bella config
+bella sdk run -- dotnet run                 # injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL
+bella login            # persist key in .bella config
 bella run -- dotnet run                  # same, inject secrets as env vars
 ```
 
@@ -53,7 +53,7 @@ bella run -- dotnet run
 
 ### [03 — ASP.NET Core `AddBellaSecrets()`](03-aspnet/)
 ```bash
-bella exec -- dotnet run
+bella sdk run -- dotnet run
 ```
 ```csharp
 builder.Configuration.AddBellaSecrets();

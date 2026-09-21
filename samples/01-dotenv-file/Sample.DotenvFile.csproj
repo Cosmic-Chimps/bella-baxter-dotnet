@@ -11,7 +11,7 @@
     <!-- DotNetEnv: loads .env file into System.Environment -->
     <PackageReference Include="DotNetEnv" Version="3.1.0" />
     <!-- Bella source generator: reads bella-secrets.manifest.json → emits AppSecrets.g.cs -->
-    <PackageReference Include="BellaBaxter.SourceGenerator" Version="0.1.0" />
+    <PackageReference Include="BellaBaxter.SourceGenerator" Version="0.1.1-preview.111" />
   </ItemGroup>
   <ItemGroup>
     <!-- Expose manifest to the Roslyn analyzer -->

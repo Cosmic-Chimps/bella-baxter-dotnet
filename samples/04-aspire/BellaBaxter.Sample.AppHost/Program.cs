@@ -1,5 +1,7 @@
 using Aspire.Hosting;
-using BellaBaxter.Aspire.Configuration;
+// AddBaxter()/WithReference() live in the Aspire.Hosting namespace, not in one named after
+// the package — the `using BellaBaxter.Aspire.Configuration;` that used to be here names a
+// namespace the package does not declare.
 
 var builder = DistributedApplication.CreateBuilder(args);
 

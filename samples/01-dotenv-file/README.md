@@ -27,7 +27,7 @@ bella secrets get -o .env && dotnet run
 **With API key (CI/CD, production):**
 ```bash
 # API key encodes project + environment — no .bella file needed
-bella login --api-key bax-...
+bella login
 bella secrets get -o .env && dotnet run
 ```
 

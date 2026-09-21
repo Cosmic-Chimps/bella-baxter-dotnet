@@ -48,9 +48,9 @@ public static class BellaConfigurationExtensions
         var existing = builder.Build();
         existing.GetSection(BellaOptions.SectionName).Bind(options);
 
-        // 1b. bella exec injects BELLA_BAXTER_URL and BELLA_BAXTER_API_KEY into the process.
+        // 1b. bella sdk run injects BELLA_BAXTER_URL and BELLA_BAXTER_API_KEY into the process.
         //     These always override whatever appsettings.json says so that running
-        //     `bella exec -- dotnet run` works regardless of environment or appsettings values.
+        //     `bella sdk run -- dotnet run` works regardless of environment or appsettings values.
         //     The configure callback (step 2) still takes priority over everything.
         var envApiKey = Environment.GetEnvironmentVariable("BELLA_BAXTER_API_KEY");
         if (!string.IsNullOrEmpty(envApiKey))

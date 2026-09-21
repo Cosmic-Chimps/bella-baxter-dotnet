@@ -45,7 +45,7 @@ app.MapGet("/raw", (IConfiguration config) => Results.Ok(config["DATABASE_URL"])
 
 | Method | How |
 |--------|-----|
-| `bella exec -- dotnet run` (recommended for local dev) | Injects `BELLA_BAXTER_API_KEY` + `BELLA_BAXTER_URL` automatically |
+| `bella sdk run -- dotnet run` (recommended for local dev) | Injects `BELLA_BAXTER_API_KEY` + `BELLA_BAXTER_URL` automatically |
 | .NET User Secrets | `dotnet user-secrets set "BellaBaxter:ApiKey" "bax-..."` |
 | Environment variable | `BellaBaxter__ApiKey=bax-...` |
 

@@ -21,5 +21,5 @@ Console.WriteLine($"EXTERNAL_API_KEY={s.ExternalApiKey}");
 Console.WriteLine($"GLEAP_API_KEY={s.GleapApiKey}");
 Console.WriteLine($"ENABLE_FEATURES={s.EnableFeatures.ToString().ToLower()}");
 Console.WriteLine($"APP_ID={s.AppId}");
-Console.WriteLine($"ConnectionStrings__Postgres={s.ConnectionstringsPostgres}");
+Console.WriteLine($"ConnectionStrings__Postgres={s.ConnectionStrings.Postgres}");
 Console.WriteLine($"APP_CONFIG={s.AppConfig}");

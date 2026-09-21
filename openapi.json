@@ -22513,6 +22513,13 @@
           "auditRecordId": {
             "type": "string",
             "format": "uuid"
+          },
+          "occurredAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },

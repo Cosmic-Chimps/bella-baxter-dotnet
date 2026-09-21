@@ -9,13 +9,13 @@ This is the **recommended production pattern** for ASP.NET Core apps.
 ## How it works
 
 ```
-bella exec -- dotnet run
+bella sdk run -- dotnet run
     │
     ├─ injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL into the process
     │
     └─ AddBellaSecrets()
            ├─ reads BaxterUrl + EnvironmentSlug from appsettings.json
-           ├─ reads ApiKey from BELLA_BAXTER_API_KEY (bella exec) or BellaBaxter__ApiKey
+           ├─ reads ApiKey from BELLA_BAXTER_API_KEY (bella sdk run) or BellaBaxter__ApiKey
            ├─ fetches all secrets from Baxter at startup
            ├─ injects secrets into IConfiguration
            └─ polls Baxter every 60 s → hot-reloads via IChangeToken
@@ -46,9 +46,9 @@ dotnet run
 
 **With API key — recommended for local dev too:**
 ```bash
-# bella exec injects BELLA_BAXTER_API_KEY and BELLA_BAXTER_URL automatically.
+# bella sdk run injects BELLA_BAXTER_API_KEY and BELLA_BAXTER_URL automatically.
 # BaxterUrl and EnvironmentSlug are already in appsettings.Development.json.
-bella exec -- dotnet run
+bella sdk run -- dotnet run
 ```
 
 **CI/CD / production:**
@@ -134,7 +134,7 @@ Inject it into any endpoint, controller, or service class.
 
 | Method | Variable |
 |--------|---------|
-| `bella exec -- dotnet run` | `BELLA_BAXTER_API_KEY` (injected automatically) |
+| `bella sdk run -- dotnet run` | `BELLA_BAXTER_API_KEY` (injected automatically) |
 | .NET User Secrets | `dotnet user-secrets set "BellaBaxter:ApiKey" "bax-..."` |
 | Environment variable | `BellaBaxter__ApiKey=bax-...` |
 
