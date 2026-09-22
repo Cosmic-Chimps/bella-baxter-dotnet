@@ -1502,6 +1502,14 @@
                 "schema": { }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
           }
         }
       },
@@ -2206,6 +2214,64 @@
             "content": {
               "application/json": {
                 "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}/invites/{token}/replacement": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.ReplaceTenantInvite"
+        ],
+        "summary": "POST_api_tenants_id_invites_token_replacement",
+        "description": "POST_api_tenants_id_invites_token_replacement",
+        "operationId": "ReplaceTenantInvite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InviteResponse"
+                }
               }
             }
           },
@@ -8956,6 +9022,110 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/secrets/certificates/imports": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.ApplyCertificateImport"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_secrets_certificates_imports",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_secrets_certificates_imports",
+        "operationId": "applyCertificateImport",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateImportResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets": {
       "post": {
         "tags": [
@@ -10263,6 +10433,100 @@
         "x-bella-permission": {
           "resource": "environment",
           "level": "read"
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/secrets/certificates/import-plans": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.Secrets.PlanCertificateImport"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_secrets_certificates_import_plans",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_secrets_certificates_import_plans",
+        "operationId": "planCertificateImport",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CertificateImportPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateImportPlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-bella-permission": {
+          "resource": "environment",
+          "level": "manage"
         }
       }
     },
@@ -12943,398 +13207,6 @@
           },
           "404": {
             "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/delegation-namespace": {
-      "get": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "GET_internal_v1_delegation_namespace",
-        "description": "GET_internal_v1_delegation_namespace",
-        "operationId": "internalGetDelegationNamespace",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InternalDelegationNamespaceResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/environments/{id}/cert-secrets": {
-      "get": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "GET_internal_v1_environments_id_cert_secrets",
-        "description": "GET_internal_v1_environments_id_cert_secrets",
-        "operationId": "getEnvironmentCertSecrets",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "prefix",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InternalCertSecretsResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/providers/{id}/credentials": {
-      "get": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "GET_internal_v1_providers_id_credentials",
-        "description": "GET_internal_v1_providers_id_credentials",
-        "operationId": "getProviderCredentials",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InternalProviderCredentialsResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/cert-rotation/audit": {
-      "post": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "POST_internal_v1_cert_rotation_audit",
-        "description": "POST_internal_v1_cert_rotation_audit",
-        "operationId": "recordCertRotationAudit",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RecordCertRotationAuditCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/cert-rotation/outcome": {
-      "post": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "POST_internal_v1_cert_rotation_outcome",
-        "description": "POST_internal_v1_cert_rotation_outcome",
-        "operationId": "recordRotationOutcome",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RecordRotationOutcomeCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/internal/v1/environments/{id}/ssh/sign-deploy-cert": {
-      "post": {
-        "tags": [
-          "Internal"
-        ],
-        "summary": "POST_internal_v1_environments_id_ssh_sign_deploy_cert",
-        "description": "POST_internal_v1_environments_id_ssh_sign_deploy_cert",
-        "operationId": "signDeploySshCert",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InternalSignDeployCertRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InternalSignDeployCertResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
             "content": {
               "application/json": {
                 "schema": { }
@@ -17328,6 +17200,172 @@
           }
         }
       },
+      "CertificateImportPlanRequest": {
+        "required": [
+          "sourceProviderSlug",
+          "entries"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceProviderSlug": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DropEntryRequest"
+            }
+          },
+          "manifest": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ManifestRequest"
+              }
+            ]
+          },
+          "stripRoot": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "CertificateImportPlanResponse": {
+        "required": [
+          "digest",
+          "secretPrefix",
+          "summary",
+          "warnings",
+          "entries"
+        ],
+        "type": "object",
+        "properties": {
+          "digest": {
+            "type": "string"
+          },
+          "secretPrefix": {
+            "type": "string"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/CertificateImportSummary"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedCertificateResponse"
+            }
+          }
+        }
+      },
+      "CertificateImportRequest": {
+        "required": [
+          "sourceProviderSlug",
+          "entries",
+          "destinationProviderSlug",
+          "planDigest"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceProviderSlug": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DropEntryRequest"
+            }
+          },
+          "destinationProviderSlug": {
+            "type": "string"
+          },
+          "planDigest": {
+            "type": "string"
+          },
+          "manifest": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ManifestRequest"
+              }
+            ]
+          },
+          "stripRoot": {
+            "type": "boolean",
+            "default": false
+          },
+          "requireIntact": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "CertificateImportResultResponse": {
+        "required": [
+          "summary",
+          "entries",
+          "failedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/CertificateImportSummary"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedCertificateResponse"
+            }
+          },
+          "failedAt": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CertificateImportSummary": {
+        "required": [
+          "created",
+          "updated",
+          "unchanged",
+          "rejected",
+          "skipped"
+        ],
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unchanged": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejected": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skipped": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "CertificateInfo": {
         "required": [
           "commonName",
@@ -18800,6 +18838,39 @@
           }
         }
       },
+      "DropEntryRequest": {
+        "required": [
+          "folder",
+          "files"
+        ],
+        "type": "object",
+        "properties": {
+          "folder": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DropFileRequest"
+            }
+          }
+        }
+      },
+      "DropFileRequest": {
+        "required": [
+          "name",
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
       "E2EEncryptedPayload": {
         "required": [
           "encrypted",
@@ -20211,160 +20282,14 @@
           }
         }
       },
-      "InternalCertSecretItem": {
-        "required": [
-          "secretKey",
-          "decryptedValue"
-        ],
-        "type": "object",
-        "properties": {
-          "secretKey": {
-            "type": "string"
-          },
-          "decryptedValue": {
-            "type": "string"
-          }
-        }
-      },
-      "InternalCertSecretsResponse": {
-        "required": [
-          "items"
-        ],
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InternalCertSecretItem"
-            }
-          }
-        }
-      },
-      "InternalDelegationGenerationResponse": {
-        "required": [
-          "marker",
-          "state"
-        ],
-        "type": "object",
-        "properties": {
-          "marker": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          }
-        }
-      },
-      "InternalDelegationNamespaceResponse": {
-        "required": [
-          "suffix",
-          "activeMarker",
-          "generations"
-        ],
-        "type": "object",
-        "properties": {
-          "suffix": {
-            "type": "string"
-          },
-          "activeMarker": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "generations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InternalDelegationGenerationResponse"
-            }
-          }
-        }
-      },
-      "InternalProviderCredentialsResponse": {
-        "required": [
-          "providerType",
-          "decryptedConfig"
-        ],
-        "type": "object",
-        "properties": {
-          "providerType": {
-            "type": "string"
-          },
-          "decryptedConfig": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "InternalSignDeployCertRequest": {
-        "required": [
-          "publicKey"
-        ],
-        "type": "object",
-        "properties": {
-          "publicKey": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string",
-            "default": "deploy"
-          },
-          "loginUser": {
-            "type": "string",
-            "default": "certmanager"
-          },
-          "purpose": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ttlSeconds": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          }
-        }
-      },
-      "InternalSignDeployCertResponse": {
-        "required": [
-          "signedCertificate",
-          "caPublicKey",
-          "serialNumber",
-          "ttlSeconds"
-        ],
-        "type": "object",
-        "properties": {
-          "signedCertificate": {
-            "type": "string"
-          },
-          "caPublicKey": {
-            "type": "string"
-          },
-          "serialNumber": {
-            "type": "string"
-          },
-          "ttlSeconds": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fallbackPrivateKeyPem": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "fallbackPublicKeyOpenSsh": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
-        }
+      "InviteDeliveryOutcome": {
+        "enum": [
+          "NotRequested",
+          "InProgress",
+          "Sent",
+          "Failed",
+          "Unknown"
+        ]
       },
       "InviteListResponse": {
         "required": [
@@ -20376,7 +20301,11 @@
           "isRevoked",
           "isExpired",
           "acceptedByUserId",
-          "acceptedAt"
+          "acceptedAt",
+          "email",
+          "joinUrl",
+          "deliveryOutcome",
+          "deliveryFailureReason"
         ],
         "type": "object",
         "properties": {
@@ -20418,6 +20347,27 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "joinUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "deliveryOutcome": {
+            "$ref": "#/components/schemas/InviteDeliveryOutcome"
+          },
+          "deliveryFailureReason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20450,7 +20400,8 @@
           "tenantName",
           "role",
           "expiresAt",
-          "email"
+          "email",
+          "joinUrl"
         ],
         "type": "object",
         "properties": {
@@ -20477,6 +20428,9 @@
               "null",
               "string"
             ]
+          },
+          "joinUrl": {
+            "type": "string"
           }
         }
       },
@@ -20885,6 +20839,21 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "ManifestRequest": {
+        "required": [
+          "fileName",
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
           }
         }
       },
@@ -21931,6 +21900,107 @@
           }
         }
       },
+      "PlannedCertificateFacts": {
+        "required": [
+          "commonName",
+          "subjectAlternativeNames",
+          "issuer",
+          "notBefore",
+          "notAfter",
+          "keyAlgorithm",
+          "keySizeBits",
+          "sha256Fingerprint",
+          "chainLength",
+          "chainIncludesSelfSignedRoot"
+        ],
+        "type": "object",
+        "properties": {
+          "commonName": {
+            "type": "string"
+          },
+          "subjectAlternativeNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "issuer": {
+            "type": "string"
+          },
+          "notBefore": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notAfter": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "keyAlgorithm": {
+            "type": "string"
+          },
+          "keySizeBits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sha256Fingerprint": {
+            "type": "string"
+          },
+          "chainLength": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chainIncludesSelfSignedRoot": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlannedCertificateResponse": {
+        "required": [
+          "folder",
+          "action",
+          "commonName",
+          "secretKey",
+          "reason",
+          "certificate"
+        ],
+        "type": "object",
+        "properties": {
+          "folder": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "commonName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "secretKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "certificate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PlannedCertificateFacts"
+              }
+            ]
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -22562,260 +22632,6 @@
           },
           "nextStep": {
             "type": "string"
-          }
-        }
-      },
-      "RecordCertRotationAuditCommand": {
-        "required": [
-          "rotationJobId",
-          "tenantId",
-          "environmentId",
-          "gigamonProviderId",
-          "certStorageProviderId",
-          "keyAlias",
-          "fileName",
-          "action",
-          "oldCertSerial",
-          "newCertSerial",
-          "newCertPemHash",
-          "errorMessage",
-          "errorCategory"
-        ],
-        "type": "object",
-        "properties": {
-          "rotationJobId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "tenantId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "environmentId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "gigamonProviderId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "certStorageProviderId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "keyAlias": {
-            "type": "string"
-          },
-          "fileName": {
-            "type": "string"
-          },
-          "action": {
-            "type": "string"
-          },
-          "oldCertSerial": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "newCertSerial": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "newCertPemHash": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "errorMessage": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "errorCategory": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "actorType": {
-            "type": "string",
-            "default": "scheduler"
-          },
-          "userId": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uuid"
-          },
-          "userName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "auditRecordId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "occurredAt": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          }
-        }
-      },
-      "RecordRotationOutcomeCommand": {
-        "required": [
-          "tenantId",
-          "projectId",
-          "projectRef",
-          "environmentId",
-          "environmentSlug",
-          "targetId",
-          "rotationId",
-          "outcome",
-          "primaryDomain",
-          "sanList",
-          "occurredAt"
-        ],
-        "type": "object",
-        "properties": {
-          "tenantId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "projectId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "projectRef": {
-            "type": "string"
-          },
-          "environmentId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "environmentSlug": {
-            "type": "string"
-          },
-          "targetId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "rotationId": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "uuid"
-          },
-          "outcome": {
-            "type": "string"
-          },
-          "primaryDomain": {
-            "type": "string"
-          },
-          "sanList": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "occurredAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "trigger": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "hostsSucceeded": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "hostsFailed": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "certificatesEvaluated": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "certificatesDeployed": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "certificatesUnchanged": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "certificatesFailed": {
-            "type": [
-              "null",
-              "integer"
-            ],
-            "format": "int32"
-          },
-          "failureCategory": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "failureDetail": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "missedReason": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "occurrenceDueAt": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "notAfter": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "announcementId": {
-            "type": "string",
-            "format": "uuid"
           }
         }
       },
@@ -26538,6 +26354,9 @@
       "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.ReplaceTenantInvite"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.ReprovisionTenantDek"
     },
     {
@@ -26895,6 +26714,9 @@
       "name": "BellaBaxter.Features.Projects.Environments.Ssh.SignSshKey"
     },
     {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.ApplyCertificateImport"
+    },
+    {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.CreateSecret"
     },
     {
@@ -26947,6 +26769,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.ListEnvironmentCertificates"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.Secrets.PlanCertificateImport"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.Secrets.PreviewImportSecrets"
@@ -27070,9 +26895,6 @@
     },
     {
       "name": "BellaBaxter.Features.Mcp.RevokeMcpConnection"
-    },
-    {
-      "name": "Internal"
     },
     {
       "name": "BellaBaxter.Features.Groups.AddUserToGroup"
