@@ -18085,6 +18085,28 @@
               "null",
               "string"
             ]
+          },
+          "scopeKind": {
+            "$ref": "#/components/schemas/TenantInviteScopeKind"
+          },
+          "scopeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "scopeRole": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20390,6 +20412,12 @@
           },
           "isValid": {
             "type": "boolean"
+          },
+          "invitedName": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -24458,6 +24486,14 @@
           "User",
           "Viewer"
         ]
+      },
+      "TenantInviteScopeKind": {
+        "enum": [
+          "None",
+          "Project",
+          "Environment"
+        ],
+        "default": "None"
       },
       "TenantRole": {
         "enum": [
