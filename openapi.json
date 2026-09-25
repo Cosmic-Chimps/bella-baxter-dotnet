@@ -1022,6 +1022,16 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -1035,6 +1045,16 @@
             "content": {
               "application/json": {
                 "schema": { }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           }
@@ -1491,6 +1511,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InviteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -2275,6 +2305,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -2342,6 +2382,77 @@
             "content": {
               "application/json": {
                 "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/invites/{token}/address-verification": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RequestInviteAddressVerification"
+        ],
+        "summary": "POST_api_tenants_invites_token_address_verification",
+        "description": "POST_api_tenants_invites_token_address_verification",
+        "operationId": "requestInviteAddressVerification",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InviteAddressVerificationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           }
@@ -20304,6 +20415,24 @@
           }
         }
       },
+      "InviteAddressVerificationOutcome": {
+        "enum": [
+          "Sent",
+          "Failed",
+          "Unavailable"
+        ]
+      },
+      "InviteAddressVerificationResponse": {
+        "required": [
+          "outcome"
+        ],
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "$ref": "#/components/schemas/InviteAddressVerificationOutcome"
+          }
+        }
+      },
       "InviteDeliveryOutcome": {
         "enum": [
           "NotRequested",
@@ -20327,7 +20456,10 @@
           "email",
           "joinUrl",
           "deliveryOutcome",
-          "deliveryFailureReason"
+          "deliveryFailureReason",
+          "refusedAttemptCount",
+          "lastRefusedAt",
+          "lastRefusedReason"
         ],
         "type": "object",
         "properties": {
@@ -20386,6 +20518,23 @@
             "$ref": "#/components/schemas/InviteDeliveryOutcome"
           },
           "deliveryFailureReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "refusedAttemptCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastRefusedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lastRefusedReason": {
             "type": [
               "null",
               "string"
@@ -26394,6 +26543,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.ReprovisionTenantDek"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RequestInviteAddressVerification"
     },
     {
       "name": "BellaBaxter.Features.Tenants.RequestSsoAccess"
