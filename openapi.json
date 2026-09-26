@@ -3773,10 +3773,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -3817,10 +3813,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -4038,10 +4030,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "provider",
-          "level": "manage"
         }
       },
       "get": {
@@ -4140,10 +4128,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "provider",
-          "level": "manage"
         }
       }
     },
@@ -4303,10 +4287,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -4493,10 +4473,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "get": {
@@ -4538,10 +4514,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -4582,10 +4554,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "put": {
@@ -4634,10 +4602,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "get": {
@@ -4676,10 +4640,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -4720,10 +4680,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -4765,10 +4721,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -4809,10 +4761,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -5151,10 +5099,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5204,10 +5148,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5265,10 +5205,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5327,10 +5263,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5378,10 +5310,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5449,10 +5377,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5511,10 +5435,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "get": {
@@ -5556,10 +5476,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -5609,10 +5525,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5695,10 +5607,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "get": {
@@ -5739,10 +5647,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -5803,10 +5707,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       },
       "put": {
@@ -5875,10 +5775,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "manage"
         }
       }
     },
@@ -5947,10 +5843,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -6000,10 +5892,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -6062,10 +5950,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -6115,10 +5999,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -6187,10 +6067,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -6319,10 +6195,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "project",
-          "level": "read"
         }
       }
     },
@@ -6371,10 +6243,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -6421,10 +6289,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -6491,10 +6355,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -6536,10 +6396,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -6581,10 +6437,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -6633,10 +6485,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -6711,10 +6559,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -6771,10 +6615,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -6832,10 +6672,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "put": {
@@ -6901,10 +6737,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -6961,10 +6793,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -7031,10 +6859,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -7170,10 +6994,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -7220,10 +7040,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -7279,10 +7095,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -7338,10 +7150,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -7417,10 +7225,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -7702,10 +7506,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -7763,10 +7563,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -7844,10 +7640,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -7890,10 +7682,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -7942,10 +7730,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -7994,10 +7778,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -8056,10 +7836,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -8255,10 +8031,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -8335,10 +8107,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -8395,10 +8163,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -8475,10 +8239,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -8530,10 +8290,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -9068,10 +8824,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -9238,10 +8990,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -9340,10 +9088,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -9410,10 +9154,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -9480,10 +9220,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -9558,10 +9294,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -9646,10 +9378,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -9707,10 +9435,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -9786,10 +9510,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -9956,10 +9676,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "patch": {
@@ -10044,10 +9760,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10114,10 +9826,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       },
       "put": {
@@ -10202,10 +9910,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10322,10 +10026,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -10404,10 +10104,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10494,10 +10190,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10548,10 +10240,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -10642,10 +10330,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10722,10 +10406,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10802,10 +10482,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10882,10 +10558,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -10993,10 +10665,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -11082,10 +10750,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -11179,10 +10843,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -11268,10 +10928,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -11348,10 +11004,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -11438,10 +11090,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -11527,10 +11175,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -12271,10 +11915,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -12338,10 +11978,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -12408,10 +12044,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -12461,10 +12093,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -12522,10 +12150,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
@@ -12602,10 +12226,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -12665,10 +12285,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -15072,10 +14688,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       },
       "get": {
@@ -15125,10 +14737,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "read"
         }
       }
     },
@@ -15558,10 +15166,6 @@
               }
             }
           }
-        },
-        "x-bella-permission": {
-          "resource": "environment",
-          "level": "manage"
         }
       }
     },
