@@ -124,17 +124,9 @@ public sealed class ZkeDekHandler : DelegatingHandler
 
         // ── ECIES transport decryption ────────────────────────────────────────
         var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
-        byte[] processedBytes;
-        try
-        {
-            processedBytes = DecryptEciesBody(bytes) ?? bytes;
-        }
-        catch (Exception ex)
-        {
-            await Console.Error.WriteLineAsync(
-                $"[ZkeDekHandler] ECIES decryption failed for {request.RequestUri}: {ex.GetType().Name}: {ex.Message}");
-            processedBytes = bytes;
-        }
+        // #1050 — an envelope that will not decrypt throws (E2EDecryptionException); a body that is not an
+        // envelope comes back null and passes through. Never the original bytes in place of a failed decryption.
+        var processedBytes = DecryptEciesBody(request, bytes) ?? bytes;
 
         // ── ZKE at-rest decryption (bellabaxter:v1: prefix) ──────────────────
         if (wrappedDekHeader is not null)
@@ -149,14 +141,9 @@ public sealed class ZkeDekHandler : DelegatingHandler
             // Decrypt any remaining bellabaxter:v1: values in response body.
             // This is a no-op today (server decrypts server-side) but makes the handler
             // correct for future true-ZKE mode where the server skips server-side decrypt.
-            try
-            {
-                processedBytes = DecryptZkeValues(processedBytes, wrappedDekHeader);
-            }
-            catch
-            {
-                // Non-fatal — fall through with server-decrypted values
-            }
+            // #1050 — a value that stays encrypted is REFUSED, not returned: no plaintext secret can start with
+            // the prefix (every writer refuses values beginning `bellabaxter:`), so one that still does is ciphertext.
+            processedBytes = DecryptZkeValues(request, processedBytes, wrappedDekHeader);
         }
 
         response.Content = new ByteArrayContent(processedBytes);
@@ -166,14 +153,26 @@ public sealed class ZkeDekHandler : DelegatingHandler
 
     // ── ECIES helpers (mirrors E2EEncryptionHandler) ──────────────────────────
 
-    private byte[]? DecryptEciesBody(byte[] bytes)
+    private byte[]? DecryptEciesBody(HttpRequestMessage request, byte[] bytes)
     {
-        using var doc = JsonDocument.Parse(bytes);
-        if (!doc.RootElement.TryGetProperty("encrypted", out var enc) || !enc.GetBoolean())
+        JsonDocument parsed;
+        try { parsed = JsonDocument.Parse(bytes); }
+        catch (JsonException) { return null; } // not JSON (a dotenv export) — not an envelope
+        using var doc = parsed;
+        if (doc.RootElement.ValueKind != JsonValueKind.Object
+            || !doc.RootElement.TryGetProperty("encrypted", out var enc)
+            || enc.ValueKind != JsonValueKind.True)
             return null; // Not ECIES-encrypted — return null to use original bytes
 
-        var payload = ParseEciesPayload(doc.RootElement);
-        var plaintext = EciesAlgorithm.Decrypt(payload, _ecdh);
+        byte[] plaintext;
+        try
+        {
+            plaintext = EciesAlgorithm.Decrypt(ParseEciesPayload(doc.RootElement), _ecdh);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            throw E2EDecryptionException.For(request, "the transport envelope did not decrypt", ex);
+        }
 
         return IsFullResponseObject(plaintext)
             ? plaintext
@@ -240,15 +239,25 @@ public sealed class ZkeDekHandler : DelegatingHandler
 
     // ── ZKE at-rest helpers ───────────────────────────────────────────────────
 
-    private byte[] DecryptZkeValues(byte[] responseBytes, string wrappedDekBase64)
+    private byte[] DecryptZkeValues(HttpRequestMessage request, byte[] responseBytes, string wrappedDekBase64)
     {
         // Unwrap the DEK using our private key
         var dek = DecryptWrappedDek(wrappedDekBase64);
-        if (dek is null) return responseBytes;
+        if (dek is null)
+        {
+            // Nothing to decrypt is fine (the server decrypted server-side). Ciphertext we cannot open is not.
+            if (HasZkeEncryptedValues(responseBytes))
+                throw E2EDecryptionException.For(request, "the wrapped data key could not be unwrapped with this key");
+            return responseBytes;
+        }
 
         try
         {
             return DecryptZkeInJson(responseBytes, dek);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException and not E2EDecryptionException)
+        {
+            throw E2EDecryptionException.For(request, "an at-rest value did not decrypt", ex);
         }
         finally
         {
@@ -256,9 +265,30 @@ public sealed class ZkeDekHandler : DelegatingHandler
         }
     }
 
+    /// <summary>Whether the body is a secrets object carrying at least one <c>bellabaxter:v1:</c> value.</summary>
+    private static bool HasZkeEncryptedValues(byte[] jsonBytes)
+    {
+        try
+        {
+            using var doc = JsonDocument.Parse(jsonBytes);
+            return doc.RootElement.ValueKind == JsonValueKind.Object
+                && doc.RootElement.TryGetProperty("secrets", out var secrets)
+                && secrets.ValueKind == JsonValueKind.Object
+                && secrets.EnumerateObject().Any(p =>
+                    p.Value.ValueKind == JsonValueKind.String && DekAlgorithm.IsEncrypted(p.Value.GetString()!));
+        }
+        catch (JsonException)
+        {
+            return false; // not JSON — no values of any kind
+        }
+    }
+
     private static byte[] DecryptZkeInJson(byte[] jsonBytes, byte[] dek)
     {
-        using var doc = JsonDocument.Parse(jsonBytes);
+        JsonDocument parsed;
+        try { parsed = JsonDocument.Parse(jsonBytes); }
+        catch (JsonException) { return jsonBytes; } // not JSON — nothing at rest to decrypt
+        using var doc = parsed;
 
         // Only handle the standard AllEnvironmentSecretsResponse shape: {"secrets":{...}, ...}
         if (doc.RootElement.ValueKind != JsonValueKind.Object

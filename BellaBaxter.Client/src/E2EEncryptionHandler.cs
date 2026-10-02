@@ -49,13 +49,29 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
             && response.IsSuccessStatusCode)
         {
             var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
-            try
+
+            // A body that is not JSON (a dotenv export on a /secrets path) is not an envelope: pass it through.
+            JsonDocument doc;
+            try { doc = JsonDocument.Parse(bytes); }
+            catch (JsonException) { return response; }
+
+            using (doc)
             {
-                using var doc = JsonDocument.Parse(bytes);
-                if (doc.RootElement.TryGetProperty("encrypted", out var enc) && enc.GetBoolean())
+                if (doc.RootElement.ValueKind == JsonValueKind.Object
+                    && doc.RootElement.TryGetProperty("encrypted", out var enc)
+                    && enc.ValueKind == JsonValueKind.True)
                 {
-                    var payload = ParsePayload(doc.RootElement);
-                    var plaintext = EciesAlgorithm.Decrypt(payload, _ecdh);
+                    // An envelope that will not decrypt is REFUSED (#1050): returning it would hand the caller
+                    // ciphertext as its secrets. Fail closed, never fall back to the original bytes.
+                    byte[] plaintext;
+                    try
+                    {
+                        plaintext = EciesAlgorithm.Decrypt(ParsePayload(doc.RootElement), _ecdh);
+                    }
+                    catch (Exception ex) when (ex is not OperationCanceledException)
+                    {
+                        throw E2EDecryptionException.For(request, "the transport envelope did not decrypt", ex);
+                    }
 
                     // If plaintext is already a full response object (e.g. AllEnvironmentSecretsResponse
                     // with environmentSlug/version/lastModified), pass it through directly.
@@ -66,12 +82,6 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
                     response.Content = new ByteArrayContent(responseBytes);
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 }
-            }
-            catch (Exception ex)
-            {
-                // Surface decryption failures to stderr so they are diagnosable.
-                await Console.Error.WriteLineAsync(
-                    $"[BellaClient] E2E decryption failed for {request.RequestUri}: {ex.GetType().Name}: {ex.Message}");
             }
         }
 

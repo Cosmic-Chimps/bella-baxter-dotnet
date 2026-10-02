@@ -3132,36 +3132,6 @@
         }
       }
     },
-    "/api/diagnostics/auth": {
-      "get": {
-        "tags": [
-          "BellaBaxter.Features.SystemEndpoints.DiagnosticsEndpoint"
-        ],
-        "summary": "GET_api_diagnostics_auth",
-        "description": "GET_api_diagnostics_auth",
-        "operationId": "getAuthDiagnostics",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthDiagnostics"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": { }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/system/integration-info": {
       "get": {
         "tags": [
@@ -8026,6 +7996,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/TrustDomainResponse"
                 }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": { }
               }
             }
           },
@@ -16943,56 +16921,6 @@
           },
           "mcpConnectorAddress": {
             "type": "string"
-          }
-        }
-      },
-      "AuthDiagnostics": {
-        "required": [
-          "hasAuthorizationHeader",
-          "isAuthenticated",
-          "tokenIssuer",
-          "tokenAudience",
-          "tokenClaims",
-          "configuredKeycloakUrl",
-          "expectedIssuer"
-        ],
-        "type": "object",
-        "properties": {
-          "hasAuthorizationHeader": {
-            "type": "boolean"
-          },
-          "isAuthenticated": {
-            "type": "boolean"
-          },
-          "tokenIssuer": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "tokenAudience": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "tokenClaims": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "configuredKeycloakUrl": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "expectedIssuer": {
-            "type": [
-              "null",
-              "string"
-            ]
           }
         }
       },
