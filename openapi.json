@@ -6368,6 +6368,64 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/audience-readiness": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.GetAudienceReadiness"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_audience_readiness",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_audience_readiness",
+        "operationId": "getAudienceReadiness",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudienceReadinessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/environments/{envId}/drift": {
       "get": {
         "tags": [
@@ -6561,6 +6619,16 @@
           },
           "409": {
             "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -7642,6 +7710,26 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -7843,6 +7931,26 @@
             "content": {
               "application/json": {
                 "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           }
@@ -15718,6 +15826,28 @@
               "null",
               "string"
             ]
+          },
+          "presentedAudiences": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "audienceMatched": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "trustDomainId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
@@ -16197,6 +16327,87 @@
           "expiresAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "AudienceReadinessResponse": {
+        "required": [
+          "windowDays",
+          "nodeEvidence",
+          "trustDomains"
+        ],
+        "type": "object",
+        "properties": {
+          "windowDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodeEvidence": {
+            "$ref": "#/components/schemas/AudienceReadinessSection"
+          },
+          "trustDomains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrustDomainAudienceReadiness"
+            }
+          }
+        }
+      },
+      "AudienceReadinessSection": {
+        "required": [
+          "verdict",
+          "expectedAudiences",
+          "isDefaultAudience",
+          "recommendedAudience",
+          "enforced",
+          "matched",
+          "notMatched",
+          "sampled",
+          "presentedAudiences",
+          "notReadyCallers"
+        ],
+        "type": "object",
+        "properties": {
+          "verdict": {
+            "type": "string"
+          },
+          "expectedAudiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isDefaultAudience": {
+            "type": "boolean"
+          },
+          "recommendedAudience": {
+            "type": "string"
+          },
+          "enforced": {
+            "type": "boolean"
+          },
+          "matched": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notMatched": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sampled": {
+            "type": "boolean"
+          },
+          "presentedAudiences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PresentedAudienceCount"
+            }
+          },
+          "notReadyCallers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotReadyCaller"
+            }
           }
         }
       },
@@ -18247,6 +18458,15 @@
               "null",
               "string"
             ]
+          },
+          "acceptedAudiences": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -20946,6 +21166,22 @@
           }
         }
       },
+      "NotReadyCaller": {
+        "required": [
+          "name",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "OidcTokenResponse": {
         "required": [
           "token",
@@ -21817,6 +22053,22 @@
                 "$ref": "#/components/schemas/PlannedCertificateFacts"
               }
             ]
+          }
+        }
+      },
+      "PresentedAudienceCount": {
+        "required": [
+          "audience",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "audience": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -23541,7 +23793,12 @@
           "awsIidAllowedAccounts",
           "awsIidAllowedAccountsNotice",
           "modeMeaning",
-          "strictReadiness"
+          "strictReadiness",
+          "k8sExpectedAudience",
+          "k8sAudienceIsDefault",
+          "k8sRecommendedAudience",
+          "k8sAudienceEnforced",
+          "audienceNotice"
         ],
         "type": "object",
         "properties": {
@@ -23572,6 +23829,24 @@
           },
           "strictReadiness": {
             "$ref": "#/components/schemas/StrictReadinessDto"
+          },
+          "k8sExpectedAudience": {
+            "type": "string"
+          },
+          "k8sAudienceIsDefault": {
+            "type": "boolean"
+          },
+          "k8sRecommendedAudience": {
+            "type": "string"
+          },
+          "k8sAudienceEnforced": {
+            "type": "boolean"
+          },
+          "audienceNotice": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -24706,6 +24981,33 @@
           }
         }
       },
+      "TrustDomainAudienceReadiness": {
+        "required": [
+          "trustDomainId",
+          "name",
+          "critical",
+          "section"
+        ],
+        "type": "object",
+        "properties": {
+          "trustDomainId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "critical": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "section": {
+            "$ref": "#/components/schemas/AudienceReadinessSection"
+          }
+        }
+      },
       "TrustDomainResponse": {
         "required": [
           "id",
@@ -24719,7 +25021,12 @@
           "grantedRole",
           "isEnabled",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
+          "acceptedAudiences",
+          "audienceIsDefault",
+          "recommendedAudience",
+          "audienceEnforced",
+          "warnings"
         ],
         "type": "object",
         "properties": {
@@ -24769,6 +25076,27 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "acceptedAudiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "audienceIsDefault": {
+            "type": "boolean"
+          },
+          "recommendedAudience": {
+            "type": "string"
+          },
+          "audienceEnforced": {
+            "type": "boolean"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -25220,6 +25548,22 @@
           "acknowledgeStrictRefusals": {
             "type": "boolean",
             "default": false
+          },
+          "k8sExpectedAudience": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "k8sAudienceEnforced": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "acknowledgeAudienceRefusals": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -25324,6 +25668,25 @@
               "null",
               "string"
             ]
+          },
+          "acceptedAudiences": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "audienceEnforced": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "acknowledgeAudienceRefusals": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -26229,9 +26592,6 @@
       "name": "BellaBaxter.Features.Tenants.Devices.RevokeZkeDevice"
     },
     {
-      "name": "BellaBaxter.Features.SystemEndpoints.DiagnosticsEndpoint"
-    },
-    {
       "name": "BellaBaxter.Features.SystemEndpoints.GetIntegrationInfo"
     },
     {
@@ -26416,6 +26776,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.UpdateEnvironment"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.GetAudienceReadiness"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.GetEnvironmentDrift"

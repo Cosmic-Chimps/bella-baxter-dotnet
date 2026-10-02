@@ -60,6 +60,11 @@ public sealed class SpiffeTrustBundleCache : BackgroundService, ISpiffeTrustBund
         IHttpClientFactory httpClientFactory,
         ILogger<SpiffeTrustBundleCache> logger)
     {
+        // Backlog §2.31 — re-applied here because SpiffeOptions is public and can be registered without
+        // the builder. The bundle this fetches is the trust anchor; see SpiffeOptionsBuilder.Build.
+        if (BellaApiAddress.Problem(options.BellaBaseUrl, "[BellaSpiffe] BellaBaseUrl") is { } problem)
+            throw new InvalidOperationException(problem);
+
         _options = options;
         _httpClientFactory = httpClientFactory;
         _logger = logger;

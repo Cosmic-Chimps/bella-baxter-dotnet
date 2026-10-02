@@ -142,9 +142,17 @@ For local development without a running Bella agent, set `AllowMissingClientCert
 
 ## Options reference
 
+> **Breaking change (backlog §2.31, issue #710).** `BellaBaseUrl` must be `https`. Plain `http` is
+> accepted only for a loopback host (`localhost`, `127.0.0.0/8`, `::1`); anything else is refused with
+> an `InvalidOperationException` at registration (`AddBellaSpiffe`) and again when the trust-bundle
+> cache is constructed. The trust bundle fetched from this address is this service's trust anchor for
+> every SVID it accepts, so over plain http to another machine anyone on the network path could replace
+> it and choose which SVIDs you admit. There is no opt-out: if you were on `http://` to a non-loopback
+> host, move that host to `https`.
+
 | Property | Type | Default | Description |
 |---|---|---|---|
-| `BellaBaseUrl` | `string` | _(required)_ | Bella Baxter API base URL |
+| `BellaBaseUrl` | `string` | _(required)_ | Bella Baxter API base URL. `https` only, except plain `http` to a loopback host |
 | `EnvironmentId` | `Guid` | _(required)_ | Environment whose trust bundle to fetch |
 | `TrustBundleRefreshInterval` | `TimeSpan` | `1h` | How often to refresh the CA cert |
 | `AllowMissingClientCert` | `bool` | `false` | Pass through requests without a cert |

@@ -141,9 +141,16 @@ builder.Services.AddSingleton(sp =>
 
 ## Configuration Reference
 
+> **Breaking change (backlog §2.31, issue #710).** `BellaBaseUrl` must be `https`. Plain `http` is
+> accepted only for a loopback host (`localhost`, `127.0.0.0/8`, `::1`); anything else is refused with
+> an `ArgumentException` when the client is created. The JWT-SVID, the `bax-` lease it is exchanged
+> for, and every secret read travel over this address, so over plain http to another machine anyone on
+> the network path could read or replace them. There is no opt-out: if you were on `http://` to a
+> non-loopback host, move that host to `https`.
+
 | Property | Default | Description |
 |---|---|---|
-| `BellaBaseUrl` | *(required)* | Bella Baxter API base URL |
+| `BellaBaseUrl` | *(required)* | Bella Baxter API base URL. `https` only, except plain `http` to a loopback host |
 | `EnvironmentId` | *(required)* | Environment whose WorkloadIdentity registration to use |
 | `AgentBaseUrl` | `http://localhost:8088` | **Obsolete.** Only used by the deprecated `BellaAgentHttpClient`; no agent serves it |
 | `SvidAudience` | `bella-api` | JWT-SVID audience claim |

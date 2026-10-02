@@ -9,6 +9,11 @@ public sealed record SpiffeClientOptions
     /// Base URL of the Bella Baxter API (e.g. "https://api.bella.example.com").
     /// Used to exchange the JWT-SVID for a bax- lease token.
     /// </summary>
+    /// <remarks>
+    /// Must be <c>https</c>. Plain <c>http</c> is accepted only for a loopback host (<c>localhost</c>,
+    /// 127.0.0.0/8, <c>::1</c>); anything else is refused when the client is created, because the
+    /// JWT-SVID, the lease and every secret read travel over it. There is no opt-out.
+    /// </remarks>
     public required string BellaBaseUrl { get; init; }
 
     /// <summary>

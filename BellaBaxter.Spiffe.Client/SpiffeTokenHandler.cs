@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
+using BellaBaxter.Client;
 using Microsoft.Extensions.Logging;
 
 namespace BellaBaxter.Spiffe.Client;
@@ -43,6 +44,10 @@ public sealed class SpiffeTokenHandler : DelegatingHandler
         _options = options;
         _exchangeHttp = exchangeHttp;
         _logger = logger;
+
+        // Backlog §2.31 — this handler is the one that sends the JWT-SVID and receives the lease, so it
+        // re-applies the rule rather than trusting every constructor path to have done so.
+        BellaApiAddress.RequireAcceptable(options.BellaBaseUrl, nameof(SpiffeClientOptions.BellaBaseUrl));
         _exchangeUrl = $"{options.BellaBaseUrl.TrimEnd('/')}/api/v1/environments/{options.EnvironmentId}/svid/exchange";
     }
 

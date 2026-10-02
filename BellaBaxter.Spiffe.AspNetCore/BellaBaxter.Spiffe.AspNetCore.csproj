@@ -23,4 +23,16 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
+  <!-- Backlog §2.31: the https-or-loopback rule has ONE author, BellaBaxter.Client's BellaApiAddress.
+       This package targets net8.0/net9.0 and depends on nothing, so it compiles that same file as a
+       linked source; BELLA_API_ADDRESS_INTERNAL makes this copy internal, so a consumer referencing
+       both packages sees one public type. Both projects live in apps/sdk/dotnet, the tree the public
+       bella-baxter-dotnet repository mirrors, so the link resolves there too. -->
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);BELLA_API_ADDRESS_INTERNAL</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\BellaBaxter.Client\src\BellaApiAddress.cs" Link="Shared\BellaApiAddress.cs" />
+  </ItemGroup>
 </Project>

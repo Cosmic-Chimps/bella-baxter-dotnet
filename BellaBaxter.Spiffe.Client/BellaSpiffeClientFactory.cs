@@ -52,6 +52,11 @@ public static class BellaSpiffeClientFactory
     {
         loggerFactory ??= Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory.Instance;
 
+        // Backlog §2.31 — the JWT-SVID goes out and a bax- lease comes back over this address, then
+        // every secret read. Refused here, before any client is built, unless it is https or plain
+        // http to this machine; the rule is BellaApiAddress's, shared with `bella spiffe agent`.
+        BellaApiAddress.RequireAcceptable(options.BellaBaseUrl, nameof(SpiffeClientOptions.BellaBaseUrl));
+
         // Default to the REAL agent interface (spec 001 T044): the SPIFFE Workload API over a Unix
         // socket. The previous default called an HTTP endpoint at localhost:8088 that no agent has ever
         // served, so this path could not have worked against a live agent.
