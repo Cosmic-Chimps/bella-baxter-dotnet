@@ -7530,6 +7530,109 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/node-bindings": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.ListNodeBindings"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_node_bindings",
+        "description": "GET_api_v1_projects_projectRef_environments_envSlug_node_bindings",
+        "operationId": "listNodeBindings",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeBindingListResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/node-bindings/{bindingId}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.ReleaseNodeBinding"
+        ],
+        "summary": "DELETE_api_v1_projects_projectRef_environments_envSlug_node_bindings_bindingId",
+        "description": "DELETE_api_v1_projects_projectRef_environments_envSlug_node_bindings_bindingId",
+        "operationId": "releaseNodeBinding",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bindingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/workload-identities/{id}/leases": {
       "get": {
         "tags": [
@@ -16299,6 +16402,12 @@
               "null",
               "string"
             ]
+          },
+          "nodeReattestationCredential": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -16327,6 +16436,12 @@
           "expiresAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "nodeReattestationCredential": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20543,6 +20658,12 @@
               "null",
               "string"
             ]
+          },
+          "nodeReattestationCredential": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -20563,6 +20684,12 @@
           "expiresAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "nodeReattestationCredential": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -21049,6 +21176,91 @@
           },
           "strict": {
             "type": "string"
+          }
+        }
+      },
+      "NodeBindingListResponse": {
+        "required": [
+          "items",
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NodeBindingResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "NodeBindingResponse": {
+        "required": [
+          "id",
+          "account",
+          "region",
+          "instanceId",
+          "workloadIdentityId",
+          "workloadName",
+          "boundAt",
+          "lastAttestedAt",
+          "lastAdmission",
+          "released",
+          "releasedAt",
+          "releaseReason"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "account": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "instanceId": {
+            "type": "string"
+          },
+          "workloadIdentityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "workloadName": {
+            "type": "string"
+          },
+          "boundAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastAttestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastAdmission": {
+            "type": "string"
+          },
+          "released": {
+            "type": "boolean"
+          },
+          "releasedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "releaseReason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -26836,6 +27048,12 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.IssueJwtSvid"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.ListNodeBindings"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.ReleaseNodeBinding"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.WorkloadIdentities.WorkloadIdentityLeases"
