@@ -347,6 +347,22 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
           "503": {
             "description": "Service Unavailable",
             "content": {
@@ -611,6 +627,22 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/json": {
                 "schema": { }
@@ -20868,6 +20900,19 @@
               "integer"
             ],
             "format": "int32"
+          },
+          "providerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "confirmOverwrite": {
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
@@ -21052,7 +21097,9 @@
           "secretsSkipped",
           "providersEncrypted",
           "webhooksEncrypted",
-          "notificationsEncrypted"
+          "notificationsEncrypted",
+          "projectsSkipped",
+          "notMigrated"
         ],
         "type": "object",
         "properties": {
@@ -21089,8 +21136,72 @@
           "notificationsEncrypted": {
             "type": "integer",
             "format": "int32"
+          },
+          "projectsSkipped": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notMigrated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MigrationNotMigrated"
+            }
           }
         }
+      },
+      "MigrationNotMigrated": {
+        "required": [
+          "subject",
+          "id",
+          "name",
+          "reason",
+          "count",
+          "where"
+        ],
+        "type": "object",
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/MigrationSubject"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/MigrationSkipReason"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "where": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MigrationSkipReason": {
+        "enum": [
+          "NoKey",
+          "KeyStoreUnreadable",
+          "ProviderUnreachable",
+          "Undecryptable",
+          "WriteFailed",
+          "Unreadable"
+        ]
+      },
+      "MigrationSubject": {
+        "enum": [
+          "Project",
+          "ProviderCredential",
+          "WebhookSigningSecret",
+          "NotificationChannel"
+        ]
       },
       "ModeMeaningDto": {
         "required": [
@@ -21569,6 +21680,20 @@
             "format": "uuid"
           },
           "vaultProviderName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "issuingAuthority": {
+            "type": "string",
+            "default": "tenant"
+          },
+          "issuerStatus": {
+            "type": "string",
+            "default": "unreadable"
+          },
+          "issuerRemedy": {
             "type": [
               "null",
               "string"
@@ -26227,6 +26352,13 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "linkedProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
