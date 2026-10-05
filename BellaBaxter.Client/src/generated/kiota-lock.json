@@ -1,8 +1,8 @@
 {
-  "descriptionHash": "A2051B791CE38F37FE09DB4D404974CAAB777771844A8DB8806FB01D0011F4D4036115A90F507E31206174D64CB00B187902138E9F17DACEBF65FCDE6AF6602A",
+  "descriptionHash": "182445C9B468DD5D99D7892C5453667475C33A23AD2DAC85B8BD4C139091563156EDD2057C00A07E1865DD8768484E815B6576BA7901DEF3F6A808A256F5DDB9",
   "descriptionLocation": "../../../openapi.json",
   "lockFileVersion": "1.0.0",
-  "kiotaVersion": "1.30.0",
+  "kiotaVersion": "1.35.0",
   "clientClassName": "BellaClient",
   "typeAccessModifier": "Public",
   "clientNamespaceName": "BellaBaxter.Client",
@@ -30,5 +30,6 @@
   ],
   "includePatterns": [],
   "excludePatterns": [],
-  "disabledValidationRules": []
+  "disabledValidationRules": [],
+  "allowedExternalOrigins": []
 }
