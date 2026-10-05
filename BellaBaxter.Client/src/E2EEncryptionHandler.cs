@@ -10,10 +10,11 @@ namespace BellaBaxter.Client;
 ///
 /// <para>Behavior:</para>
 /// <list type="bullet">
-///   <item>Adds <c>X-E2E-Public-Key</c> header to all requests targeting paths containing <c>/secrets</c>.</item>
-///   <item>On response, if the payload is encrypted (<c>"encrypted": true</c>), decrypts it
-///         using <see cref="EciesAlgorithm.Decrypt"/> and rewrites the content as
-///         <c>{"secrets":{"KEY":"VALUE"},"version":0}</c> so Kiota can parse it normally.</item>
+///   <item>Adds <c>X-E2E-Public-Key</c> to every Bella API request (<see cref="ZkePresentedKey.ShouldPresent"/>, #635),
+///         so each envelope-required read of apps/sdk/SDK_CONTRACT.md is end-to-end encrypted (#1162).</item>
+///   <item>On a <c>/secrets</c> response, if the payload is encrypted (<c>"encrypted": true</c>), decrypts it
+///         using <see cref="EciesAlgorithm.Decrypt"/> and hands the plaintext on unchanged — except the item-shaped
+///         reads, rewritten to <c>{"secrets":{"KEY":"VALUE"},"version":0}</c> (<see cref="DecryptedSecretsBody"/>).</item>
 ///   <item>#1050 — throws <see cref="E2EEResponseException"/> when an envelope does not decrypt, and when a read the
 ///         server always encrypts (<see cref="ZkePresentedKey.RequiresEnvelope"/>) comes back plain.</item>
 /// </list>
@@ -83,12 +84,8 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
                         throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
                     }
 
-                    // If plaintext is already a full response object (e.g. AllEnvironmentSecretsResponse
-                    // with environmentSlug/version/lastModified), pass it through directly.
-                    // Otherwise convert legacy list/single-item format to {"secrets":{...},"version":0}.
-                    var responseBytes = IsFullResponseObject(plaintext)
-                        ? plaintext
-                        : BuildSecretsResponse(plaintext);
+                    // #1162 — handed on unchanged, except the item-shaped reads (see DecryptedSecretsBody).
+                    var responseBytes = DecryptedSecretsBody.HandOn(plaintext);
                     response.Content = new ByteArrayContent(responseBytes);
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 }
@@ -113,72 +110,6 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
         Tag:             root.GetProperty("tag").GetString()!,
         Ciphertext:      root.GetProperty("ciphertext").GetString()!
     );
-
-    /// <summary>
-    /// Returns <c>true</c> when the plaintext is already a full response object
-    /// (e.g. <c>AllEnvironmentSecretsResponse</c>) that Kiota can deserialize directly.
-    /// These objects have a "secrets" property that is itself a JSON object (key→value map),
-    /// as opposed to provider-specific endpoints whose plaintext is an array of secret items.
-    /// </summary>
-    private static bool IsFullResponseObject(byte[] plaintext)
-    {
-        try
-        {
-            using var doc = JsonDocument.Parse(plaintext);
-            // Full response: JSON object with a "secrets" property that is itself an object
-            return doc.RootElement.ValueKind == JsonValueKind.Object
-                && doc.RootElement.TryGetProperty("secrets", out var s)
-                && s.ValueKind == JsonValueKind.Object;
-        }
-        catch { return false; }
-    }
-
-    /// <summary>
-    /// Converts legacy encrypted plaintext (array of <c>{key,value,...}</c> or a single
-    /// <c>{key,value}</c> object) to <c>{"secrets":{...},"version":0}</c> for Kiota.
-    /// </summary>
-    private static byte[] BuildSecretsResponse(byte[] plaintext)
-    {
-        var secrets = ExtractKeyValuePairs(plaintext);
-        return JsonSerializer.SerializeToUtf8Bytes(new { secrets, version = 0L });
-    }
-
-    /// <summary>
-    /// Deserializes the decrypted bytes (a JSON array of <c>{key, value, ...}</c> objects)
-    /// into a flat <c>key → value</c> dictionary.
-    /// </summary>
-    private static Dictionary<string, string> ExtractKeyValuePairs(byte[] plaintext)
-    {
-        using var doc = JsonDocument.Parse(plaintext);
-        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-        // List endpoint: plaintext = [{key, value, description, ...}, ...]
-        if (doc.RootElement.ValueKind == JsonValueKind.Array)
-        {
-            foreach (var item in doc.RootElement.EnumerateArray())
-            {
-                if (item.TryGetProperty("key", out var k) && item.TryGetProperty("value", out var v))
-                {
-                    var key = k.GetString();
-                    if (key is not null)
-                        result[key] = v.GetString() ?? string.Empty;
-                }
-            }
-            return result;
-        }
-
-        // Single-secret endpoint: plaintext = {key, value, ...}
-        if (doc.RootElement.ValueKind == JsonValueKind.Object
-            && doc.RootElement.TryGetProperty("key", out var sk)
-            && doc.RootElement.TryGetProperty("value", out var sv))
-        {
-            var key = sk.GetString();
-            if (key is not null)
-                result[key] = sv.GetString() ?? string.Empty;
-        }
-
-        return result;
-    }
 
     protected override void Dispose(bool disposing)
     {

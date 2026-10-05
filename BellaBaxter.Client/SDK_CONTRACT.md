@@ -44,8 +44,9 @@ GET /api/v1/projects/{projectRef}/environments/{envSlug}/secrets
 getAllEnvironmentSecrets
 ```
 
-> **Why `operationId` matters:** Several SDKs (Swift, .NET) match by `operationId` 
-> to decide whether to apply E2EE decryption. Renaming it disables E2EE silently.
+> **Why `operationId` matters:** generated clients and SDK method names are derived from it, and the
+> server-side guard `EnvelopeRequiredReadsMatchTheSdkContractTests` names the envelope-required reads by it.
+> Since #1162 no SDK decides E2EE by `operationId` (Swift used to); every SDK decides by method + path.
 
 ### Response Schema — `AllEnvironmentSecretsResponse`
 
@@ -166,6 +167,42 @@ Everything else under `/secrets` (`…/secrets/version`, `…/secrets/manifest`,
 `…/secrets/import/preview`, and every `POST`/`PUT`/`PATCH`/`DELETE`) carries no value and is answered in plain
 JSON even when the key is presented. An SDK MUST NOT require an envelope there.
 
+### Rule: the key is presented on every envelope-required read (#1162) — FROZEN
+
+An SDK that does E2EE presents `X-E2E-Public-Key` on **every** request it sends to one of the seven
+envelope-required reads above, whichever public method, generated-client call or helper issued it. The
+decision is made once, in the SDK's transport layer (its middleware / interceptor / round-tripper), by the
+same `requiresEnvelope(method, path)` matcher the envelope rule below uses — never per public method, so a
+read added to the SDK later is end-to-end encrypted without anyone remembering to opt it in.
+
+- **At least the seven; broader is allowed.** .NET presents on every `/api/` request (#635, both
+  `E2EEncryptionHandler` and `ZkeDekHandler`) and Go on every path containing `/secrets`. They stay broader:
+  the server ignores the key on calls that carry no value and answers them in plain JSON, and the SDK
+  requires an envelope only on the seven, so a broader presentation costs nothing and protects a future
+  value-carrying read before the matcher learns about it. The other SDKs present on exactly the seven, which
+  keeps the device key's fingerprint out of requests that have nothing to encrypt.
+- **The decrypted body is handed on unchanged.** The plaintext of each read is the JSON the server would
+  have sent without a key (see the table); an SDK must not reshape it (e.g. wrap a single secret item in a
+  `{"secrets": …}` object), or the read decrypts correctly and still returns the wrong thing. Until #1162,
+  Python, Java, PHP, Ruby and .NET did exactly that to every non-`getAllEnvironmentSecrets` plaintext, and .NET
+  turned both exports and `listGlobalSecrets` into `{"secrets":{},"version":0}` — no values at all.
+  **One documented exception, .NET only:** the item-shaped reads (`listSecrets`, `getSecret`,
+  `getSecretVersion`) are still rewritten to `{"secrets":{"KEY":"VALUE"},"version":0}` by
+  `DecryptedSecretsBody`, because the CLI (`bella secrets get --provider`, `bella secrets list`) reads that
+  map from `AdditionalData["secrets"]`. Removing it needs those two commands changed first.
+- **Behaviour change for the two exports:** once the key is presented, `exportEnvironmentSecrets` and
+  `exportSecrets` answer a `{key: value}` dict (in the envelope) whatever `format` asks for; a dotenv/JSON
+  **file** is served only to a caller that presents no key. An SDK helper that promises dotenv text formats
+  the decrypted dict itself.
+- **Why:** before #1162 the SDKs disagreed about which reads were end-to-end encrypted at all: .NET every
+  call, Go every `/secrets` path, Python/Java/Ruby/PHP only `GET`s ending in `/secrets`, JS/Dart/Swift only
+  `getAllEnvironmentSecrets`. The fail-closed rule below held everywhere, but only where a key was
+  presented, so `getSecret`, `getSecretVersion` and both exports reached most SDKs' callers over TLS alone.
+- **Proved by** `apps/sdk/contract-tests/run.sh`'s presentation step: each SDK's program runs with
+  `CONTRACT_READS=all` and makes all seven reads through the SDK; the stub answers each only when the
+  registered key is presented and records the operation, and the step passes only with a `match` on all
+  seven and every decrypted body carrying the stub's value in the read's own shape.
+
 ### Rule: a presented key requires an envelope (#1050) — FROZEN
 
 Once an SDK has sent `X-E2E-Public-Key` on an envelope-required read, a `2xx` answer that is not a
@@ -257,4 +294,4 @@ Each SDK has its own E2EE implementation. The key file per SDK:
 
 ---
 
-*Last updated: October 2026 — #1050: all 9 SDKs refuse a plaintext, tampered or wrong-key answer once they have presented their key.*
+*Last updated: October 2026 — #1050: all 9 SDKs refuse a plaintext, tampered or wrong-key answer once they have presented their key. #1162: all 9 present it on every envelope-required read.*

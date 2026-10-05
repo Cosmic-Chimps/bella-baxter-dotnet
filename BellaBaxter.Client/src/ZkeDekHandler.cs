@@ -181,9 +181,8 @@ public sealed class ZkeDekHandler : DelegatingHandler
             throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
         }
 
-        return IsFullResponseObject(plaintext)
-            ? plaintext
-            : BuildSecretsResponse(plaintext);
+        // #1162 — handed on unchanged, except the item-shaped reads (see DecryptedSecretsBody).
+        return DecryptedSecretsBody.HandOn(plaintext);
     }
 
     private static E2EEncryptedPayload ParseEciesPayload(JsonElement root) => new(
@@ -194,55 +193,6 @@ public sealed class ZkeDekHandler : DelegatingHandler
         Tag:             root.GetProperty("tag").GetString()!,
         Ciphertext:      root.GetProperty("ciphertext").GetString()!
     );
-
-    private static bool IsFullResponseObject(byte[] plaintext)
-    {
-        try
-        {
-            using var doc = JsonDocument.Parse(plaintext);
-            return doc.RootElement.ValueKind == JsonValueKind.Object
-                && doc.RootElement.TryGetProperty("secrets", out var s)
-                && s.ValueKind == JsonValueKind.Object;
-        }
-        catch { return false; }
-    }
-
-    private static byte[] BuildSecretsResponse(byte[] plaintext)
-    {
-        var secrets = ExtractKeyValuePairs(plaintext);
-        return JsonSerializer.SerializeToUtf8Bytes(new { secrets, version = 0L });
-    }
-
-    private static Dictionary<string, string> ExtractKeyValuePairs(byte[] plaintext)
-    {
-        using var doc = JsonDocument.Parse(plaintext);
-        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-        if (doc.RootElement.ValueKind == JsonValueKind.Array)
-        {
-            foreach (var item in doc.RootElement.EnumerateArray())
-            {
-                if (item.TryGetProperty("key", out var k) && item.TryGetProperty("value", out var v))
-                {
-                    var key = k.GetString();
-                    if (key is not null)
-                        result[key] = v.GetString() ?? string.Empty;
-                }
-            }
-            return result;
-        }
-
-        if (doc.RootElement.ValueKind == JsonValueKind.Object
-            && doc.RootElement.TryGetProperty("key", out var sk)
-            && doc.RootElement.TryGetProperty("value", out var sv))
-        {
-            var key = sk.GetString();
-            if (key is not null)
-                result[key] = sv.GetString() ?? string.Empty;
-        }
-
-        return result;
-    }
 
     // ── ZKE at-rest helpers ───────────────────────────────────────────────────
 
