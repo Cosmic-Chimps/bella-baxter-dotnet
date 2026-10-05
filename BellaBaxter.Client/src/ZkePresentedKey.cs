@@ -47,4 +47,36 @@ internal static class ZkePresentedKey
     /// </summary>
     internal static bool CarriesEncryptedPayload(HttpRequestMessage request) =>
         request.RequestUri?.AbsolutePath.Contains("/secrets", StringComparison.OrdinalIgnoreCase) == true;
+
+    /// <summary>
+    /// True when the server ALWAYS encrypts a 2xx answer to a presented key, so a plain one must be refused
+    /// (#1050 b). The value-carrying reads of apps/sdk/SDK_CONTRACT.md, "Which Endpoints Support E2EE" — and
+    /// deliberately not every <c>/secrets</c> path: <c>…/secrets/version</c>, <c>/manifest</c>, <c>/hash</c>,
+    /// <c>/{key}/metadata</c>, <c>/{key}/versions</c> and every write answer in plain JSON even with the key, and
+    /// refusing those would break them. The same matcher, segment for segment, is in every SDK.
+    /// </summary>
+    internal static bool RequiresEnvelope(HttpRequestMessage request)
+    {
+        if (request.Method != HttpMethod.Get) return false;
+        var path = request.RequestUri?.AbsolutePath;
+        if (path is null) return false;
+
+        const string anchor = "/api/v1/projects/";
+        var at = path.IndexOf(anchor, StringComparison.Ordinal);
+        if (at < 0) return false;
+
+        // [0] is the project; a trailing slash routes to the same endpoint, so it must not dodge the rule.
+        var s = path[(at + anchor.Length)..].TrimEnd('/').Split('/');
+        return s switch
+        {
+            [_, "secrets"] => true,                                                         // listGlobalSecrets
+            [_, "environments", _, "secrets"] => true,                                      // getAllEnvironmentSecrets
+            [_, "environments", _, "secrets", "export"] => true,                            // exportEnvironmentSecrets
+            [_, "environments", _, "providers", _, "secrets"] => true,                      // listSecrets
+            [_, "environments", _, "providers", _, "secrets", var key] => key != "hash",    // getSecret, exportSecrets
+            [_, "environments", _, "providers", _, "secrets", _, "versions", var n] =>      // getSecretVersion
+                n.Length > 0 && n.All(char.IsAsciiDigit),
+            _ => false,
+        };
+    }
 }

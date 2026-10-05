@@ -27,7 +27,7 @@ upgrade before the old behavior can be removed.
 | PHP | `apps/sdk/php/` |
 | Python | `apps/sdk/python/` |
 | Ruby | `apps/sdk/ruby/` |
-| .NET (C#) | `apps/sdk/dotnet-sdk/` |
+| .NET (C#) | `apps/sdk/dotnet/BellaBaxter.Client/` |
 | Swift (iOS/macOS) | `apps/sdk/swift/` |
 
 ---
@@ -148,12 +148,56 @@ plaintext = JSON.serialize(AllEnvironmentSecretsResponse, camelCase)
 
 ### Which Endpoints Support E2EE
 
-| Endpoint | Supports E2EE |
-|----------|--------------|
-| `GET .../secrets` (`getAllEnvironmentSecrets`) | ✅ Yes — **full response** encrypted |
-| `GET .../providers/{slug}/secrets` (`listSecrets`) | ✅ Yes — secrets array encrypted |
-| `GET .../secrets/version` | ❌ No |
-| `GET .../secrets/export` | ❌ No |
+Every `GET` that carries secret VALUES encrypts its whole `2xx` body to a presented key. These are the
+**envelope-required reads** (paths relative to the API root; `{…}` is one path segment):
+
+| Path | `operationId` | Plaintext the server encrypts |
+|------|---------------|-------------------------------|
+| `/api/v1/projects/{p}/environments/{e}/secrets` | `getAllEnvironmentSecrets` | full `AllEnvironmentSecretsResponse` |
+| `/api/v1/projects/{p}/environments/{e}/secrets/export` | `exportEnvironmentSecrets` | `{key: value}` dict (a dotenv/JSON **file** only when NO key is presented) |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets` | `listSecrets` | array of secret items |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/export` | `exportSecrets` | `{key: value}` dict |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}` (`{key}` ≠ `hash`, `export`) | `getSecret` | one secret item |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}/versions/{n}` (`{n}` digits) | `getSecretVersion` | one secret version |
+| `/api/v1/projects/{p}/secrets` | `listGlobalSecrets` | `ListGlobalSecretsResponse` |
+
+Everything else under `/secrets` (`…/secrets/version`, `…/secrets/manifest`, `…/secrets/certificates`,
+`…/secrets/hash`, `…/secrets/{key}/metadata`, `…/secrets/{key}/versions`, `…/secrets/{key}/rotation-policy`,
+`…/secrets/import/preview`, and every `POST`/`PUT`/`PATCH`/`DELETE`) carries no value and is answered in plain
+JSON even when the key is presented. An SDK MUST NOT require an envelope there.
+
+### Rule: a presented key requires an envelope (#1050) — FROZEN
+
+Once an SDK has sent `X-E2E-Public-Key` on an envelope-required read, a `2xx` answer that is not a
+decryptable envelope is an **error**, never a value. There is no plaintext fallback and no opt-out: an SDK
+that does not want to require an envelope must not present the key.
+
+| What came back (`2xx`, envelope-required read, key presented) | Error code |
+|---|---|
+| Not JSON, not a JSON object, or a JSON object without `"encrypted": true` (plain secrets) | `e2ee-plaintext-response` |
+| `"encrypted": true` but a field is missing/undecodable, the GCM tag fails (tampered), or it was encrypted to another key | `e2ee-decryption-failed` |
+
+- One error type per SDK, carrying the code: `E2EEResponseError` (Go, JS/TS, Python, Ruby, Dart, Swift),
+  `E2EEResponseException` (.NET, Java, PHP). The code strings above are the stable, cross-SDK contract.
+- The message is `E2EE response expected but plaintext received for <path>; refusing it (e2ee-plaintext-response)`
+  or `E2EE response could not be decrypted for <path>; refusing it (e2ee-decryption-failed)` (an SDK may add a
+  short parenthetical reason after `<path>`). It never contains the body, ciphertext or key material.
+- Non-`2xx` answers (problem details, `403` from the device gate) are not envelopes and are surfaced as the
+  SDK surfaces any API error.
+- **Why:** a header-stripping intermediary, a terminating proxy, or a server regression of the #636 class
+  would otherwise hand the caller unencrypted secrets that it believes were end-to-end encrypted, and a
+  tampered or mis-keyed envelope would be read as ciphertext-shaped "values". The protection is aimed at
+  those; an ACTIVE adversary holding the TLS session can still re-encrypt to the presented key (the server's
+  ephemeral key is unauthenticated; see #1050).
+- **Server side:** every envelope-required read encrypts whenever the header is present (since
+  `6bd551e39`, 2026-03-03, before any SDK release), on every `2xx` branch: `listGlobalSecrets` on a project with
+  no global provider answered an EMPTY plain list until #1050 routed that branch through the same encryption.
+  `EnvelopeRequiredReadsMatchTheSdkContractTests` (BellaBaxter.Tests) fails if the set of `GET`s declaring
+  `E2EEncryptedPayload` stops being exactly the table above, and the `…_WithPresentedKey_IsAnEnvelope…` tests
+  hold the empty / nothing-configured branches to the rule.
+- **Proved by** `apps/sdk/contract-tests/run.sh`: after the key contract, each SDK is run against the stub's
+  `plaintext-despite-presented-key`, `tampered-envelope` and `wrong-key-envelope` scenarios and must refuse
+  each with the code above. Each SDK also has a unit test of the same four cases.
 
 ---
 
@@ -213,4 +257,4 @@ Each SDK has its own E2EE implementation. The key file per SDK:
 
 ---
 
-*Last updated: March 2026 — all 9 SDKs verified against the format described here.*
+*Last updated: October 2026 — #1050: all 9 SDKs refuse a plaintext, tampered or wrong-key answer once they have presented their key.*

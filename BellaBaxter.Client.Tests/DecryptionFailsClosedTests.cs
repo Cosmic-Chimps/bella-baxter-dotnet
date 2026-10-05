@@ -16,8 +16,10 @@ namespace BellaBaxter.Client.Tests;
 /// returned the response as-is — so the caller received the still-encrypted envelope (or, for the at-rest layer, the
 /// <c>bellabaxter:v1:</c> ciphertext) as if it were the secrets. Constitution Principle I: "A <c>catch</c> that swallows
 /// a verification failure and continues is forbidden."</para>
-/// <para>The controls matter as much: a body that is not an encrypted envelope at all (a dotenv export on a
-/// <c>/secrets</c> path) passes through untouched, and a genuine envelope still decrypts.</para>
+/// <para>The controls matter as much: a body that is not an encrypted envelope on a read that does not require one
+/// passes through untouched, and a genuine envelope still decrypts. (A dotenv export used to be the control here; since
+/// #1050 (b) a plain answer to an export the key was presented on is refused — see
+/// <see cref="PlaintextAfterPresentedKeyTests"/>.)</para>
 /// </remarks>
 public class DecryptionFailsClosedTests
 {
@@ -60,7 +62,8 @@ public class DecryptionFailsClosedTests
         handler.InnerHandler = new Stub(() => Json(Envelope(Plain, handler.PublicKeyBase64, tamper: true)));
         using var client = new HttpClient(handler);
 
-        await Assert.ThrowsAsync<E2EDecryptionException>(() => client.GetAsync(SecretsUrl));
+        var ex = await Assert.ThrowsAsync<E2EEResponseException>(() => client.GetAsync(SecretsUrl));
+        Assert.Equal(E2EEResponseException.DecryptionFailed, ex.Code);
     }
 
     [Fact]
@@ -75,17 +78,15 @@ public class DecryptionFailsClosedTests
     }
 
     [Fact]
-    public async Task E2E_a_body_that_is_not_an_envelope_passes_through_untouched()
+    public async Task E2E_a_body_that_is_not_an_envelope_passes_through_where_no_envelope_is_required()
     {
-        // A dotenv export lives on a /secrets path and is not JSON at all; that is not a decryption failure.
-        var handler = new E2EEncryptionHandler { InnerHandler = new Stub(() => new HttpResponseMessage(HttpStatusCode.OK)
-        {
-            Content = new StringContent("DATABASE_URL=postgres://db/app\n", Encoding.UTF8, "text/plain"),
-        }) };
+        // `…/secrets/version` lives on a /secrets path and the server answers it in plain JSON even with the key; that
+        // is neither a decryption failure nor (#1050 b) a refused plaintext answer.
+        var handler = new E2EEncryptionHandler { InnerHandler = new Stub(() => Json("""{"version":7}""")) };
         using var client = new HttpClient(handler);
 
-        var body = await (await client.GetAsync(SecretsUrl + "/export")).Content.ReadAsStringAsync();
-        Assert.Equal("DATABASE_URL=postgres://db/app\n", body);
+        var body = await (await client.GetAsync(SecretsUrl + "/version")).Content.ReadAsStringAsync();
+        Assert.Equal("""{"version":7}""", body);
     }
 
     // ── ZkeDekHandler: transport layer ───────────────────────────────────────
@@ -98,7 +99,8 @@ public class DecryptionFailsClosedTests
         handler.InnerHandler = new Stub(() => Json(Envelope(Plain, handler.PublicKeyBase64, tamper: true)));
         using var client = new HttpClient(handler);
 
-        await Assert.ThrowsAsync<E2EDecryptionException>(() => client.GetAsync(SecretsUrl));
+        var ex = await Assert.ThrowsAsync<E2EEResponseException>(() => client.GetAsync(SecretsUrl));
+        Assert.Equal(E2EEResponseException.DecryptionFailed, ex.Code);
     }
 
     [Fact]
@@ -126,12 +128,15 @@ public class DecryptionFailsClosedTests
         var dek = DekAlgorithm.GenerateDek();
         var otherDek = DekAlgorithm.GenerateDek();
         var cipher = DekAlgorithm.Encrypt("postgres://db/app", otherDek); // encrypted under a DIFFERENT key
+        // Inside a genuine transport envelope, as the server sends it to a presented key (#1050 b): without one the
+        // answer would be refused as plaintext before the at-rest layer is ever reached.
         handler.InnerHandler = new Stub(() => Json(
-            $$"""{"secrets":{"DATABASE_URL":"{{cipher}}"},"version":7}""",
+            Envelope($$"""{"secrets":{"DATABASE_URL":"{{cipher}}"},"version":7}""", handler.PublicKeyBase64, tamper: false),
             ("X-Bella-Wrapped-Dek", WrappedDek(dek, handler.PublicKeyBase64))));
         using var client = new HttpClient(handler);
 
-        await Assert.ThrowsAsync<E2EDecryptionException>(() => client.GetAsync(SecretsUrl));
+        var ex = await Assert.ThrowsAsync<E2EEResponseException>(() => client.GetAsync(SecretsUrl));
+        Assert.Equal(E2EEResponseException.DecryptionFailed, ex.Code);
     }
 
     [Fact]
@@ -144,12 +149,15 @@ public class DecryptionFailsClosedTests
         var dek = DekAlgorithm.GenerateDek();
         var cipher = DekAlgorithm.Encrypt("postgres://db/app", dek);
         var wrappedForOther = WrappedDek(dek, Convert.ToBase64String(someoneElse.ExportSubjectPublicKeyInfo()));
+        // Inside a genuine transport envelope, as the server sends it to a presented key (#1050 b): without one the
+        // answer would be refused as plaintext before the at-rest layer is ever reached.
         handler.InnerHandler = new Stub(() => Json(
-            $$"""{"secrets":{"DATABASE_URL":"{{cipher}}"},"version":7}""",
+            Envelope($$"""{"secrets":{"DATABASE_URL":"{{cipher}}"},"version":7}""", handler.PublicKeyBase64, tamper: false),
             ("X-Bella-Wrapped-Dek", wrappedForOther)));
         using var client = new HttpClient(handler);
 
-        await Assert.ThrowsAsync<E2EDecryptionException>(() => client.GetAsync(SecretsUrl));
+        var ex = await Assert.ThrowsAsync<E2EEResponseException>(() => client.GetAsync(SecretsUrl));
+        Assert.Equal(E2EEResponseException.DecryptionFailed, ex.Code);
     }
 
     [Fact]
@@ -160,7 +168,7 @@ public class DecryptionFailsClosedTests
         var dek = DekAlgorithm.GenerateDek();
         var cipher = DekAlgorithm.Encrypt("postgres://db/app", dek);
         handler.InnerHandler = new Stub(() => Json(
-            $$"""{"secrets":{"DATABASE_URL":"{{cipher}}","PORT":"8080"},"version":7}""",
+            Envelope($$"""{"secrets":{"DATABASE_URL":"{{cipher}}","PORT":"8080"},"version":7}""", handler.PublicKeyBase64, tamper: false),
             ("X-Bella-Wrapped-Dek", WrappedDek(dek, handler.PublicKeyBase64))));
         using var client = new HttpClient(handler);
 

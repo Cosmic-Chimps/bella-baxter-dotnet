@@ -14,6 +14,8 @@ namespace BellaBaxter.Client;
 ///   <item>On response, if the payload is encrypted (<c>"encrypted": true</c>), decrypts it
 ///         using <see cref="EciesAlgorithm.Decrypt"/> and rewrites the content as
 ///         <c>{"secrets":{"KEY":"VALUE"},"version":0}</c> so Kiota can parse it normally.</item>
+///   <item>#1050 — throws <see cref="E2EEResponseException"/> when an envelope does not decrypt, and when a read the
+///         server always encrypts (<see cref="ZkePresentedKey.RequiresEnvelope"/>) comes back plain.</item>
 /// </list>
 ///
 /// <para>Algorithm: <see cref="EciesAlgorithm.AlgorithmId"/> (shared with API).</para>
@@ -39,10 +41,14 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
         // ZkeDekHandler sends, and on the same set of requests: the server cannot tell the two apart,
         // and a client that presented the key on different paths depending on which handler was wired
         // would fail in only one of its two configurations.
-        if (ZkePresentedKey.ShouldPresent(request))
+        var presented = ZkePresentedKey.ShouldPresent(request);
+        if (presented)
             request.Headers.TryAddWithoutValidation(ZkePresentedKey.HeaderName, PublicKeyBase64);
 
         var response = await base.SendAsync(request, cancellationToken);
+
+        // #1050 (b) — on a read the server always encrypts to a presented key, a plain answer is REFUSED.
+        var envelopeRequired = presented && ZkePresentedKey.RequiresEnvelope(request);
 
         // Decryption stays on the narrow test: only secrets responses come back encrypted.
         if (ZkePresentedKey.CarriesEncryptedPayload(request)
@@ -50,10 +56,14 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
         {
             var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
 
-            // A body that is not JSON (a dotenv export on a /secrets path) is not an envelope: pass it through.
+            // A body that is not JSON is not an envelope: a plain answer where one was required, otherwise passed through.
             JsonDocument doc;
             try { doc = JsonDocument.Parse(bytes); }
-            catch (JsonException) { return response; }
+            catch (JsonException)
+            {
+                if (envelopeRequired) throw E2EEResponseException.Plaintext(request);
+                return response;
+            }
 
             using (doc)
             {
@@ -70,7 +80,7 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
                     }
                     catch (Exception ex) when (ex is not OperationCanceledException)
                     {
-                        throw E2EDecryptionException.For(request, "the transport envelope did not decrypt", ex);
+                        throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
                     }
 
                     // If plaintext is already a full response object (e.g. AllEnvironmentSecretsResponse
@@ -81,6 +91,10 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
                         : BuildSecretsResponse(plaintext);
                     response.Content = new ByteArrayContent(responseBytes);
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                }
+                else if (envelopeRequired)
+                {
+                    throw E2EEResponseException.Plaintext(request);
                 }
             }
         }

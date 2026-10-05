@@ -97,11 +97,14 @@ public sealed class ZkeDekHandler : DelegatingHandler
         // #635 — the key is presented on every API call, not only on `/secrets`. The status call the
         // CLI makes before a read (`GET /api/v1/tenants/me/zke`) went out bare, so the server answered
         // `presentedKeyRegistered: false` and the CLI refused itself before reaching any secret.
-        if (ZkePresentedKey.ShouldPresent(request))
+        var presented = ZkePresentedKey.ShouldPresent(request);
+        if (presented)
             request.Headers.TryAddWithoutValidation(ZkePresentedKey.HeaderName, PublicKeyBase64);
 
         // Decryption stays on the narrow test: only secrets responses come back encrypted.
         var isSecrets = ZkePresentedKey.CarriesEncryptedPayload(request);
+        // #1050 (b) — on a read the server always encrypts to a presented key, a plain answer is REFUSED.
+        var envelopeRequired = presented && ZkePresentedKey.RequiresEnvelope(request);
 
         var response = await base.SendAsync(request, cancellationToken);
 
@@ -124,9 +127,13 @@ public sealed class ZkeDekHandler : DelegatingHandler
 
         // ── ECIES transport decryption ────────────────────────────────────────
         var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
-        // #1050 — an envelope that will not decrypt throws (E2EDecryptionException); a body that is not an
-        // envelope comes back null and passes through. Never the original bytes in place of a failed decryption.
-        var processedBytes = DecryptEciesBody(request, bytes) ?? bytes;
+        // #1050 — an envelope that will not decrypt throws (E2EEResponseException); a body that is not an envelope
+        // comes back null, which is refused where the read requires one and passed through elsewhere. Never the
+        // original bytes in place of a failed decryption.
+        var decrypted = DecryptEciesBody(request, bytes);
+        if (decrypted is null && envelopeRequired)
+            throw E2EEResponseException.Plaintext(request);
+        var processedBytes = decrypted ?? bytes;
 
         // ── ZKE at-rest decryption (bellabaxter:v1: prefix) ──────────────────
         if (wrappedDekHeader is not null)
@@ -171,7 +178,7 @@ public sealed class ZkeDekHandler : DelegatingHandler
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            throw E2EDecryptionException.For(request, "the transport envelope did not decrypt", ex);
+            throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
         }
 
         return IsFullResponseObject(plaintext)
@@ -247,7 +254,7 @@ public sealed class ZkeDekHandler : DelegatingHandler
         {
             // Nothing to decrypt is fine (the server decrypted server-side). Ciphertext we cannot open is not.
             if (HasZkeEncryptedValues(responseBytes))
-                throw E2EDecryptionException.For(request, "the wrapped data key could not be unwrapped with this key");
+                throw E2EEResponseException.Undecryptable(request, "the wrapped data key could not be unwrapped with this key");
             return responseBytes;
         }
 
@@ -255,9 +262,9 @@ public sealed class ZkeDekHandler : DelegatingHandler
         {
             return DecryptZkeInJson(responseBytes, dek);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException and not E2EDecryptionException)
+        catch (Exception ex) when (ex is not OperationCanceledException and not E2EEResponseException)
         {
-            throw E2EDecryptionException.For(request, "an at-rest value did not decrypt", ex);
+            throw E2EEResponseException.Undecryptable(request, "an at-rest value did not decrypt", ex);
         }
         finally
         {

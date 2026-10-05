@@ -39,6 +39,8 @@ await client.Secrets.UpsertAsync(environmentId, "DATABASE_URL", "postgres://..."
 
 Includes built-in **end-to-end encryption** — secret values are encrypted client-side using ECIES (via `BellaBaxter.Crypto`) so they are never transmitted in plaintext even to the Baxter API.
 
+**It fails closed (#1050).** Once the client has presented its key on a secrets read, the answer must be an envelope that decrypts to that key. A plain answer throws `E2EEResponseException` with `Code == "e2ee-plaintext-response"`; a tampered envelope, or one encrypted to another key, throws it with `Code == "e2ee-decryption-failed"`. There is no plaintext fallback and no opt-out. The codes are the same in every Bella SDK (`apps/sdk/SDK_CONTRACT.md`).
+
 See [`BellaBaxter.Client/README.md`](BellaBaxter.Client/README.md) for full API reference.
 
 ---
