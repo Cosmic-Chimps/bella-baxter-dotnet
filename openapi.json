@@ -22250,9 +22250,11 @@
             "default": "rsa"
           },
           "keyBits": {
-            "type": "integer",
-            "format": "int32",
-            "default": 4096
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
           },
           "organization": {
             "type": [
@@ -22361,9 +22363,11 @@
             "default": "rsa"
           },
           "keyBits": {
-            "type": "integer",
-            "format": "int32",
-            "default": 2048
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
           }
         }
       },
