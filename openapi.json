@@ -6036,6 +6036,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -6752,6 +6762,86 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/authority/reestablish": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.ReestablishEnvironmentAuthority"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_authority_reestablish",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_authority_reestablish",
+        "operationId": "reestablishEnvironmentAuthority",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReestablishEnvironmentAuthorityCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReestablishEnvironmentAuthorityResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}": {
       "delete": {
         "tags": [
@@ -6929,6 +7019,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -8910,6 +9010,16 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -19981,6 +20091,40 @@
               "null",
               "string"
             ]
+          },
+          "authorityStoreState": {
+            "type": "string",
+            "default": "in-sync"
+          },
+          "authorityStoreReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "authorityRetentionState": {
+            "type": "string",
+            "default": "not-deleted"
+          },
+          "authorityRetentionReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "authorityDestroyAfter": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "authorityDestroyedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -22149,6 +22293,40 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "authorityStoreState": {
+            "type": "string",
+            "default": "in-sync"
+          },
+          "authorityStoreReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "authorityRetentionState": {
+            "type": "string",
+            "default": "not-deleted"
+          },
+          "authorityRetentionReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "authorityDestroyAfter": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "authorityDestroyedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -23528,6 +23706,37 @@
           }
         }
       },
+      "ReestablishEnvironmentAuthorityCommand": {
+        "required": [
+          "confirmTrustReset"
+        ],
+        "type": "object",
+        "properties": {
+          "confirmTrustReset": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ReestablishEnvironmentAuthorityResponse": {
+        "required": [
+          "pki",
+          "ssh",
+          "reestablishedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "pki": {
+            "type": "boolean"
+          },
+          "ssh": {
+            "type": "boolean"
+          },
+          "reestablishedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "RegionInfo": {
         "required": [
           "id",
@@ -24644,6 +24853,30 @@
               "null",
               "string"
             ]
+          },
+          "authorityRetentionState": {
+            "type": "string",
+            "default": "not-deleted"
+          },
+          "authorityRetentionReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "authorityDestroyAfter": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "authorityDestroyedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -27577,6 +27810,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.UpdateSpiffeSettings"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.ReestablishEnvironmentAuthority"
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.RemoveProviderFromEnvironment"
