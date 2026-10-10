@@ -253,11 +253,11 @@ public sealed class ZkeDekHandler : DelegatingHandler
             || secretsEl.ValueKind != JsonValueKind.Object)
             return jsonBytes;
 
-        // Check if any value is ZKE-encrypted
+        // Check if any value is ZKE-encrypted (either envelope: spec 077 added bellabaxter:v2:)
         var hasEncrypted = false;
         foreach (var prop in secretsEl.EnumerateObject())
         {
-            if (prop.Value.GetString()?.StartsWith(DekAlgorithm.Prefix, StringComparison.Ordinal) == true)
+            if (prop.Value.GetString() is { } candidate && DekAlgorithm.IsEncrypted(candidate))
             {
                 hasEncrypted = true;
                 break;
@@ -271,6 +271,11 @@ public sealed class ZkeDekHandler : DelegatingHandler
         foreach (var prop in secretsEl.EnumerateObject())
         {
             var val = prop.Value.GetString() ?? string.Empty;
+            // spec 077 — a bound value opens only with its tenant, project and environment identifiers, which
+            // this response does not carry. The server serves every value decrypted, so one arriving here is
+            // refused (the caller turns this into Undecryptable), never handed back as the secret.
+            if (DekAlgorithm.IsBound(val))
+                throw new InvalidOperationException("A bound at-rest value cannot be opened by the client.");
             decryptedSecrets[prop.Name] = DekAlgorithm.IsEncrypted(val)
                 ? DekAlgorithm.DecryptToString(val, dek)
                 : val;
