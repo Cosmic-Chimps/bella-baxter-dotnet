@@ -6876,6 +6876,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -6911,6 +6921,16 @@
         "responses": {
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -9870,6 +9890,16 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -13051,6 +13081,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -14098,6 +14138,98 @@
                   "items": {
                     "type": "string"
                   }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/authority-names/decisions": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.NameClaims.DecideAuthorityName"
+        ],
+        "summary": "POST_api_v1_tenants_me_authority_names_decisions",
+        "description": "POST_api_v1_tenants_me_authority_names_decisions",
+        "operationId": "decideAuthorityName",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecideAuthorityNameCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/authority-names": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Environments.NameClaims.GetAuthorityNameMigration"
+        ],
+        "summary": "GET_api_v1_tenants_me_authority_names",
+        "description": "GET_api_v1_tenants_me_authority_names",
+        "operationId": "getAuthorityNameMigration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorityNameMigrationResponse"
                 }
               }
             }
@@ -18662,6 +18794,92 @@
           }
         }
       },
+      "AuthorityNameCandidate": {
+        "required": [
+          "environmentId",
+          "projectName",
+          "environmentName",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "environmentName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthorityNameItem": {
+        "required": [
+          "itemId",
+          "kind",
+          "storeName",
+          "candidates"
+        ],
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "storeName": {
+            "type": "string"
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthorityNameCandidate"
+            }
+          }
+        }
+      },
+      "AuthorityNameMigrationResponse": {
+        "required": [
+          "state",
+          "completedAt",
+          "itemsOwed",
+          "itemsForOperator",
+          "needsDecision"
+        ],
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "itemsOwed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemsForOperator": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "needsDecision": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthorityNameItem"
+            }
+          }
+        }
+      },
       "AwsExternalIdResponse": {
         "required": [
           "externalId"
@@ -20490,6 +20708,25 @@
           },
           "tenantId": {
             "type": "string"
+          }
+        }
+      },
+      "DecideAuthorityNameCommand": {
+        "required": [
+          "itemId",
+          "ownerEnvironmentId"
+        ],
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "ownerEnvironmentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
@@ -29145,6 +29382,12 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.Environments.DynamicCredentials.ListCredentialRoles"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.NameClaims.DecideAuthorityName"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Environments.NameClaims.GetAuthorityNameMigration"
     },
     {
       "name": "BellaBaxter.Features.Pki.ListPkiLogs"
