@@ -1246,6 +1246,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -26171,6 +26181,16 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "authorityStoreState": {
+            "type": "string",
+            "default": "in-sync"
+          },
+          "authorityStoreReason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
