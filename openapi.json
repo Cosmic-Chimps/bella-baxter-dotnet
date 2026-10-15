@@ -2584,7 +2584,7 @@
         ],
         "summary": "DELETE_api_tenants_id_invites_token",
         "description": "DELETE_api_tenants_id_invites_token",
-        "operationId": "RevokeTenantInvite",
+        "operationId": "revokeTenantInvite",
         "parameters": [
           {
             "name": "id",
