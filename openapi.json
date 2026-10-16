@@ -1622,6 +1622,77 @@
         }
       }
     },
+    "/api/tenants/invites/{token}/decline": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.DeclineTenantInvite"
+        ],
+        "summary": "POST_api_tenants_invites_token_decline",
+        "description": "POST_api_tenants_invites_token_decline",
+        "operationId": "declineTenantInvite",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/encryption-key/emergency-kit": {
       "get": {
         "tags": [
@@ -2029,6 +2100,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TenantUsageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/invitations": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.ListMyInvitations"
+        ],
+        "summary": "GET_api_v1_me_invitations",
+        "description": "GET_api_v1_me_invitations",
+        "operationId": "listMyInvitations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyInvitationsResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -2566,6 +2679,68 @@
           },
           "409": {
             "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}/invites/{token}/delivery": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.ResendTenantInvite"
+        ],
+        "summary": "POST_api_tenants_id_invites_token_delivery",
+        "description": "POST_api_tenants_id_invites_token_delivery",
+        "operationId": "resendTenantInvite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResendInviteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -15767,6 +15942,13 @@
             }
           },
           {
+            "name": "excludeActions",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "actorType",
             "in": "query",
             "schema": {
@@ -19552,7 +19734,8 @@
           "items",
           "totalCount",
           "page",
-          "size"
+          "size",
+          "excludedCount"
         ],
         "type": "object",
         "properties": {
@@ -19573,6 +19756,10 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          },
+          "excludedCount": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -22354,7 +22541,14 @@
           "deliveryFailureReason",
           "refusedAttemptCount",
           "lastRefusedAt",
-          "lastRefusedReason"
+          "lastRefusedReason",
+          "scopeKind",
+          "scopeId",
+          "scopeRole",
+          "scopeName",
+          "scopeParentName",
+          "isDeclined",
+          "declinedAt"
         ],
         "type": "object",
         "properties": {
@@ -22434,6 +22628,44 @@
               "null",
               "string"
             ]
+          },
+          "scopeKind": {
+            "$ref": "#/components/schemas/TenantInviteScopeKind"
+          },
+          "scopeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "scopeRole": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "scopeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "scopeParentName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isDeclined": {
+            "type": "boolean"
+          },
+          "declinedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -23160,6 +23392,59 @@
           },
           "strict": {
             "type": "string"
+          }
+        }
+      },
+      "MyInvitationResponse": {
+        "required": [
+          "token",
+          "tenantName",
+          "role",
+          "expiresAt",
+          "invitedByName"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantName": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/TenantInviteRole"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "invitedByName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MyInvitationsResponse": {
+        "required": [
+          "status",
+          "invitations"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "invitations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MyInvitationResponse"
+            }
           }
         }
       },
@@ -25163,6 +25448,24 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "ResendInviteResponse": {
+        "required": [
+          "outcome",
+          "failureReason"
+        ],
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "$ref": "#/components/schemas/InviteDeliveryOutcome"
+          },
+          "failureReason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -28843,6 +29146,9 @@
       "name": "BellaBaxter.Features.Tenants.ListTenantInvites"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.DeclineTenantInvite"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.DownloadEmergencyKit"
     },
     {
@@ -28873,6 +29179,9 @@
       "name": "BellaBaxter.Features.Tenants.GetTenantUsage"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.ListMyInvitations"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.ListTenantUsers"
     },
     {
@@ -28895,6 +29204,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.RequestSsoAccess"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.ResendTenantInvite"
     },
     {
       "name": "BellaBaxter.Features.Tenants.RevokeTenantInvite"
