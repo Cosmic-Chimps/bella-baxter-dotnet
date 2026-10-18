@@ -1006,6 +1006,48 @@
         }
       }
     },
+    "/api/v1/me/account-security": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Users.GetMyAccountSecurity"
+        ],
+        "summary": "GET_api_v1_me_account_security",
+        "description": "GET_api_v1_me_account_security",
+        "operationId": "getMyAccountSecurity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyAccountSecurityResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/users/{userId}/deactivation-impact": {
       "get": {
         "tags": [
@@ -1258,6 +1300,16 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2085,6 +2137,126 @@
         }
       }
     },
+    "/api/tenants/{id}/users/{userId}": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetTenantMember"
+        ],
+        "summary": "GET_api_tenants_id_users_userId",
+        "description": "GET_api_tenants_id_users_userId",
+        "operationId": "getTenantMember",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantMemberDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RemoveTenantUser"
+        ],
+        "summary": "DELETE_api_tenants_id_users_userId",
+        "description": "DELETE_api_tenants_id_users_userId",
+        "operationId": "RemoveTenantUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenant/usage": {
       "get": {
         "tags": [
@@ -2100,6 +2272,67 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TenantUsageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}/membership": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.LeaveTenant"
+        ],
+        "summary": "DELETE_api_tenants_id_membership",
+        "description": "DELETE_api_tenants_id_membership",
+        "operationId": "leaveTenant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -2351,14 +2584,14 @@
         }
       }
     },
-    "/api/tenants/{id}/users/{userId}": {
-      "delete": {
+    "/api/tenants/{id}/users/{userId}/second-factor-removal": {
+      "post": {
         "tags": [
-          "BellaBaxter.Features.Tenants.RemoveTenantUser"
+          "BellaBaxter.Features.Tenants.RemoveMemberSecondFactor"
         ],
-        "summary": "DELETE_api_tenants_id_users_userId",
-        "description": "DELETE_api_tenants_id_users_userId",
-        "operationId": "RemoveTenantUser",
+        "summary": "POST_api_tenants_id_users_userId_second_factor_removal",
+        "description": "POST_api_tenants_id_users_userId_second_factor_removal",
+        "operationId": "removeTenantMemberSecondFactor",
         "parameters": [
           {
             "name": "id",
@@ -2379,12 +2612,34 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberCredentialActionCommand"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "No Content",
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
-                "schema": { }
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -2400,6 +2655,26 @@
           },
           "409": {
             "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2690,6 +2965,108 @@
         }
       }
     },
+    "/api/tenants/{id}/users/{userId}/password-change-requirement": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RequireMemberPasswordChange"
+        ],
+        "summary": "POST_api_tenants_id_users_userId_password_change_requirement",
+        "description": "POST_api_tenants_id_users_userId_password_change_requirement",
+        "operationId": "requireTenantMemberPasswordChange",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberCredentialActionCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CredentialActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/tenants/{id}/invites/{token}/delivery": {
       "post": {
         "tags": [
@@ -2863,6 +3240,154 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}/users/{userId}/suspension": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.SuspendTenantMember"
+        ],
+        "summary": "POST_api_tenants_id_users_userId_suspension",
+        "description": "POST_api_tenants_id_users_userId_suspension",
+        "operationId": "suspendTenantMember",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuspendMemberCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RestoreTenantMember"
+        ],
+        "summary": "DELETE_api_tenants_id_users_userId_suspension",
+        "description": "DELETE_api_tenants_id_users_userId_suspension",
+        "operationId": "restoreTenantMember",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3171,6 +3696,97 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}/ownership-transfer": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.TransferTenantOwnership"
+        ],
+        "summary": "POST_api_tenants_id_ownership_transfer",
+        "description": "POST_api_tenants_id_ownership_transfer",
+        "operationId": "transferTenantOwnership",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferOwnershipCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -6800,6 +7416,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "503": {
             "description": "Service Unavailable",
             "content": {
@@ -8200,6 +8826,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -8744,6 +9380,16 @@
           },
           "429": {
             "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -17255,8 +17901,38 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -17471,6 +18147,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiKeyOperationResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -17831,6 +18517,66 @@
           }
         }
       },
+      "AccessEntry": {
+        "required": [
+          "kind",
+          "projectSlug",
+          "projectName",
+          "environmentSlug",
+          "environmentName",
+          "role",
+          "source",
+          "groupName",
+          "removable",
+          "refusalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/AccessEntryKind"
+          },
+          "projectSlug": {
+            "type": "string"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "environmentName": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/AccessSource"
+          },
+          "groupName": {
+            "type": "string"
+          },
+          "removable": {
+            "type": "boolean"
+          },
+          "refusalCode": {
+            "type": "string"
+          }
+        }
+      },
+      "AccessEntryKind": {
+        "enum": [
+          "project",
+          "environment"
+        ]
+      },
+      "AccessKind": {
+        "enum": [
+          "everything",
+          "listed",
+          "undetermined"
+        ]
+      },
       "AccessLogEntry": {
         "required": [
           "id",
@@ -18020,6 +18766,32 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "AccessSource": {
+        "enum": [
+          "direct",
+          "group",
+          "owner"
+        ]
+      },
+      "ActionVerdict": {
+        "required": [
+          "action",
+          "allowed",
+          "refusalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/MemberAction"
+          },
+          "allowed": {
+            "type": "boolean"
+          },
+          "refusalCode": {
+            "type": "string"
           }
         }
       },
@@ -20769,6 +21541,45 @@
           }
         }
       },
+      "CredentialActionOutcome": {
+        "enum": [
+          "completed",
+          "partial"
+        ]
+      },
+      "CredentialActionResponse": {
+        "required": [
+          "outcome",
+          "steps"
+        ],
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "$ref": "#/components/schemas/CredentialActionOutcome"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CredentialActionStep"
+            }
+          }
+        }
+      },
+      "CredentialActionStep": {
+        "required": [
+          "step",
+          "done"
+        ],
+        "type": "object",
+        "properties": {
+          "step": {
+            "type": "string"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        }
+      },
       "CurrentUserResponse": {
         "required": [
           "id",
@@ -23241,6 +24052,77 @@
           }
         }
       },
+      "MemberAccess": {
+        "required": [
+          "kind",
+          "entries",
+          "moreViaGroups"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/AccessKind"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessEntry"
+            }
+          },
+          "moreViaGroups": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MemberAction": {
+        "enum": [
+          "changeRole",
+          "remove",
+          "suspend",
+          "restore",
+          "requirePasswordChange",
+          "removeSecondFactor",
+          "transferOwnership"
+        ]
+      },
+      "MemberCredentialActionCommand": {
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberIdentity": {
+        "required": [
+          "userId",
+          "email",
+          "fullName"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          }
+        }
+      },
+      "MemberStatus": {
+        "enum": [
+          "Active",
+          "Suspended"
+        ]
+      },
       "MigrateTenantEncryptionResponse": {
         "required": [
           "success",
@@ -23392,6 +24274,25 @@
           },
           "strict": {
             "type": "string"
+          }
+        }
+      },
+      "MyAccountSecurityResponse": {
+        "required": [
+          "emailVerified",
+          "otpConfigured",
+          "verificationMailAvailable"
+        ],
+        "type": "object",
+        "properties": {
+          "emailVerified": {
+            "type": "boolean"
+          },
+          "otpConfigured": {
+            "type": "boolean"
+          },
+          "verificationMailAvailable": {
+            "type": "boolean"
           }
         }
       },
@@ -25401,6 +26302,38 @@
           }
         }
       },
+      "RemovalImpact": {
+        "required": [
+          "projects",
+          "environments",
+          "apiKeys",
+          "mcpConnections",
+          "pendingInvitations"
+        ],
+        "type": "object",
+        "properties": {
+          "projects": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "environments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiKeys": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mcpConnections": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pendingInvitations": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ReprovisionTenantDekResponse": {
         "required": [
           "message",
@@ -27024,6 +27957,17 @@
           }
         }
       },
+      "SuspendMemberCommand": {
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
       "SvidExchangeResponse": {
         "required": [
           "token",
@@ -27182,6 +28126,49 @@
           "Environment"
         ],
         "default": "None"
+      },
+      "TenantMemberDetailResponse": {
+        "required": [
+          "identity",
+          "tenantRole",
+          "status",
+          "joinedAt",
+          "access",
+          "actions",
+          "removalImpact",
+          "hasEncryptionKey"
+        ],
+        "type": "object",
+        "properties": {
+          "identity": {
+            "$ref": "#/components/schemas/MemberIdentity"
+          },
+          "tenantRole": {
+            "$ref": "#/components/schemas/TenantRole"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MemberStatus"
+          },
+          "joinedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "access": {
+            "$ref": "#/components/schemas/MemberAccess"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActionVerdict"
+            }
+          },
+          "removalImpact": {
+            "$ref": "#/components/schemas/RemovalImpact"
+          },
+          "hasEncryptionKey": {
+            "type": "boolean"
+          }
+        }
       },
       "TenantRole": {
         "enum": [
@@ -27568,6 +28555,22 @@
           "period": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "TransferOwnershipCommand": {
+        "required": [
+          "newOwnerUserId",
+          "confirmAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "newOwnerUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "confirmAddress": {
+            "type": "string"
           }
         }
       },
@@ -29116,6 +30119,9 @@
       "name": "BellaBaxter.Features.Users.UpdateCurrentUser"
     },
     {
+      "name": "BellaBaxter.Features.Users.GetMyAccountSecurity"
+    },
+    {
       "name": "BellaBaxter.Features.Users.PreviewUserDeactivation"
     },
     {
@@ -29176,7 +30182,16 @@
       "name": "BellaBaxter.Features.Tenants.GetTenantInvite"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.GetTenantMember"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.GetTenantUsage"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.LeaveTenant"
     },
     {
       "name": "BellaBaxter.Features.Tenants.ListMyInvitations"
@@ -29191,7 +30206,7 @@
       "name": "BellaBaxter.Features.Tenants.RecoverTenantEncryptionKey"
     },
     {
-      "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
+      "name": "BellaBaxter.Features.Tenants.RemoveMemberSecondFactor"
     },
     {
       "name": "BellaBaxter.Features.Tenants.ReplaceTenantInvite"
@@ -29206,6 +30221,9 @@
       "name": "BellaBaxter.Features.Tenants.RequestSsoAccess"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.RequireMemberPasswordChange"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.ResendTenantInvite"
     },
     {
@@ -29213,6 +30231,12 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.SetTenantSelfServiceFeature"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.SuspendTenantMember"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RestoreTenantMember"
     },
     {
       "name": "BellaBaxter.Features.Tenants.SwitchTenant"
@@ -29228,6 +30252,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.ToggleZkeEnforcement"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.TransferTenantOwnership"
     },
     {
       "name": "BellaBaxter.Features.Tenants.Devices.GetZkeReadiness"
