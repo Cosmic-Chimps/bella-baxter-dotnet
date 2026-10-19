@@ -167,6 +167,13 @@ Everything else under `/secrets` (`…/secrets/version`, `…/secrets/manifest`,
 `…/secrets/import/preview`, and every `POST`/`PUT`/`PATCH`/`DELETE`) carries no value and is answered in plain
 JSON even when the key is presented. An SDK MUST NOT require an envelope there.
 
+**`…/secrets/hash` returns an opaque CHANGE TOKEN, not a digest of the values (#1044).** The `hash` field is an HMAC
+under a key only the server holds, one key per environment. Compare it for **equality with the last value you saw and
+nothing else**: do not parse it, do not recompute it (you cannot), do not assume its format or length, and do not treat
+it as a hash of the secrets. Use the `ETag` / `If-None-Match` pair the same way. It changes once for every environment
+when a deployment first serves the keyed form, so every poller refetches once on upgrade. The response schema is
+unchanged. A `503` means the token cannot be produced right now; it is never answered with an unkeyed digest, so retry.
+
 ### Rule: the key is presented on every envelope-required read (#1162) — FROZEN
 
 An SDK that does E2EE presents `X-E2E-Public-Key` on **every** request it sends to one of the seven

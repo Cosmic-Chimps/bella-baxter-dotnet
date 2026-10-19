@@ -10003,6 +10003,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -10081,6 +10091,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OidcTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -12338,6 +12358,16 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -18766,6 +18796,10 @@
           "size": {
             "type": "integer",
             "format": "int32"
+          },
+          "scopeLimited": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -22633,6 +22667,12 @@
               "null",
               "string"
             ]
+          },
+          "publicKey": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -22644,6 +22684,12 @@
         "properties": {
           "oidcToken": {
             "type": "string"
+          },
+          "publicKey": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
