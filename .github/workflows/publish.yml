@@ -37,7 +37,7 @@ jobs:
 
       - name: Generate Kiota client
         run: |
-          dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.30.0
+          dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.35.0
           kiota generate \
             --language CSharp \
             --class-name BellaClient \

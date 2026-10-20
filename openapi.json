@@ -4342,7 +4342,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ShareMetaResponse"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ShareMetaResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ShareContentResponse"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "kind",
+                    "mapping": {
+                      "meta": "#/components/schemas/ShareMetaResponse",
+                      "content": "#/components/schemas/ShareContentResponse"
+                    }
+                  }
                 }
               }
             }
@@ -26690,7 +26704,8 @@
           "ciphertext",
           "iv",
           "expiresAt",
-          "viewsRemaining"
+          "viewsRemaining",
+          "kind"
         ],
         "type": "object",
         "properties": {
@@ -26717,6 +26732,13 @@
               "integer"
             ],
             "format": "int32"
+          },
+          "kind": {
+            "enum": [
+              "content"
+            ],
+            "type": "string",
+            "description": "Discriminator. Always \"content\" on this shape."
           }
         }
       },
@@ -26776,7 +26798,8 @@
           "passwordSalt",
           "maxViews",
           "viewCount",
-          "viewsRemaining"
+          "viewsRemaining",
+          "kind"
         ],
         "type": "object",
         "properties": {
@@ -26817,6 +26840,13 @@
               "integer"
             ],
             "format": "int32"
+          },
+          "kind": {
+            "enum": [
+              "meta"
+            ],
+            "type": "string",
+            "description": "Discriminator. Always \"meta\" on this shape."
           }
         }
       },
