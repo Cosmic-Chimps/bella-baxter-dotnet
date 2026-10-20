@@ -39,16 +39,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedWebhookResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -1494,16 +1484,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateOwnTenantResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -1567,16 +1547,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InviteResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -4111,50 +4081,6 @@
         }
       }
     },
-    "/api/v1/system/rate-limit/status": {
-      "get": {
-        "tags": [
-          "BellaBaxter.Features.SystemEndpoints.SystemEndpoints"
-        ],
-        "summary": "GET_api_v1_system_rate_limit_status",
-        "description": "GET_api_v1_system_rate_limit_status",
-        "operationId": "getRateLimitStatus",
-        "responses": {
-          "501": {
-            "description": "Not Implemented",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/system/health/rate-limit": {
-      "get": {
-        "tags": [
-          "BellaBaxter.Features.SystemEndpoints.SystemEndpoints"
-        ],
-        "summary": "GET_api_v1_system_health_rate_limit",
-        "description": "GET_api_v1_system_health_rate_limit",
-        "operationId": "getRateLimitHealth",
-        "responses": {
-          "501": {
-            "description": "Not Implemented",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/superadmin/users/{userId}/tenants": {
       "get": {
         "tags": [
@@ -4355,16 +4281,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateShareResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -5157,16 +5073,6 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProviderOperationResponse"
                 }
               }
             }
@@ -6234,16 +6140,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProjectImportResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -6375,16 +6271,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProjectOperationResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -6417,47 +6303,6 @@
           },
           "402": {
             "description": "Payment Required",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/search": {
-      "get": {
-        "tags": [
-          "BellaBaxter.Features.Projects.ListProjects"
-        ],
-        "summary": "GET_api_v1_projects_search",
-        "description": "GET_api_v1_projects_search",
-        "operationId": "searchProjects",
-        "parameters": [
-          {
-            "name": "query",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -7128,16 +6973,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateSecretResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -7218,7 +7053,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/secrets/{key}": {
@@ -7658,16 +7494,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CopyEnvironmentResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -7750,16 +7576,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EnvironmentOperationResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -7773,9 +7589,9 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {
+              "application/problem+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvironmentOperationResponse"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -7783,9 +7599,9 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json": {
+              "application/problem+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EnvironmentOperationResponse"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -9666,16 +9482,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TrustDomainResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -10253,16 +10059,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TotpKeyImportResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -10401,16 +10197,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TotpKeyImportResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -10699,16 +10485,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SshRoleResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -11398,16 +11174,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateSecretResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -11489,7 +11255,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/E2EEncryptedPayload"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SecretItem"
+                  }
                 }
               }
             }
@@ -11514,7 +11283,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}": {
@@ -11629,7 +11399,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/E2EEncryptedPayload"
+                  "$ref": "#/components/schemas/SecretItem"
                 }
               }
             }
@@ -11664,7 +11434,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       },
       "put": {
         "tags": [
@@ -11790,7 +11561,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/E2EEncryptedPayload"
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -11815,7 +11589,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/export": {
@@ -11865,7 +11640,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/E2EEncryptedPayload"
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -11890,7 +11668,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/secrets": {
@@ -11950,7 +11729,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/secrets/version": {
@@ -13258,7 +13038,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/E2EEncryptedPayload"
+                  "$ref": "#/components/schemas/SecretItem"
                 }
               }
             }
@@ -13313,7 +13093,8 @@
               }
             }
           }
-        }
+        },
+        "x-bella-e2e": "envelope-capable"
       }
     },
     "/api/v1/projects/{projectRef}/environments/{envSlug}/providers/{providerSlug}/secrets/{key}/versions/{version}/destroy": {
@@ -15250,16 +15031,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotificationChannelOperationResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -15902,16 +15673,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GroupOperationResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -16261,300 +16022,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DashboardResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/cert-rotation/{jobId}/cancel": {
-      "post": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_cancel",
-        "description": "POST_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_cancel",
-        "operationId": "cancelCertRotationJob",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/cert-rotation/{jobId}": {
-      "get": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId",
-        "description": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId",
-        "operationId": "getCertRotationJob",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/cert-rotation/{jobId}/report": {
-      "get": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_report",
-        "description": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_report",
-        "operationId": "getCertRotationReport",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/cert-rotation/{jobId}/report/pdf": {
-      "get": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_report_pdf",
-        "description": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation_jobId_report_pdf",
-        "operationId": "getCertRotationReportPdf",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/projects/{projectRef}/environments/{envSlug}/cert-rotation": {
-      "get": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation",
-        "description": "GET_api_v1_projects_projectRef_environments_envSlug_cert_rotation",
-        "operationId": "listCertRotationJobs",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Cert Rotation"
-        ],
-        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_cert_rotation",
-        "description": "POST_api_v1_projects_projectRef_environments_envSlug_cert_rotation",
-        "operationId": "triggerCertRotation",
-        "parameters": [
-          {
-            "name": "projectRef",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "envSlug",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "410": {
-            "description": "Gone",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -17559,16 +17026,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedApiKeyResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -17767,16 +17224,6 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedApiKeyResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -18109,16 +17556,6 @@
               }
             }
           },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedApiKeyResponse"
-                }
-              }
-            }
-          },
           "201": {
             "description": "Created",
             "content": {
@@ -18291,16 +17728,6 @@
               "application/problem+json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateUserResponse"
                 }
               }
             }
@@ -21893,37 +21320,6 @@
             "type": "string"
           },
           "content": {
-            "type": "string"
-          }
-        }
-      },
-      "E2EEncryptedPayload": {
-        "required": [
-          "encrypted",
-          "algorithm",
-          "serverPublicKey",
-          "nonce",
-          "tag",
-          "ciphertext"
-        ],
-        "type": "object",
-        "properties": {
-          "encrypted": {
-            "type": "boolean"
-          },
-          "algorithm": {
-            "type": "string"
-          },
-          "serverPublicKey": {
-            "type": "string"
-          },
-          "nonce": {
-            "type": "string"
-          },
-          "tag": {
-            "type": "string"
-          },
-          "ciphertext": {
             "type": "string"
           }
         }
@@ -26691,6 +26087,97 @@
           }
         }
       },
+      "SecretItem": {
+        "required": [
+          "key",
+          "value",
+          "description",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "rotationPolicy": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RotationPolicyInfo"
+              }
+            ]
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "ignoreInScan": {
+            "type": "boolean",
+            "default": false
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "expiryWarningDays": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "certificate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CertificateInfo"
+              }
+            ]
+          }
+        }
+      },
       "SecretManifestItem": {
         "required": [
           "key",
@@ -30324,9 +29811,6 @@
       "name": "BellaBaxter.Features.SystemEndpoints.GetVersion"
     },
     {
-      "name": "BellaBaxter.Features.SystemEndpoints.SystemEndpoints"
-    },
-    {
       "name": "BellaBaxter.Features.SuperAdmin.GetUserTenants"
     },
     {
@@ -30859,9 +30343,6 @@
     },
     {
       "name": "BellaBaxter.Features.Dashboard.GetDashboard"
-    },
-    {
-      "name": "Cert Rotation"
     },
     {
       "name": "BellaBaxter.Features.CertRotation.ListCertRotationLogs"

@@ -152,15 +152,27 @@ plaintext = JSON.serialize(AllEnvironmentSecretsResponse, camelCase)
 Every `GET` that carries secret VALUES encrypts its whole `2xx` body to a presented key. These are the
 **envelope-required reads** (paths relative to the API root; `{…}` is one path segment):
 
-| Path | `operationId` | Plaintext the server encrypts |
+| Path | `operationId` | Plaintext the server encrypts (= the `200` the OpenAPI document declares) |
 |------|---------------|-------------------------------|
 | `/api/v1/projects/{p}/environments/{e}/secrets` | `getAllEnvironmentSecrets` | full `AllEnvironmentSecretsResponse` |
-| `/api/v1/projects/{p}/environments/{e}/secrets/export` | `exportEnvironmentSecrets` | `{key: value}` dict (a dotenv/JSON **file** only when NO key is presented) |
-| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets` | `listSecrets` | array of secret items |
-| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/export` | `exportSecrets` | `{key: value}` dict |
-| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}` (`{key}` ≠ `hash`, `export`) | `getSecret` | one secret item |
-| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}/versions/{n}` (`{n}` digits) | `getSecretVersion` | one secret version |
+| `/api/v1/projects/{p}/environments/{e}/secrets/export` | `exportEnvironmentSecrets` | `{key: value}` dict, `Dictionary<string,string>` (a dotenv/JSON **file** only when NO key is presented) |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets` | `listSecrets` | array of `SecretItem` |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/export` | `exportSecrets` | `{key: value}` dict, `Dictionary<string,string>` |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}` (`{key}` ≠ `hash`, `export`) | `getSecret` | one `SecretItem` |
+| `/api/v1/projects/{p}/environments/{e}/providers/{v}/secrets/{key}/versions/{n}` (`{n}` digits) | `getSecretVersion` | one `SecretItem` (that version) |
 | `/api/v1/projects/{p}/secrets` | `listGlobalSecrets` | `ListGlobalSecretsResponse` |
+
+**The OpenAPI document declares the PLAINTEXT, never the envelope (#1187).** Each of these seven reads declares the
+plaintext in the last column as its `200`, so a generated client can parse what its SDK hands it: the SDK opens
+the envelope BEFORE the generated client sees the body, and a caller that presents no key is sent the plaintext
+anyway. (Until #1187 five of the seven declared `E2EEncryptedPayload`, a shape no generated client ever parses:
+Kiota clients returned an empty model or failed, Swift's decode failed, Dart could not represent the body.)
+The envelope is transport-level and is said by an operation extension instead: **`x-bella-e2e: envelope-capable`**
+(server: `[EnvelopeCapableRead]`). The extension is documentation for readers and tooling; **no SDK decides to
+decrypt from it or from the schema** — every SDK keys that off method + path (`requiresEnvelope`, below). The set
+of operations carrying it is exactly this table (`EnvelopeRequiredReadsMatchTheSdkContractTests`,
+`EnvelopeReadsDeclarePlaintextTests`). `E2EEncryptedPayload` is no longer a schema in the document; the wire
+shape of the envelope is the one in "Encrypted Response Shape" above.
 
 Everything else under `/secrets` (`…/secrets/version`, `…/secrets/manifest`, `…/secrets/certificates`,
 `…/secrets/hash`, `…/secrets/{key}/metadata`, `…/secrets/{key}/versions`, `…/secrets/{key}/rotation-policy`,
@@ -193,10 +205,10 @@ read added to the SDK later is end-to-end encrypted without anyone remembering t
   `{"secrets": …}` object), or the read decrypts correctly and still returns the wrong thing. Until #1162,
   Python, Java, PHP, Ruby and .NET did exactly that to every non-`getAllEnvironmentSecrets` plaintext, and .NET
   turned both exports and `listGlobalSecrets` into `{"secrets":{},"version":0}` — no values at all.
-  **One documented exception, .NET only:** the item-shaped reads (`listSecrets`, `getSecret`,
-  `getSecretVersion`) are still rewritten to `{"secrets":{"KEY":"VALUE"},"version":0}` by
-  `DecryptedSecretsBody`, because the CLI (`bella secrets get --provider`, `bella secrets list`) reads that
-  map from `AdditionalData["secrets"]`. Removing it needs those two commands changed first.
+  There is no exception: .NET's item rewrite (`DecryptedSecretsBody`, which turned the three item-shaped reads into
+  `{"secrets":{"KEY":"VALUE"},"version":0}` for the CLI) was removed with #1187, once the document declared those
+  reads' real plaintext and the generated client could parse it. `bella secrets get --provider`, `bella secrets
+  list` and `bella agent` read the typed `List<SecretItem>` now.
 - **Behaviour change for the two exports:** once the key is presented, `exportEnvironmentSecrets` and
   `exportSecrets` answer a `{key: value}` dict (in the envelope) whatever `format` asks for; a dotenv/JSON
   **file** is served only to a caller that presents no key. An SDK helper that promises dotenv text formats
@@ -236,9 +248,9 @@ that does not want to require an envelope must not present the key.
 - **Server side:** every envelope-required read encrypts whenever the header is present (since
   `6bd551e39`, 2026-03-03, before any SDK release), on every `2xx` branch: `listGlobalSecrets` on a project with
   no global provider answered an EMPTY plain list until #1050 routed that branch through the same encryption.
-  `EnvelopeRequiredReadsMatchTheSdkContractTests` (BellaBaxter.Tests) fails if the set of `GET`s declaring
-  `E2EEncryptedPayload` stops being exactly the table above, and the `…_WithPresentedKey_IsAnEnvelope…` tests
-  hold the empty / nothing-configured branches to the rule.
+  `EnvelopeRequiredReadsMatchTheSdkContractTests` (BellaBaxter.Tests) fails if the set of `GET`s marked
+  `[EnvelopeCapableRead]` (published as `x-bella-e2e: envelope-capable`) stops being exactly the table above, and
+  the `…_WithPresentedKey_IsAnEnvelope…` tests hold the empty / nothing-configured branches to the rule.
 - **Proved by** `apps/sdk/contract-tests/run.sh`: after the key contract, each SDK is run against the stub's
   `plaintext-despite-presented-key`, `tampered-envelope` and `wrong-key-envelope` scenarios and must refuse
   each with the code above. Each SDK also has a unit test of the same four cases.
@@ -279,7 +291,7 @@ that does not want to require an envelope must not present the key.
 | `BellaBaxter.Crypto/EciesAlgorithm.cs` | The one true implementation of the crypto algorithm |
 | `BellaBaxter.Api/Features/…/Secrets/GetAllEnvironmentSecrets.cs` | The contracted endpoint + `AllEnvironmentSecretsResponse` record |
 | `BellaBaxter.Api/Infrastructure/Security/E2E/` | E2EE service wiring |
-| `BellaBaxter.WebApp/openapi.json` | OpenAPI spec — `x-sdk-contract: frozen` marks contracted operations/schemas |
+| `BellaBaxter.WebApp/openapi.json` | OpenAPI spec — `x-sdk-contract: frozen` marks contracted operations/schemas; `x-bella-e2e: envelope-capable` marks the seven reads that can answer with the E2EE envelope (#1187) |
 
 ---
 

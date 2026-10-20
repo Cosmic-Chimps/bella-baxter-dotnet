@@ -13,8 +13,8 @@ namespace BellaBaxter.Client;
 ///   <item>Adds <c>X-E2E-Public-Key</c> to every Bella API request (<see cref="ZkePresentedKey.ShouldPresent"/>, #635),
 ///         so each envelope-required read of apps/sdk/SDK_CONTRACT.md is end-to-end encrypted (#1162).</item>
 ///   <item>On a <c>/secrets</c> response, if the payload is encrypted (<c>"encrypted": true</c>), decrypts it
-///         using <see cref="EciesAlgorithm.Decrypt"/> and hands the plaintext on unchanged — except the item-shaped
-///         reads, rewritten to <c>{"secrets":{"KEY":"VALUE"},"version":0}</c> (<see cref="DecryptedSecretsBody"/>).</item>
+///         using <see cref="EciesAlgorithm.Decrypt"/> and hands the plaintext on UNCHANGED: the OpenAPI document declares
+///         each read's plaintext as its <c>200</c> (#1187), so the generated client parses it as is.</item>
 ///   <item>#1050 — throws <see cref="E2EEResponseException"/> when an envelope does not decrypt, and when a read the
 ///         server always encrypts (<see cref="ZkePresentedKey.RequiresEnvelope"/>) comes back plain.</item>
 /// </list>
@@ -84,9 +84,8 @@ public sealed class E2EEncryptionHandler : DelegatingHandler
                         throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
                     }
 
-                    // #1162 — handed on unchanged, except the item-shaped reads (see DecryptedSecretsBody).
-                    var responseBytes = DecryptedSecretsBody.HandOn(plaintext);
-                    response.Content = new ByteArrayContent(responseBytes);
+                    // #1162 / #1187 — handed on unchanged: the plaintext IS the shape the document declares for the read.
+                    response.Content = new ByteArrayContent(plaintext);
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 }
                 else if (envelopeRequired)

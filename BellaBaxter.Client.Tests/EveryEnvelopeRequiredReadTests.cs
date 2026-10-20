@@ -11,13 +11,13 @@ namespace BellaBaxter.Client.Tests;
 /// <summary>
 /// Issue #1162 — the key is presented on EVERY envelope-required read (apps/sdk/SDK_CONTRACT.md, "Rule: the key is
 /// presented on every envelope-required read"), each in the shape the API encrypts for that read, and what the
-/// handler hands on is that plaintext — except the item-shaped reads, which .NET rewrites to
-/// <c>{"secrets":{…}}</c> because the CLI reads them that way (<see cref="DecryptedSecretsBody"/>).
+/// handler hands on is that plaintext, UNCHANGED, for every one of the seven.
 /// </summary>
 /// <remarks>
-/// Before #1162 the two exports and <c>listGlobalSecrets</c> went through that item rewrite too and came out as
-/// <c>{"secrets":{},"version":0}</c> — decrypted correctly, and every value dropped. The <c>Unchanged</c> rows below
-/// were red against that code.
+/// Before #1162 the two exports and <c>listGlobalSecrets</c> went through an item rewrite and came out as
+/// <c>{"secrets":{},"version":0}</c> — decrypted correctly, and every value dropped. #1187 removed the rewrite for the
+/// item-shaped reads too (<c>listSecrets</c>, <c>getSecret</c>, <c>getSecretVersion</c>): the OpenAPI document declares
+/// their plaintext, so the generated client parses it as is (<see cref="TypedReadsParseTheDeclaredPlaintextTests"/>).
 /// </remarks>
 public class EveryEnvelopeRequiredReadTests
 {
@@ -26,7 +26,6 @@ public class EveryEnvelopeRequiredReadTests
     private const string Sentinel = "postgres://sentinel/app";
     private const string Item = $$"""{"key":"DATABASE_URL","value":"{{Sentinel}}","description":null,"createdAt":"2026-01-01T00:00:00Z","updatedAt":"2026-01-01T00:00:00Z","type":null}""";
     private const string Dict = $$"""{"DATABASE_URL":"{{Sentinel}}"}""";
-    private const string ItemAsMap = $$"""{"secrets":{"DATABASE_URL":"{{Sentinel}}"},"version":0}""";
     private static readonly JsonSerializerOptions Wire = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
     private sealed class Server(string plaintext) : HttpMessageHandler
@@ -55,10 +54,10 @@ public class EveryEnvelopeRequiredReadTests
             ("getAllEnvironmentSecrets", Env + "/secrets",
                 $$"""{"environmentSlug":"e","environmentName":"E","secrets":{{Dict}},"version":7,"lastModified":"2026-10-04T00:00:00Z"}""", "Unchanged"),
             ("exportEnvironmentSecrets", Env + "/secrets/export?format=json", Dict, "Unchanged"),
-            ("listSecrets", Env + "/providers/vault/secrets", "[" + Item + "]", ItemAsMap),
+            ("listSecrets", Env + "/providers/vault/secrets", "[" + Item + "]", "Unchanged"),
             ("exportSecrets", Env + "/providers/vault/secrets/export?format=dotenv", Dict, "Unchanged"),
-            ("getSecret", Env + "/providers/vault/secrets/DATABASE_URL", Item, ItemAsMap),
-            ("getSecretVersion", Env + "/providers/vault/secrets/DATABASE_URL/versions/3", Item, ItemAsMap),
+            ("getSecret", Env + "/providers/vault/secrets/DATABASE_URL", Item, "Unchanged"),
+            ("getSecretVersion", Env + "/providers/vault/secrets/DATABASE_URL/versions/3", Item, "Unchanged"),
             ("listGlobalSecrets", Api + "/secrets",
                 $$"""{"projectRef":"p","projectSlug":"p","globalSecretProviderId":null,"secrets":[{{Item}}]}""", "Unchanged"),
         };

@@ -181,8 +181,8 @@ public sealed class ZkeDekHandler : DelegatingHandler
             throw E2EEResponseException.Undecryptable(request, "the transport envelope did not decrypt", ex);
         }
 
-        // #1162 — handed on unchanged, except the item-shaped reads (see DecryptedSecretsBody).
-        return DecryptedSecretsBody.HandOn(plaintext);
+        // #1162 / #1187 — handed on unchanged: the plaintext IS the shape the document declares for the read.
+        return plaintext;
     }
 
     private static E2EEncryptedPayload ParseEciesPayload(JsonElement root) => new(
