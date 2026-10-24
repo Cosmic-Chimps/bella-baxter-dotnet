@@ -5892,6 +5892,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "confirmProjectSlug",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "previewDigest",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -5907,6 +5921,36 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -6039,6 +6083,58 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/deletion-preview": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.GetProjectDeletionPreview"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_deletion_preview",
+        "description": "GET_api_v1_projects_projectRef_deletion_preview",
+        "operationId": "getProjectDeletionPreview",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDeletionPreview"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -17069,6 +17165,16 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -25008,6 +25114,130 @@
           }
         }
       },
+      "ProjectDeletionPreview": {
+        "required": [
+          "projectId",
+          "slug",
+          "name",
+          "providers",
+          "totals",
+          "dataKeyDeleted",
+          "previewDigest"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectDeletionProvider"
+            }
+          },
+          "totals": {
+            "$ref": "#/components/schemas/ProjectDeletionTotals"
+          },
+          "dataKeyDeleted": {
+            "type": "boolean"
+          },
+          "previewDigest": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectDeletionProvider": {
+        "required": [
+          "providerId",
+          "name",
+          "type",
+          "isSystemProvider",
+          "providerDeleted",
+          "environmentSecrets",
+          "projectSecrets"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "isSystemProvider": {
+            "type": "boolean"
+          },
+          "providerDeleted": {
+            "type": "boolean"
+          },
+          "environmentSecrets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectSecrets": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectDeletionTotals": {
+        "required": [
+          "environments",
+          "webhooks",
+          "notificationChannels",
+          "activeLeases",
+          "trustDomains",
+          "sshRoles",
+          "totpKeys",
+          "apiKeysRevoked"
+        ],
+        "type": "object",
+        "properties": {
+          "environments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webhooks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationChannels": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeLeases": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trustDomains": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sshRoles": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totpKeys": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiKeysRevoked": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ProjectEncryptionKeyStatusResponse": {
         "required": [
           "tenantEncryptionEnabled",
@@ -29942,6 +30172,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.ExportProject"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.GetProjectDeletionPreview"
     },
     {
       "name": "BellaBaxter.Features.Projects.GetProjectEncryptionKey"
