@@ -4476,6 +4476,310 @@
         }
       }
     },
+    "/api/v1/projects/{projectRef}/environments/{envSlug}/security/acknowledgements": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.SecurityIntelligence.AcknowledgeEnvironmentSecurityInsight"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_environments_envSlug_security_acknowledgements",
+        "description": "POST_api_v1_projects_projectRef_environments_envSlug_security_acknowledgements",
+        "operationId": "acknowledgeEnvironmentSecurityInsight",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcknowledgeSecurityInsightRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsightAcknowledgementResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.SecurityIntelligence.WithdrawEnvironmentSecurityInsightAcknowledgement"
+        ],
+        "summary": "DELETE_api_v1_projects_projectRef_environments_envSlug_security_acknowledgements",
+        "description": "DELETE_api_v1_projects_projectRef_environments_envSlug_security_acknowledgements",
+        "operationId": "withdrawEnvironmentSecurityInsightAcknowledgement",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "envSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/security/acknowledgements": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.SecurityIntelligence.AcknowledgeProjectSecurityInsight"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_security_acknowledgements",
+        "description": "POST_api_v1_projects_projectRef_security_acknowledgements",
+        "operationId": "acknowledgeProjectSecurityInsight",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcknowledgeSecurityInsightRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsightAcknowledgementResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.SecurityIntelligence.WithdrawProjectSecurityInsightAcknowledgement"
+        ],
+        "summary": "DELETE_api_v1_projects_projectRef_security_acknowledgements",
+        "description": "DELETE_api_v1_projects_projectRef_security_acknowledgements",
+        "operationId": "withdrawProjectSecurityInsightAcknowledgement",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secretKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/environments/{id}/security": {
       "get": {
         "tags": [
@@ -18367,6 +18671,91 @@
           "owner"
         ]
       },
+      "AcknowledgedInsightResponse": {
+        "required": [
+          "type",
+          "severity",
+          "secretKey",
+          "detail",
+          "recommendation",
+          "detailCode",
+          "recommendationCode",
+          "messageParameters",
+          "acknowledgedBy",
+          "acknowledgedAt",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          },
+          "secretKey": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "recommendation": {
+            "type": "string"
+          },
+          "detailCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recommendationCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "acknowledgedBy": {
+            "type": "string"
+          },
+          "acknowledgedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AcknowledgeSecurityInsightRequest": {
+        "required": [
+          "secretKey",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "secretKey": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ActionVerdict": {
         "required": [
           "action",
@@ -22072,6 +22461,15 @@
           },
           "providerFetchFailed": {
             "type": "boolean"
+          },
+          "acknowledgedInsights": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AcknowledgedInsightResponse"
+            }
           }
         }
       },
@@ -22856,6 +23254,41 @@
           },
           "otpauthUrl": {
             "type": "string"
+          }
+        }
+      },
+      "InsightAcknowledgementResponse": {
+        "required": [
+          "secretKey",
+          "type",
+          "originalSeverity",
+          "acknowledgedBy",
+          "acknowledgedAt",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "secretKey": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "originalSeverity": {
+            "type": "string"
+          },
+          "acknowledgedBy": {
+            "type": "string"
+          },
+          "acknowledgedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -25382,6 +25815,20 @@
           },
           "breachCheckSkipped": {
             "type": "boolean"
+          },
+          "passed": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          "acknowledgedInsights": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AcknowledgedInsightResponse"
+            }
           }
         }
       },
@@ -26749,6 +27196,10 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "previouslyAcknowledged": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -26798,6 +27249,11 @@
           "totalScanned": {
             "type": "integer",
             "format": "int32"
+          },
+          "acknowledged": {
+            "type": "integer",
+            "format": "int32",
+            "default": 0
           }
         }
       },
@@ -30103,6 +30559,18 @@
     },
     {
       "name": "BellaBaxter.Features.Shares.UnlockShare"
+    },
+    {
+      "name": "BellaBaxter.Features.SecurityIntelligence.AcknowledgeEnvironmentSecurityInsight"
+    },
+    {
+      "name": "BellaBaxter.Features.SecurityIntelligence.WithdrawEnvironmentSecurityInsightAcknowledgement"
+    },
+    {
+      "name": "BellaBaxter.Features.SecurityIntelligence.AcknowledgeProjectSecurityInsight"
+    },
+    {
+      "name": "BellaBaxter.Features.SecurityIntelligence.WithdrawProjectSecurityInsightAcknowledgement"
     },
     {
       "name": "BellaBaxter.Features.SecurityIntelligence.GetEnvironmentSecurityReport"
