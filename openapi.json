@@ -21289,6 +21289,10 @@
           },
           "requiresTokenRefresh": {
             "type": "boolean"
+          },
+          "freeAllowanceWithheld": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -22385,6 +22389,9 @@
           "assignedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "supportsSecretsManagement": {
+            "type": "boolean"
           }
         }
       },
@@ -26448,6 +26455,9 @@
             ],
             "format": "date-time"
           },
+          "supportsSecretsManagement": {
+            "type": "boolean"
+          },
           "awsExternalIdStatus": {
             "$ref": "#/components/schemas/AwsExternalIdState"
           },
@@ -28827,6 +28837,10 @@
             "type": "integer",
             "format": "int64",
             "default": 0
+          },
+          "freeAllowanceWithheld": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
