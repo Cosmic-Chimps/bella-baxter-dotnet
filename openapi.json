@@ -28454,6 +28454,12 @@
               "null",
               "boolean"
             ]
+          },
+          "ssoOffered": {
+            "type": [
+              "null",
+              "boolean"
+            ]
           }
         }
       },
