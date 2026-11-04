@@ -18798,6 +18798,16 @@
               "string"
             ],
             "format": "uuid"
+          },
+          "scopeNarrowing": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ScopeNarrowing"
+              }
+            ]
           }
         }
       },
@@ -26943,6 +26953,29 @@
           }
         }
       },
+      "ScopeNarrowing": {
+        "required": [
+          "providerKeys",
+          "globalKeys"
+        ],
+        "type": "object",
+        "properties": {
+          "providerKeys": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "globalKeys": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          }
+        }
+      },
       "SecretDriftSummaryResponse": {
         "required": [
           "hasDrift",
@@ -28404,6 +28437,12 @@
               {
                 "$ref": "#/components/schemas/SsoConfigResponse"
               }
+            ]
+          },
+          "hasSso": {
+            "type": [
+              "null",
+              "boolean"
             ]
           }
         }
