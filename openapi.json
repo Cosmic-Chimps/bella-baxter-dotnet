@@ -3938,6 +3938,142 @@
         }
       }
     },
+    "/api/v1/tenants/me/devices/{id}/key-exposure": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.GetDeviceKeyExposure"
+        ],
+        "summary": "GET_api_v1_tenants_me_devices_id_key_exposure",
+        "description": "GET_api_v1_tenants_me_devices_id_key_exposure",
+        "operationId": "getDeviceKeyExposure",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceKeyExposureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/devices/key-rotations/{runId}": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.GetDeviceKeyRotationRun"
+        ],
+        "summary": "GET_api_v1_tenants_me_devices_key_rotations_runId",
+        "description": "GET_api_v1_tenants_me_devices_key_rotations_runId",
+        "operationId": "getDeviceKeyRotationRun",
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceKeyRotationRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/zke/readiness": {
       "get": {
         "tags": [
@@ -4196,6 +4332,98 @@
           },
           "404": {
             "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/devices/{id}/key-rotation": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.Devices.StartDeviceKeyRotation"
+        ],
+        "summary": "POST_api_v1_tenants_me_devices_id_key_rotation",
+        "description": "POST_api_v1_tenants_me_devices_id_key_rotation",
+        "operationId": "startDeviceKeyRotation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartDeviceKeyRotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceKeyRotationRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -6746,6 +6974,82 @@
           },
           "402": {
             "description": "Payment Required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{id}/device-key-rotations": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.ListProjectDeviceKeyRotations"
+        ],
+        "summary": "GET_api_v1_projects_id_device_key_rotations",
+        "description": "GET_api_v1_projects_id_device_key_rotations",
+        "operationId": "listProjectDeviceKeyRotations",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectDeviceKeyRotationOwed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -21908,6 +22212,248 @@
           }
         }
       },
+      "DeviceKeyExposureEnvironment": {
+        "required": [
+          "environmentId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "DeviceKeyExposureProject": {
+        "required": [
+          "projectId",
+          "projectName",
+          "environments",
+          "usesOrganisationKey",
+          "coveringReadAt",
+          "owed",
+          "callerMayRotate"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "environments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceKeyExposureEnvironment"
+            }
+          },
+          "usesOrganisationKey": {
+            "type": "boolean"
+          },
+          "coveringReadAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "owed": {
+            "type": "boolean"
+          },
+          "callerMayRotate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DeviceKeyExposureResponse": {
+        "required": [
+          "deviceId",
+          "fingerprint",
+          "label",
+          "state",
+          "usedOrganisationKey",
+          "projectCount",
+          "owedCount",
+          "widenedProjectCount",
+          "projects",
+          "latestRunId",
+          "latestRunState",
+          "latestRunFinishedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "state": {
+            "type": "string"
+          },
+          "usedOrganisationKey": {
+            "type": "boolean"
+          },
+          "projectCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "owedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "widenedProjectCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceKeyExposureProject"
+            }
+          },
+          "latestRunId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "latestRunState": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "latestRunFinishedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "DeviceKeyRotationProjectResultResponse": {
+        "required": [
+          "projectId",
+          "projectName",
+          "outcome",
+          "resealed",
+          "alreadyCurrent",
+          "notResealed"
+        ],
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectName": {
+            "type": "string"
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "resealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alreadyCurrent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notResealed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DeviceKeyRotationRunResponse": {
+        "required": [
+          "id",
+          "deviceId",
+          "state",
+          "startedBy",
+          "startedAt",
+          "finishedAt",
+          "errorCode",
+          "resealed",
+          "alreadyCurrent",
+          "notResealed",
+          "projects",
+          "notMigrated"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "startedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "errorCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alreadyCurrent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notResealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceKeyRotationProjectResultResponse"
+            }
+          },
+          "notMigrated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MigrationNotMigrated"
+            }
+          }
+        }
+      },
       "DriftItem": {
         "required": [
           "key",
@@ -24449,7 +24995,9 @@
           "ProviderUnreachable",
           "Undecryptable",
           "WriteFailed",
-          "Unreadable"
+          "Unreadable",
+          "ChangedDuringRun",
+          "ConditionalWriteUnsupported"
         ]
       },
       "MigrationSubject": {
@@ -25861,6 +26409,43 @@
           "apiKeysRevoked": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ProjectDeviceKeyRotationOwed": {
+        "required": [
+          "deviceId",
+          "fingerprint",
+          "label",
+          "revokedAt",
+          "coveringReadAt",
+          "usesOrganisationKey"
+        ],
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revokedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "coveringReadAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usesOrganisationKey": {
+            "type": "boolean"
           }
         }
       },
@@ -28463,6 +29048,24 @@
           }
         }
       },
+      "StartDeviceKeyRotationRequest": {
+        "required": [
+          "projectIds"
+        ],
+        "type": "object",
+        "properties": {
+          "projectIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
       "StrictReadinessDto": {
         "required": [
           "workloadsWithoutVerifiableConstraint"
@@ -30793,6 +31396,12 @@
       "name": "BellaBaxter.Features.Tenants.TransferTenantOwnership"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.Devices.GetDeviceKeyExposure"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.GetDeviceKeyRotationRun"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.Devices.GetZkeReadiness"
     },
     {
@@ -30806,6 +31415,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.Devices.RevokeZkeDevice"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.Devices.StartDeviceKeyRotation"
     },
     {
       "name": "BellaBaxter.Features.SystemEndpoints.GetIntegrationInfo"
@@ -30929,6 +31541,9 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.ImportProject"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.ListProjectDeviceKeyRotations"
     },
     {
       "name": "BellaBaxter.Features.Projects.ListProjects"
