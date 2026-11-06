@@ -1124,6 +1124,66 @@
         }
       }
     },
+    "/api/v1/me/passkeys/{credentialId}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Users.RemoveMyPasskey"
+        ],
+        "summary": "DELETE_api_v1_me_passkeys_credentialId",
+        "description": "DELETE_api_v1_me_passkeys_credentialId",
+        "operationId": "removeMyPasskey",
+        "parameters": [
+          {
+            "name": "credentialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users/handshake": {
       "post": {
         "tags": [
@@ -25027,7 +25087,8 @@
         "required": [
           "emailVerified",
           "otpConfigured",
-          "verificationMailAvailable"
+          "verificationMailAvailable",
+          "passkeys"
         ],
         "type": "object",
         "properties": {
@@ -25039,6 +25100,12 @@
           },
           "verificationMailAvailable": {
             "type": "boolean"
+          },
+          "passkeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MyPasskey"
+            }
           }
         }
       },
@@ -25092,6 +25159,32 @@
             "items": {
               "$ref": "#/components/schemas/MyInvitationResponse"
             }
+          }
+        }
+      },
+      "MyPasskey": {
+        "required": [
+          "id",
+          "label",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -28999,6 +29092,33 @@
           "Oidc"
         ]
       },
+      "SsoRegistrationValues": {
+        "required": [
+          "alias",
+          "oidcRedirectUri",
+          "samlEntityId",
+          "samlAcsUrl",
+          "samlMetadataUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string"
+          },
+          "oidcRedirectUri": {
+            "type": "string"
+          },
+          "samlEntityId": {
+            "type": "string"
+          },
+          "samlAcsUrl": {
+            "type": "string"
+          },
+          "samlMetadataUrl": {
+            "type": "string"
+          }
+        }
+      },
       "SsoStatusResponse": {
         "required": [
           "approvalStatus",
@@ -29044,6 +29164,16 @@
             "type": [
               "null",
               "boolean"
+            ]
+          },
+          "registration": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SsoRegistrationValues"
+              }
             ]
           }
         }
@@ -31265,6 +31395,9 @@
     },
     {
       "name": "BellaBaxter.Features.Users.ReactivateUserAccount"
+    },
+    {
+      "name": "BellaBaxter.Features.Users.RemoveMyPasskey"
     },
     {
       "name": "BellaBaxter.Features.Users.Handshake.HandshakeEndpoint"
