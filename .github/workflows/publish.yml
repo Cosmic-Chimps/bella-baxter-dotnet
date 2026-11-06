@@ -3,6 +3,10 @@ name: Publish .NET SDK to NuGet
 # Trigger: push a tag like v0.2.0 to bella-baxter-dotnet repo.
 # release-sdk.yml in the monorepo creates this tag automatically.
 # Version is extracted from the tag — no commit-back, no auto-bump.
+#
+# NuGet Trusted Publishing: no stored API key. NuGet/login exchanges this run's GitHub OIDC token for a
+# short-lived key, granted only by the nuget.org policy naming this repository (bella-baxter-dotnet), this
+# workflow file (publish.yml) and the six packages it pushes, owned by `jjchiw`.
 
 on:
   push:
@@ -11,6 +15,9 @@ on:
 jobs:
   publish:
     runs-on: macos-latest
+    permissions:
+      contents: read
+      id-token: write # NuGet Trusted Publishing: the OIDC token NuGet/login exchanges
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
@@ -89,11 +96,18 @@ jobs:
             -p:Version="$VERSION" \
             -o ./nupkgs
 
+      # Just before the push: the key it returns is short-lived, and the MAUI build above is long.
+      - name: NuGet login (Trusted Publishing)
+        id: nuget_login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: jjchiw
+
       - name: Push to NuGet.org
         run: |
           for nupkg in ./nupkgs/*.nupkg; do
             dotnet nuget push "$nupkg" \
-              --api-key "${{ secrets.NUGET_API_KEY }}" \
+              --api-key "${{ steps.nuget_login.outputs.NUGET_API_KEY }}" \
               --source https://api.nuget.org/v3/index.json \
               --skip-duplicate
           done
