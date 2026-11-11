@@ -28475,7 +28475,10 @@
           "k8sAudienceIsDefault",
           "k8sRecommendedAudience",
           "k8sAudienceEnforced",
-          "audienceNotice"
+          "audienceNotice",
+          "nomadOidcIssuerUrl",
+          "nomadExpectedAudience",
+          "nomadRecommendedAudience"
         ],
         "type": "object",
         "properties": {
@@ -28524,6 +28527,18 @@
               "null",
               "string"
             ]
+          },
+          "nomadOidcIssuerUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nomadExpectedAudience": {
+            "type": "string"
+          },
+          "nomadRecommendedAudience": {
+            "type": "string"
           }
         }
       },
@@ -29209,6 +29224,12 @@
             }
           },
           "k8sOidcIssuerProblem": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nomadOidcIssuerProblem": {
             "type": [
               "null",
               "string"
@@ -30472,6 +30493,18 @@
           "acknowledgeAudienceRefusals": {
             "type": "boolean",
             "default": false
+          },
+          "nomadOidcIssuerUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nomadExpectedAudience": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
