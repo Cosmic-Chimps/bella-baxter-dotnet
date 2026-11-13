@@ -1212,6 +1212,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -1646,6 +1656,16 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -22123,7 +22143,8 @@
           "createdAt",
           "updatedAt",
           "isAdmin",
-          "tokenRemainingMinutes"
+          "tokenRemainingMinutes",
+          "canCreateTenants"
         ],
         "type": "object",
         "properties": {
@@ -22159,6 +22180,9 @@
           "tokenRemainingMinutes": {
             "type": "integer",
             "format": "int64"
+          },
+          "canCreateTenants": {
+            "type": "boolean"
           }
         }
       },
