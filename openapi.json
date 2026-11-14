@@ -4018,6 +4018,322 @@
         }
       }
     },
+    "/api/v1/tenants/me/sso/domains/{domain}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.SsoDomains.ReleaseSsoDomain"
+        ],
+        "summary": "DELETE_api_v1_tenants_me_sso_domains_domain",
+        "description": "DELETE_api_v1_tenants_me_sso_domains_domain",
+        "operationId": "releaseSsoDomain",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/sso/domains/{domain}/verify": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.SsoDomains.VerifySsoDomain"
+        ],
+        "summary": "POST_api_v1_tenants_me_sso_domains_domain_verify",
+        "description": "POST_api_v1_tenants_me_sso_domains_domain_verify",
+        "operationId": "verifySsoDomain",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SsoDomainClaimResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/encryption-key/rotation": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.OrganisationKeyRotation.GetOrganisationKeyRotation"
+        ],
+        "summary": "GET_api_v1_tenants_me_encryption_key_rotation",
+        "description": "GET_api_v1_tenants_me_encryption_key_rotation",
+        "operationId": "getOrganisationKeyRotation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationKeyRotationRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.OrganisationKeyRotation.StartOrganisationKeyRotation"
+        ],
+        "summary": "POST_api_v1_tenants_me_encryption_key_rotation",
+        "description": "POST_api_v1_tenants_me_encryption_key_rotation",
+        "operationId": "startOrganisationKeyRotation",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationKeyRotationRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/encryption-key/rotation/preview": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.OrganisationKeyRotation.PreviewOrganisationKeyRotation"
+        ],
+        "summary": "GET_api_v1_tenants_me_encryption_key_rotation_preview",
+        "description": "GET_api_v1_tenants_me_encryption_key_rotation_preview",
+        "operationId": "previewOrganisationKeyRotation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationKeyRotationPreviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/devices/{id}/key-exposure": {
       "get": {
         "tags": [
@@ -22425,6 +22741,10 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "organisationKeyRotatedAfterRead": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -25089,7 +25409,8 @@
           "Project",
           "ProviderCredential",
           "WebhookSigningSecret",
-          "NotificationChannel"
+          "NotificationChannel",
+          "AuditStreamCredential"
         ]
       },
       "ModeMeaningDto": {
@@ -25457,6 +25778,139 @@
             "type": "string"
           },
           "data": { }
+        }
+      },
+      "OrganisationKeyRotationPreviewResponse": {
+        "required": [
+          "providerCredentialCount",
+          "webhookSigningSecretCount",
+          "notificationChannelCount",
+          "auditStreamCredentialCount",
+          "recordCount",
+          "inheritingProjectCount",
+          "callerMayRotate"
+        ],
+        "type": "object",
+        "properties": {
+          "providerCredentialCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webhookSigningSecretCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationChannelCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "auditStreamCredentialCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recordCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inheritingProjectCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "callerMayRotate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OrganisationKeyRotationRunResponse": {
+        "required": [
+          "id",
+          "state",
+          "phase",
+          "startedBy",
+          "startedByName",
+          "startedAt",
+          "finishedAt",
+          "errorCode",
+          "keyRotatedAt",
+          "projectsGivenOwnKey",
+          "projectValuesResealed",
+          "recordsResealed",
+          "alreadyCurrent",
+          "notResealed",
+          "notMigrated"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "phase": {
+            "type": "string"
+          },
+          "startedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startedByName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "errorCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "keyRotatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "projectsGivenOwnKey": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "projectValuesResealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recordsResealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alreadyCurrent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notResealed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notMigrated": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MigrationNotMigrated"
+            }
+          }
         }
       },
       "PageableObject": {
@@ -29081,6 +29535,15 @@
                 "$ref": "#/components/schemas/SsoConnectionStatus"
               }
             ]
+          },
+          "domainClaims": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SsoDomainClaimResponse"
+            }
           }
         }
       },
@@ -29102,6 +29565,51 @@
             ]
           },
           "samlSigningCertificateExpiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "SsoDomainClaimResponse": {
+        "required": [
+          "domain",
+          "state",
+          "txtName",
+          "txtValue",
+          "lastCheckedAt",
+          "lastResult"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "txtName": {
+            "type": "string"
+          },
+          "txtValue": {
+            "type": "string"
+          },
+          "lastCheckedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lastResult": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "enforcedUntil": {
             "type": [
               "null",
               "string"
@@ -29399,6 +29907,13 @@
           },
           "enforceZke": {
             "type": "boolean"
+          },
+          "organisationKeyRotatedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -31584,6 +32099,21 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.TransferTenantOwnership"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.SsoDomains.ReleaseSsoDomain"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.SsoDomains.VerifySsoDomain"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.OrganisationKeyRotation.GetOrganisationKeyRotation"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.OrganisationKeyRotation.StartOrganisationKeyRotation"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.OrganisationKeyRotation.PreviewOrganisationKeyRotation"
     },
     {
       "name": "BellaBaxter.Features.Tenants.Devices.GetDeviceKeyExposure"
