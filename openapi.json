@@ -1605,6 +1605,88 @@
         }
       }
     },
+    "/api/v1/me/organisation": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.CreateFirstOrganisation"
+        ],
+        "summary": "POST_api_v1_me_organisation",
+        "description": "POST_api_v1_me_organisation",
+        "operationId": "createFirstOrganisation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFirstOrganisationCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOwnTenantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/tenants/new": {
       "post": {
         "tags": [
@@ -1656,6 +1738,16 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2885,6 +2977,79 @@
           },
           "503": {
             "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tenants/{tenantId}/name": {
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RenameTenant"
+        ],
+        "summary": "PUT_api_tenants_tenantId_name",
+        "description": "PUT_api_tenants_tenantId_name",
+        "operationId": "renameTenant",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameTenantCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenameTenantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -21847,6 +22012,21 @@
           }
         }
       },
+      "CreateFirstOrganisationCommand": {
+        "required": [
+          "name",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
       "CreateGroupCommand": {
         "required": [
           "name",
@@ -22460,7 +22640,11 @@
           "updatedAt",
           "isAdmin",
           "tokenRemainingMinutes",
-          "canCreateTenants"
+          "canCreateTenants",
+          "hasOrganisation",
+          "suggestedOrganisationName",
+          "organisationSetupUrl",
+          "organisationSetupDetail"
         ],
         "type": "object",
         "properties": {
@@ -22499,6 +22683,27 @@
           },
           "canCreateTenants": {
             "type": "boolean"
+          },
+          "hasOrganisation": {
+            "type": "boolean"
+          },
+          "suggestedOrganisationName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "organisationSetupUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "organisationSetupDetail": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -24204,14 +24409,23 @@
             "format": "uuid"
           },
           "tenantId": {
-            "type": "string",
+            "type": [
+              "null",
+              "string"
+            ],
             "format": "uuid"
           },
           "tenantName": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "tenantSlug": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           },
           "requiresTokenRefresh": {
             "type": "boolean"
@@ -24219,6 +24433,16 @@
           "isNewTenant": {
             "type": "boolean",
             "default": false
+          },
+          "organisationSetupRequired": {
+            "type": "boolean",
+            "default": false
+          },
+          "suggestedOrganisationName": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -27826,6 +28050,37 @@
           "pendingInvitations": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "RenameTenantCommand": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RenameTenantResponse": {
+        "required": [
+          "tenantId",
+          "name",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
           }
         }
       },
@@ -31987,6 +32242,9 @@
       "name": "BellaBaxter.Features.Tenants.ConfigureSamlSso"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.CreateFirstOrganisation"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.CreateOwnTenant"
     },
     {
@@ -32051,6 +32309,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.RemoveMemberSecondFactor"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RenameTenant"
     },
     {
       "name": "BellaBaxter.Features.Tenants.ReplaceTenantInvite"
