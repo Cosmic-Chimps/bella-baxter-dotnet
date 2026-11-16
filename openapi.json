@@ -17478,6 +17478,1207 @@
         }
       }
     },
+    "/api/v1/connected-apps/setup/{token}/approve": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Setup.ApproveSetup"
+        ],
+        "summary": "POST_api_v1_connected_apps_setup_token_approve",
+        "description": "POST_api_v1_connected_apps_setup_token_approve",
+        "operationId": "approveConnectedAppSetup",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveConnectedAppSetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectedAppSetupRedirect"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/connected-apps/setup/{token}/decline": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Setup.DeclineSetup"
+        ],
+        "summary": "POST_api_v1_connected_apps_setup_token_decline",
+        "description": "POST_api_v1_connected_apps_setup_token_decline",
+        "operationId": "declineConnectedAppSetup",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectedAppSetupRedirect"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/connected-apps/setup/{token}": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Setup.GetSetup"
+        ],
+        "summary": "GET_api_v1_connected_apps_setup_token",
+        "description": "GET_api_v1_connected_apps_setup_token",
+        "operationId": "getConnectedAppSetup",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectedAppSetupPage"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/connected-apps": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Grants.ListMyGrants"
+        ],
+        "summary": "GET_api_v1_me_connected_apps",
+        "description": "GET_api_v1_me_connected_apps",
+        "operationId": "listMyConnectedAppGrants",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MyConnectedAppGrantResponse"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/connected-apps": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Grants.ListTenantGrants"
+        ],
+        "summary": "GET_api_v1_tenants_me_connected_apps",
+        "description": "GET_api_v1_tenants_me_connected_apps",
+        "operationId": "listTenantConnectedAppGrants",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TenantConnectedAppGrantResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me/connected-apps/{grantId}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Grants.RevokeMyGrant"
+        ],
+        "summary": "DELETE_api_v1_me_connected_apps_grantId",
+        "description": "DELETE_api_v1_me_connected_apps_grantId",
+        "operationId": "revokeMyConnectedAppGrant",
+        "parameters": [
+          {
+            "name": "grantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/connected-apps/{grantId}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Grants.RevokeTenantGrant"
+        ],
+        "summary": "DELETE_api_v1_tenants_me_connected_apps_grantId",
+        "description": "DELETE_api_v1_tenants_me_connected_apps_grantId",
+        "operationId": "revokeTenantConnectedAppGrant",
+        "parameters": [
+          {
+            "name": "grantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/developer-apps/{appId}": {
+      "delete": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.DeleteDeveloperApp"
+        ],
+        "summary": "DELETE_api_v1_tenants_me_developer_apps_appId",
+        "description": "DELETE_api_v1_tenants_me_developer_apps_appId",
+        "operationId": "deleteDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.GetDeveloperApp"
+        ],
+        "summary": "GET_api_v1_tenants_me_developer_apps_appId",
+        "description": "GET_api_v1_tenants_me_developer_apps_appId",
+        "operationId": "getDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperAppResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.UpdateDeveloperApp"
+        ],
+        "summary": "PUT_api_v1_tenants_me_developer_apps_appId",
+        "description": "PUT_api_v1_tenants_me_developer_apps_appId",
+        "operationId": "updateDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDeveloperAppRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperAppResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/developer-apps": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.ListDeveloperApps"
+        ],
+        "summary": "GET_api_v1_tenants_me_developer_apps",
+        "description": "GET_api_v1_tenants_me_developer_apps",
+        "operationId": "listDeveloperApps",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeveloperAppResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.RegisterDeveloperApp"
+        ],
+        "summary": "POST_api_v1_tenants_me_developer_apps",
+        "description": "POST_api_v1_tenants_me_developer_apps",
+        "operationId": "registerDeveloperApp",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDeveloperAppRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperAppResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/developer-apps/{appId}/secret": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.RotateDeveloperAppSecret"
+        ],
+        "summary": "POST_api_v1_tenants_me_developer_apps_appId_secret",
+        "description": "POST_api_v1_tenants_me_developer_apps_appId_secret",
+        "operationId": "rotateDeveloperAppSecret",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RotateDeveloperAppSecretResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/developer-apps/{appId}/submit": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.SubmitDeveloperApp"
+        ],
+        "summary": "POST_api_v1_tenants_me_developer_apps_appId_submit",
+        "description": "POST_api_v1_tenants_me_developer_apps_appId_submit",
+        "operationId": "submitDeveloperApp",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperAppResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenants/me/developer-apps/{appId}/domain/verify": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.Developer.VerifyDeveloperAppDomain"
+        ],
+        "summary": "POST_api_v1_tenants_me_developer_apps_appId_domain_verify",
+        "description": "POST_api_v1_tenants_me_developer_apps_appId_domain_verify",
+        "operationId": "verifyDeveloperAppDomain",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperAppResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/connected-apps/grant": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.App.GetGrant"
+        ],
+        "summary": "GET_api_v1_connected_apps_grant",
+        "description": "GET_api_v1_connected_apps_grant",
+        "operationId": "connectedAppGetGrant",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectedAppGrantResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/connected-apps/grant/secrets": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.App.ReadGrantSecrets"
+        ],
+        "summary": "GET_api_v1_connected_apps_grant_secrets",
+        "description": "GET_api_v1_connected_apps_grant_secrets",
+        "operationId": "connectedAppReadGrantSecrets",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllEnvironmentSecretsResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/connected-apps/setup": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.ConnectedApps.App.RequestSetup"
+        ],
+        "summary": "POST_api_v1_connected_apps_setup",
+        "description": "POST_api_v1_connected_apps_setup",
+        "operationId": "connectedAppRequestSetup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectedAppSetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectedAppSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/cert-rotation/logs": {
       "get": {
         "tags": [
@@ -19673,6 +20874,26 @@
                 "$ref": "#/components/schemas/ScopeNarrowing"
               }
             ]
+          },
+          "appId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "appName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "grantId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
           }
         }
       },
@@ -20059,6 +21280,43 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "ApproveConnectedAppSetupRequest": {
+        "required": [
+          "tenantId",
+          "projectId",
+          "environmentId",
+          "scopeTag",
+          "expiresAt"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "scopeTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
           }
         }
       },
@@ -21677,6 +22935,197 @@
           }
         }
       },
+      "ConnectedAppGrantResponse": {
+        "required": [
+          "organisationName",
+          "projectSlug",
+          "environmentSlug",
+          "scopeTag",
+          "expiresAt"
+        ],
+        "type": "object",
+        "properties": {
+          "organisationName": {
+            "type": "string"
+          },
+          "projectSlug": {
+            "type": "string"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "scopeTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "ConnectedAppSetupEnvironment": {
+        "required": [
+          "id",
+          "slug",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ConnectedAppSetupOrganisation": {
+        "required": [
+          "tenantId",
+          "name",
+          "slug",
+          "unavailableReason",
+          "projects"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "unavailableReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectedAppSetupProject"
+            }
+          }
+        }
+      },
+      "ConnectedAppSetupPage": {
+        "required": [
+          "appName",
+          "domain",
+          "ownerOrganisation",
+          "expiresAt",
+          "organisations"
+        ],
+        "type": "object",
+        "properties": {
+          "appName": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "ownerOrganisation": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "organisations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectedAppSetupOrganisation"
+            }
+          }
+        }
+      },
+      "ConnectedAppSetupProject": {
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "environments"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "environments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectedAppSetupEnvironment"
+            }
+          }
+        }
+      },
+      "ConnectedAppSetupRedirect": {
+        "required": [
+          "redirectUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "redirectUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ConnectedAppSetupRequest": {
+        "required": [
+          "redirectUri",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "redirectUri": {
+            "type": "string"
+          },
+          "state": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ConnectedAppSetupResponse": {
+        "required": [
+          "setupUrl",
+          "expiresAt"
+        ],
+        "type": "object",
+        "properties": {
+          "setupUrl": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "ConstraintReportDto": {
         "required": [
           "hasVerifiableConstraint",
@@ -22814,6 +24263,116 @@
               "string"
             ],
             "format": "uuid"
+          }
+        }
+      },
+      "DeveloperAppDomainProof": {
+        "required": [
+          "state",
+          "recordName",
+          "recordValue",
+          "lastCheckedAt",
+          "lastResult",
+          "provenAt",
+          "lapsedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "recordName": {
+            "type": "string"
+          },
+          "recordValue": {
+            "type": "string"
+          },
+          "lastCheckedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lastResult": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "provenAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "lapsedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "DeveloperAppResponse": {
+        "required": [
+          "id",
+          "name",
+          "domain",
+          "redirectUris",
+          "state",
+          "submitted",
+          "reason",
+          "stateChangedAt",
+          "createdAt",
+          "clientId",
+          "domainProof"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "redirectUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "state": {
+            "type": "string"
+          },
+          "submitted": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "stateChangedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "domainProof": {
+            "$ref": "#/components/schemas/DeveloperAppDomainProof"
           }
         }
       },
@@ -25678,6 +27237,101 @@
           }
         }
       },
+      "MyConnectedAppGrantResponse": {
+        "required": [
+          "id",
+          "appName",
+          "appDomain",
+          "appOwnerOrganisationName",
+          "organisationId",
+          "organisationName",
+          "projectSlug",
+          "environmentSlug",
+          "scopeTag",
+          "expiresAt",
+          "createdAt",
+          "lastUsedAt",
+          "state",
+          "stoppedReason",
+          "revokedAt",
+          "revokeReason"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appName": {
+            "type": "string"
+          },
+          "appDomain": {
+            "type": "string"
+          },
+          "appOwnerOrganisationName": {
+            "type": "string"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "organisationName": {
+            "type": "string"
+          },
+          "projectSlug": {
+            "type": "string"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "scopeTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUsedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string"
+          },
+          "stoppedReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revokedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "revokeReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "MyInvitationResponse": {
         "required": [
           "token",
@@ -27965,6 +29619,28 @@
           }
         }
       },
+      "RegisterDeveloperAppRequest": {
+        "required": [
+          "name",
+          "domain",
+          "redirectUris"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "redirectUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "RegisterTenantEncryptionKeyRequest": {
         "required": [
           "masterPublicKey",
@@ -28027,7 +29703,8 @@
           "environments",
           "apiKeys",
           "mcpConnections",
-          "pendingInvitations"
+          "pendingInvitations",
+          "appGrants"
         ],
         "type": "object",
         "properties": {
@@ -28048,6 +29725,10 @@
             "format": "int32"
           },
           "pendingInvitations": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appGrants": {
             "type": "integer",
             "format": "int32"
           }
@@ -28214,6 +29895,21 @@
           "version": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "RotateDeveloperAppSecretResponse": {
+        "required": [
+          "clientId",
+          "clientSecret"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "clientSecret": {
+            "type": "string"
           }
         }
       },
@@ -30124,6 +31820,101 @@
           }
         }
       },
+      "TenantConnectedAppGrantResponse": {
+        "required": [
+          "id",
+          "appName",
+          "appDomain",
+          "appOwnerOrganisationName",
+          "createdByUserId",
+          "createdByName",
+          "projectSlug",
+          "environmentSlug",
+          "scopeTag",
+          "expiresAt",
+          "createdAt",
+          "lastUsedAt",
+          "state",
+          "stoppedReason",
+          "revokedAt",
+          "revokeReason"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appName": {
+            "type": "string"
+          },
+          "appDomain": {
+            "type": "string"
+          },
+          "appOwnerOrganisationName": {
+            "type": "string"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdByName": {
+            "type": "string"
+          },
+          "projectSlug": {
+            "type": "string"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "scopeTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expiresAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUsedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string"
+          },
+          "stoppedReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "revokedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "revokeReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "TenantEncryptionKeyStatusResponse": {
         "required": [
           "encryptionEnabled",
@@ -30953,6 +32744,20 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "UpdateDeveloperAppRequest": {
+        "required": [
+          "redirectUris"
+        ],
+        "type": "object",
+        "properties": {
+          "redirectUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -32957,6 +34762,60 @@
     },
     {
       "name": "BellaBaxter.Features.Dashboard.GetDashboard"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Setup.ApproveSetup"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Setup.DeclineSetup"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Setup.GetSetup"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Grants.ListMyGrants"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Grants.ListTenantGrants"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Grants.RevokeMyGrant"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Grants.RevokeTenantGrant"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.DeleteDeveloperApp"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.GetDeveloperApp"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.UpdateDeveloperApp"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.ListDeveloperApps"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.RegisterDeveloperApp"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.RotateDeveloperAppSecret"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.SubmitDeveloperApp"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.Developer.VerifyDeveloperAppDomain"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.App.GetGrant"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.App.ReadGrantSecrets"
+    },
+    {
+      "name": "BellaBaxter.Features.ConnectedApps.App.RequestSetup"
     },
     {
       "name": "BellaBaxter.Features.CertRotation.ListCertRotationLogs"
