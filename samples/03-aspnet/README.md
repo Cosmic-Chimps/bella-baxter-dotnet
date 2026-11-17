@@ -59,10 +59,10 @@ export BellaBaxter__EnvironmentSlug=production
 dotnet run
 ```
 
-**CI/CD / production with ZKE (Zero-Knowledge Encryption):**
+**CI/CD / production with device-bound encryption:**
 
-ZKE uses a persistent device key so the server can wrap the encryption key (DEK) for your process
-identity. The server never sees your DEK in plaintext; transport is bound to your specific key.
+Device-bound encryption uses a persistent device key so the server can wrap the encryption key (DEK) for your process
+identity. The DEK is wrapped to your specific key. When your organisation requires registered devices, a secret is released only to a registered device.
 
 ```bash
 # 1. Generate a device keypair once (stores private key in ~/.bella/device-key.pem)
