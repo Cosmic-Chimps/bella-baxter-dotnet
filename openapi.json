@@ -8207,6 +8207,469 @@
         }
       }
     },
+    "/api/v1/project-transfers/{runId}/abandon": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.AbandonProjectTransfer"
+        ],
+        "summary": "POST_api_v1_project_transfers_runId_abandon",
+        "description": "POST_api_v1_project_transfers_runId_abandon",
+        "operationId": "abandonProjectTransfer",
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferRunResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/transfer": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.GetProjectTransfer"
+        ],
+        "summary": "GET_api_v1_projects_projectRef_transfer",
+        "description": "GET_api_v1_projects_projectRef_transfer",
+        "operationId": "getProjectTransfer",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.StartProjectTransfer"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_transfer",
+        "description": "POST_api_v1_projects_projectRef_transfer",
+        "operationId": "startProjectTransfer",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartProjectTransferCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferRunResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project-transfers/{runId}": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.GetProjectTransferRun"
+        ],
+        "summary": "GET_api_v1_project_transfers_runId",
+        "description": "GET_api_v1_project_transfers_runId",
+        "operationId": "getProjectTransferRun",
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferRunResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{projectRef}/transfer/preview": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.PreviewProjectTransfer"
+        ],
+        "summary": "POST_api_v1_projects_projectRef_transfer_preview",
+        "description": "POST_api_v1_projects_projectRef_transfer_preview",
+        "operationId": "previewProjectTransfer",
+        "parameters": [
+          {
+            "name": "projectRef",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewProjectTransferCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferPreviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project-transfers/{runId}/resume": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Projects.Transfer.ResumeProjectTransfer"
+        ],
+        "summary": "POST_api_v1_project_transfers_runId_resume",
+        "description": "POST_api_v1_project_transfers_runId_resume",
+        "operationId": "resumeProjectTransfer",
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResumeProjectTransferCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectTransferRunResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/projects/{projectRef}/groups": {
       "post": {
         "tags": [
@@ -28701,6 +29164,35 @@
           }
         }
       },
+      "PreviewProjectTransferCommand": {
+        "required": [
+          "targetTenantId",
+          "providerMappings",
+          "targetSlug"
+        ],
+        "type": "object",
+        "properties": {
+          "targetTenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerMappings": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderMapping"
+            }
+          },
+          "targetSlug": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -29245,6 +29737,734 @@
             "items": {
               "$ref": "#/components/schemas/EnvironmentSecuritySummaryEntry"
             }
+          }
+        }
+      },
+      "ProjectTransferArchivedEnvironment": {
+        "required": [
+          "slug",
+          "secrets"
+        ],
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "secrets": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectTransferBlock": {
+        "required": [
+          "kind",
+          "environmentSlug",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "environmentSlug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectTransferDropped": {
+        "required": [
+          "members",
+          "groups",
+          "versionHistory",
+          "auditTrail",
+          "usage",
+          "securityFindings",
+          "archivedEnvironments"
+        ],
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferNamedItem"
+            }
+          },
+          "versionHistory": {
+            "type": "boolean"
+          },
+          "auditTrail": {
+            "type": "boolean"
+          },
+          "usage": {
+            "type": "boolean"
+          },
+          "securityFindings": {
+            "type": "boolean"
+          },
+          "archivedEnvironments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferArchivedEnvironment"
+            }
+          }
+        }
+      },
+      "ProjectTransferMappedProvider": {
+        "required": [
+          "sourceProviderId",
+          "sourceName",
+          "targetProviderId",
+          "targetName",
+          "type",
+          "implicit"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceProviderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "targetProviderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "targetName": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "implicit": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProjectTransferMovedEnvironment": {
+        "required": [
+          "environmentId",
+          "slug",
+          "name",
+          "secrets",
+          "rotationPolicies",
+          "webhooks",
+          "notificationChannels",
+          "members"
+        ],
+        "type": "object",
+        "properties": {
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "secrets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderCount"
+            }
+          },
+          "rotationPolicies": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webhooks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationChannels": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "members": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectTransferMoves": {
+        "required": [
+          "environments",
+          "globalSecrets",
+          "rotationPolicies",
+          "webhooks",
+          "notificationChannels",
+          "members"
+        ],
+        "type": "object",
+        "properties": {
+          "environments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferMovedEnvironment"
+            }
+          },
+          "globalSecrets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderCount"
+            }
+          },
+          "rotationPolicies": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webhooks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationChannels": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "members": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectTransferNamedItem": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectTransferNamedProject": {
+        "required": [
+          "id",
+          "slug",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectTransferNamedTenant": {
+        "required": [
+          "id",
+          "slug",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectTransferPlanLimit": {
+        "required": [
+          "resource",
+          "limit",
+          "current",
+          "after",
+          "exceeded",
+          "note"
+        ],
+        "type": "object",
+        "properties": {
+          "resource": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "current": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "after": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "exceeded": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProjectTransferPreviewResponse": {
+        "required": [
+          "sourceProject",
+          "targetTenant",
+          "targetSlug",
+          "targetSlugAvailable",
+          "moves",
+          "recreated",
+          "revoked",
+          "dropped",
+          "blocks",
+          "providersNeedingMapping",
+          "invalidMappings",
+          "mappedProviders",
+          "planLimits",
+          "targetUnencrypted",
+          "warnings",
+          "deletionPreview",
+          "previewDigest",
+          "targetProviders"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceProject": {
+            "$ref": "#/components/schemas/ProjectTransferNamedProject"
+          },
+          "targetTenant": {
+            "$ref": "#/components/schemas/ProjectTransferNamedTenant"
+          },
+          "targetSlug": {
+            "type": "string"
+          },
+          "targetSlugAvailable": {
+            "type": "boolean"
+          },
+          "moves": {
+            "$ref": "#/components/schemas/ProjectTransferMoves"
+          },
+          "recreated": {
+            "$ref": "#/components/schemas/ProjectTransferRecreated"
+          },
+          "revoked": {
+            "$ref": "#/components/schemas/ProjectTransferRevoked"
+          },
+          "dropped": {
+            "$ref": "#/components/schemas/ProjectTransferDropped"
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferBlock"
+            }
+          },
+          "providersNeedingMapping": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderRef"
+            }
+          },
+          "invalidMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderRef"
+            }
+          },
+          "mappedProviders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferMappedProvider"
+            }
+          },
+          "planLimits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferPlanLimit"
+            }
+          },
+          "targetUnencrypted": {
+            "type": "boolean"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deletionPreview": {
+            "$ref": "#/components/schemas/ProjectDeletionPreview"
+          },
+          "previewDigest": {
+            "type": "string"
+          },
+          "targetProviders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferTargetProviderChoice"
+            }
+          }
+        }
+      },
+      "ProjectTransferProgress": {
+        "required": [
+          "environments",
+          "environmentSecrets",
+          "globalSecrets",
+          "webhooks",
+          "notificationChannels",
+          "workloadIdentities",
+          "trustDomains"
+        ],
+        "type": "object",
+        "properties": {
+          "environments": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "environmentSecrets": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "globalSecrets": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "webhooks": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "notificationChannels": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "workloadIdentities": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          },
+          "trustDomains": {
+            "$ref": "#/components/schemas/ProjectTransferProgressCount"
+          }
+        }
+      },
+      "ProjectTransferProgressCount": {
+        "required": [
+          "created",
+          "copied",
+          "verified"
+        ],
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "copied": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "verified": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectTransferProviderCount": {
+        "required": [
+          "providerId",
+          "secrets"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "secrets": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ProjectTransferProviderMapping": {
+        "required": [
+          "sourceProviderId",
+          "targetProviderId"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceProviderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "targetProviderId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ProjectTransferProviderRef": {
+        "required": [
+          "providerId",
+          "name",
+          "type",
+          "isSystemProvider",
+          "deleted"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "isSystemProvider": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProjectTransferRecreated": {
+        "required": [
+          "environments",
+          "newEnvironmentIds"
+        ],
+        "type": "object",
+        "properties": {
+          "environments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferRecreatedEnvironment"
+            }
+          },
+          "newEnvironmentIds": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProjectTransferRecreatedEnvironment": {
+        "required": [
+          "environmentId",
+          "slug",
+          "sshAuthority",
+          "pkiAuthority",
+          "tokenSigningKey",
+          "workloadIdentities",
+          "trustDomains"
+        ],
+        "type": "object",
+        "properties": {
+          "environmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "sshAuthority": {
+            "type": "boolean"
+          },
+          "pkiAuthority": {
+            "type": "boolean"
+          },
+          "tokenSigningKey": {
+            "type": "boolean"
+          },
+          "workloadIdentities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferNamedItem"
+            }
+          },
+          "trustDomains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferNamedItem"
+            }
+          }
+        }
+      },
+      "ProjectTransferRevoked": {
+        "required": [
+          "apiKeys",
+          "connectedAppGrants"
+        ],
+        "type": "object",
+        "properties": {
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferNamedItem"
+            }
+          },
+          "connectedAppGrants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferNamedItem"
+            }
+          }
+        }
+      },
+      "ProjectTransferRunResponse": {
+        "required": [
+          "id",
+          "state",
+          "phase",
+          "failureCode",
+          "source",
+          "target",
+          "startedBy",
+          "startedByName",
+          "requestedAt",
+          "heartbeatAt",
+          "completedAt",
+          "progress",
+          "notMoved"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string"
+          },
+          "phase": {
+            "type": "string"
+          },
+          "failureCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "$ref": "#/components/schemas/ProjectTransferRunSide"
+          },
+          "target": {
+            "$ref": "#/components/schemas/ProjectTransferRunSide"
+          },
+          "startedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startedByName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "heartbeatAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/ProjectTransferProgress"
+          },
+          "notMoved": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MigrationNotMigrated"
+            }
+          }
+        }
+      },
+      "ProjectTransferRunSide": {
+        "required": [
+          "tenantId",
+          "tenantSlug",
+          "projectId",
+          "projectSlug"
+        ],
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantSlug": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "projectSlug": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectTransferTargetProviderChoice": {
+        "required": [
+          "id",
+          "name",
+          "type",
+          "isSystem"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "isSystem": {
+            "type": "boolean"
           }
         }
       },
@@ -29829,6 +31049,20 @@
             "type": [
               "null",
               "string"
+            ]
+          }
+        }
+      },
+      "ResumeProjectTransferCommand": {
+        "required": [
+          "acceptNotMoved"
+        ],
+        "type": "object",
+        "properties": {
+          "acceptNotMoved": {
+            "type": [
+              "null",
+              "boolean"
             ]
           }
         }
@@ -31691,6 +32925,49 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        }
+      },
+      "StartProjectTransferCommand": {
+        "required": [
+          "targetTenantId",
+          "providerMappings",
+          "targetSlug",
+          "confirmProjectSlug",
+          "previewDigest"
+        ],
+        "type": "object",
+        "properties": {
+          "targetTenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerMappings": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ProjectTransferProviderMapping"
+            }
+          },
+          "targetSlug": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "confirmProjectSlug": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "previewDigest": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -34354,6 +35631,24 @@
     },
     {
       "name": "BellaBaxter.Features.Projects.UpdateProjectUserPermissions"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.AbandonProjectTransfer"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.GetProjectTransfer"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.StartProjectTransfer"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.GetProjectTransferRun"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.PreviewProjectTransfer"
+    },
+    {
+      "name": "BellaBaxter.Features.Projects.Transfer.ResumeProjectTransfer"
     },
     {
       "name": "BellaBaxter.Features.Projects.Groups.AssignGroupToProject"
