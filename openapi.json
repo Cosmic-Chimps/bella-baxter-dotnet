@@ -2581,6 +2581,47 @@
         }
       }
     },
+    "/api/v1/tenant/usage/breakdown": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetTenantUsageBreakdown"
+        ],
+        "summary": "GET_api_v1_tenant_usage_breakdown",
+        "description": "GET_api_v1_tenant_usage_breakdown",
+        "operationId": "getTenantUsageBreakdown",
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantUsageBreakdownResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/tenants/{id}/membership": {
       "delete": {
         "tags": [
@@ -33400,6 +33441,34 @@
           }
         }
       },
+      "TenantUsageBreakdownResponse": {
+        "required": [
+          "month",
+          "total",
+          "liveCount",
+          "sources"
+        ],
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "liveCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageSourceResponse"
+            }
+          }
+        }
+      },
       "TenantUsageResponse": {
         "required": [
           "plan",
@@ -34633,6 +34702,45 @@
           }
         }
       },
+      "UsageSourceResponse": {
+        "required": [
+          "sourceId",
+          "kind",
+          "name",
+          "state",
+          "calls",
+          "link"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "state": {
+            "type": "string"
+          },
+          "calls": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "link": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "UserDeactivationImpactResponse": {
         "required": [
           "apiKeyCount",
@@ -35373,6 +35481,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.GetTenantUsage"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.GetTenantUsageBreakdown"
     },
     {
       "name": "BellaBaxter.Features.Tenants.LeaveTenant"
