@@ -2062,6 +2062,88 @@
         }
       }
     },
+    "/api/v1/tenants/me/enterprise-request": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetEnterpriseRequest"
+        ],
+        "summary": "GET_api_v1_tenants_me_enterprise_request",
+        "description": "GET_api_v1_tenants_me_enterprise_request",
+        "operationId": "getEnterpriseRequest",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnterpriseRequestResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.RequestEnterprise"
+        ],
+        "summary": "POST_api_v1_tenants_me_enterprise_request",
+        "description": "POST_api_v1_tenants_me_enterprise_request",
+        "operationId": "requestEnterprise",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnterpriseRequestResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/sso": {
       "get": {
         "tags": [
@@ -25305,6 +25387,29 @@
           }
         }
       },
+      "EnterpriseRequestResponse": {
+        "required": [
+          "status",
+          "requestedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "requestedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "offered": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
       "EnvironmentCertificateItem": {
         "required": [
           "key",
@@ -35451,6 +35556,12 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.GetBillingStatements"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.GetEnterpriseRequest"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.RequestEnterprise"
     },
     {
       "name": "BellaBaxter.Features.Tenants.GetSsoConfig"
