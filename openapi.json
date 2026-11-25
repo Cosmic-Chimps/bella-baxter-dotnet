@@ -28264,6 +28264,10 @@
           "membersWithoutPasswordUnknown": {
             "type": "boolean",
             "default": false
+          },
+          "offered": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
