@@ -1420,16 +1420,6 @@
               }
             }
           },
-          "402": {
-            "description": "Payment Required",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
           "403": {
             "description": "Forbidden",
             "content": {
@@ -1524,16 +1514,6 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "402": {
-            "description": "Payment Required",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2062,6 +2042,48 @@
         }
       }
     },
+    "/api/v1/plane": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetPlane"
+        ],
+        "summary": "GET_api_v1_plane",
+        "description": "GET_api_v1_plane",
+        "operationId": "getPlane",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantPlaneResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/tenants/me/enterprise-request": {
       "get": {
         "tags": [
@@ -2263,16 +2285,6 @@
           },
           "400": {
             "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "402": {
-            "description": "Payment Required",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2630,6 +2642,38 @@
           },
           "409": {
             "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tenant/modules": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Tenants.GetTenantModules"
+        ],
+        "summary": "GET_api_v1_tenant_modules",
+        "description": "GET_api_v1_tenant_modules",
+        "operationId": "getTenantModules",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenantModulesResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3426,16 +3470,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RequestSsoAccessResponse"
-                }
-              }
-            }
-          },
-          "402": {
-            "description": "Payment Required",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -19429,6 +19463,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -19452,16 +19506,6 @@
           "required": true
         },
         "responses": {
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -19474,6 +19518,262 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/module-subscription/checkout": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Billing.CreateModuleSubscriptionCheckoutSession"
+        ],
+        "summary": "POST_api_v1_billing_module_subscription_checkout",
+        "description": "POST_api_v1_billing_module_subscription_checkout",
+        "operationId": "createModuleSubscriptionCheckoutSession",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateModuleSubscriptionCheckoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateModuleSubscriptionCheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/usage/disable": {
+      "post": {
+        "tags": [
+          "BellaBaxter.Features.Billing.DisablePaidUsage"
+        ],
+        "summary": "POST_api_v1_billing_usage_disable",
+        "description": "POST_api_v1_billing_usage_disable",
+        "operationId": "disablePaidUsage",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": { }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/module-subscription": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Billing.GetModuleSubscription"
+        ],
+        "summary": "GET_api_v1_billing_module_subscription",
+        "description": "GET_api_v1_billing_module_subscription",
+        "operationId": "getModuleSubscription",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleSubscriptionResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/module-subscription/members-without-password": {
+      "get": {
+        "tags": [
+          "BellaBaxter.Features.Billing.GetModuleSubscriptionMembersWithoutPassword"
+        ],
+        "summary": "GET_api_v1_billing_module_subscription_members_without_password",
+        "description": "GET_api_v1_billing_module_subscription_members_without_password",
+        "operationId": "getModuleSubscriptionMembersWithoutPassword",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModuleSubscriptionMembersWithoutPasswordResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -19509,6 +19809,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -23917,27 +24237,42 @@
       },
       "CreateCheckoutSessionRequest": {
         "required": [
-          "successUrl",
-          "cancelUrl"
+          "termsVersion"
         ],
         "type": "object",
         "properties": {
-          "successUrl": {
+          "termsVersion": {
             "type": "string"
           },
+          "successUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "cancelUrl": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
       "CreateCheckoutSessionResponse": {
         "required": [
+          "enabled",
           "url"
         ],
         "type": "object",
         "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
           "url": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -24118,6 +24453,28 @@
               "null",
               "string"
             ]
+          }
+        }
+      },
+      "CreateModuleSubscriptionCheckoutRequest": {
+        "required": [
+          "interval"
+        ],
+        "type": "object",
+        "properties": {
+          "interval": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateModuleSubscriptionCheckoutResponse": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
           }
         }
       },
@@ -27817,6 +28174,96 @@
           },
           "strict": {
             "type": "string"
+          }
+        }
+      },
+      "ModuleSubscriptionMembersWithoutPasswordResponse": {
+        "required": [
+          "members",
+          "unknown"
+        ],
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModuleSubscriptionMemberWithoutPassword"
+            }
+          },
+          "unknown": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ModuleSubscriptionMemberWithoutPassword": {
+        "required": [
+          "userId",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          }
+        }
+      },
+      "ModuleSubscriptionResponse": {
+        "required": [
+          "state",
+          "interval",
+          "currentPeriodEnd",
+          "graceEndsAt"
+        ],
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "interval": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "currentPeriodEnd": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "graceEndsAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "canSubscribe": {
+            "type": "boolean",
+            "default": false
+          },
+          "enforcementLiftedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "membersWithoutPasswordCount": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "membersWithoutPasswordUnknown": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -33458,6 +33905,69 @@
           }
         }
       },
+      "TenantModulesResponse": {
+        "required": [
+          "surfaces"
+        ],
+        "type": "object",
+        "properties": {
+          "surfaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenantModuleSurface"
+            }
+          }
+        }
+      },
+      "TenantModuleSurface": {
+        "required": [
+          "surface",
+          "module",
+          "available",
+          "granted",
+          "reason",
+          "graceEndsAt"
+        ],
+        "type": "object",
+        "properties": {
+          "surface": {
+            "type": "string"
+          },
+          "module": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "granted": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "graceEndsAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "TenantPlaneResponse": {
+        "required": [
+          "plane"
+        ],
+        "type": "object",
+        "properties": {
+          "plane": {
+            "type": "string"
+          }
+        }
+      },
       "TenantRole": {
         "enum": [
           "Owner",
@@ -33635,6 +34145,39 @@
             "default": 0
           },
           "freeAllowanceWithheld": {
+            "type": "boolean",
+            "default": false
+          },
+          "hasUsagePaymentMethod": {
+            "type": "boolean",
+            "default": false
+          },
+          "usageTermsVersion": {
+            "type": "string",
+            "default": ""
+          },
+          "scheduledFreeMonthlyQuota": {
+            "type": [
+              "null",
+              "integer"
+            ],
+            "format": "int32"
+          },
+          "scheduledOverageRatePerRequest": {
+            "type": [
+              "null",
+              "number"
+            ],
+            "format": "double"
+          },
+          "scheduledEffectiveFrom": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "paidUsageAvailable": {
             "type": "boolean",
             "default": false
           }
@@ -35558,6 +36101,9 @@
       "name": "BellaBaxter.Features.Tenants.GetBillingStatements"
     },
     {
+      "name": "BellaBaxter.Features.Tenants.GetPlane"
+    },
+    {
       "name": "BellaBaxter.Features.Tenants.GetEnterpriseRequest"
     },
     {
@@ -35589,6 +36135,9 @@
     },
     {
       "name": "BellaBaxter.Features.Tenants.RemoveTenantUser"
+    },
+    {
+      "name": "BellaBaxter.Features.Tenants.GetTenantModules"
     },
     {
       "name": "BellaBaxter.Features.Tenants.GetTenantUsage"
@@ -36342,6 +36891,18 @@
     },
     {
       "name": "BellaBaxter.Features.Billing.CreateCheckoutSession"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.CreateModuleSubscriptionCheckoutSession"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.DisablePaidUsage"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.GetModuleSubscription"
+    },
+    {
+      "name": "BellaBaxter.Features.Billing.GetModuleSubscriptionMembersWithoutPassword"
     },
     {
       "name": "BellaBaxter.Features.Billing.StripeWebhookHandler"

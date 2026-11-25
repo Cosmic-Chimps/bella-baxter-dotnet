@@ -60,7 +60,7 @@ bella login
 # or: bella sdk run -- dotnet run  (injects BELLA_BAXTER_API_KEY + BELLA_BAXTER_URL)
 ```
 API keys encode the project and environment — no `.bella` file required.
-**Billed** on pay-as-you-go plans. Generate via `bella api-keys create` or the WebApp.
+**Billed** on pay-as-you-go plans. Create one in the WebApp (see [Generating an API key](#generating-an-api-key)).
 
 ---
 
@@ -166,10 +166,11 @@ The target project only needs `builder.Configuration.AddBellaSecrets()` — all 
 
 ## Generating an API key
 
-```bash
-bella api-keys create --env production --name "MyApi Production"
-# Returns: bax-<keyId>-<secret>
-```
+An API key belongs to one environment. In the Bella WebApp, open the project, choose the **Environments** tab,
+open the environment, choose its **API Keys** tab, then choose **Create API Key**. The key
+(`bax-<keyId>-<secret>`) is shown once, when it is created.
+
+The `bella api-keys` commands are planned and are not in the CLI yet.
 
 The key encodes the project slug and environment slug. Store it in user secrets, a secrets manager, or inject it via `bella sdk run`.
 

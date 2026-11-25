@@ -97,7 +97,7 @@ public static class BellaBarterStackExtensions
         var openBaoListenAddr = $"0.0.0.0:{OpenBaoPort}";
 
         var openbao = builder
-            .AddContainer($"{name}-openbao", "ghcr.io/openbao/openbao", "2.5.1")
+            .AddContainer($"{name}-openbao", "ghcr.io/openbao/openbao", "2.6.6")
             .WithHttpEndpoint(port: OpenBaoPort, targetPort: OpenBaoPort, name: "http")
             .WithEnvironment("OPENBAO_DEV_LISTEN_ADDRESS", openBaoListenAddr)
             .WithEnvironment("OPENBAO_DEV_ROOT_TOKEN_ID", openBaoDevToken.Resource)

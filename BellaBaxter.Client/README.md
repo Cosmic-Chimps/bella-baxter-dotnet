@@ -43,11 +43,9 @@ foreach (var secret in secrets)
 
 ### API key (recommended for apps and CI/CD)
 
-```bash
-# Generate a key via the CLI
-bella api-keys create --env production --name "MyApp Production"
-# Returns: bax-<keyId>-<secret>
-```
+An API key belongs to one environment. In the Bella WebApp, open the project, choose the **Environments** tab,
+open the environment, choose its **API Keys** tab, then choose **Create API Key**. The key
+(`bax-<keyId>-<secret>`) is shown once, when it is created.
 
 ```csharp
 var client = BellaClientFactory.Create(
@@ -57,7 +55,7 @@ var client = BellaClientFactory.Create(
 ```
 
 API keys encode the project and environment slug — no `.bella` file needed.
-Billed on pay-as-you-go plans. Generate via `bella api-keys create` or the Bella WebApp.
+Billed on pay-as-you-go plans. The `bella api-keys` commands are planned and are not in the CLI yet.
 
 ### OAuth (local dev)
 
